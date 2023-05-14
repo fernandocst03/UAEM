@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-primary {
+  @apply px-4 py-1 text-sm font-bold text-gray-100 transition bg-blue-500 rounded hover:text-gray-100 hover:bg-blue-300;
+}
+
+.btn-secondary {
+  @apply px-4 py-1 text-sm font-bold text-gray-100 transition bg-gray-900 rounded hover:text-gray-100 hover:bg-gray-700;
+}
+
+.danger-button {
+  @apply px-4 py-2 text-xs font-bold text-gray-100 uppercase transition bg-red-600 rounded hover:text-gray-100 hover:bg-red-500;
+}
+
+.title {
+  @apply text-base font-bold text-gray-900;
+}
+
+.text {
+  @apply text-sm text-gray-900;
+}
+
+.text-secondary {
+  @apply text-sm font-normal text-gray-700;
+}
+
+.card-container {
+  @apply flex flex-col justify-between p-5 leading-normal bg-white rounded shadow;
+}
