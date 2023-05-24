@@ -1,21 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\AcuerdosCU\Bitacora;
-use App\Models\AcuerdosCU\Sesion;
+use App\Models\Bitacora;
 use Carbon\Carbon;
 
-function bitacora($accion_id, $seccion, $registro_id, $old_value = null, $new_value = null)
+function bitacora($accionId, $seccion, $registroId, $oldValue = null, $newValue = null)
 {
   $fecha = Carbon::now();
   $bitacora = Bitacora::create([
-    'accion_id' => $accion_id,
+    'accion_id' => $accionId,
     'user_id' => Auth::user()->id,
     'fecha' => $fecha,
     'seccion' => $seccion,
-    'registro_id' => $registro_id,
-    'old_value' => $old_value,
-    'new_value' => $new_value
+    'registro_id' => $registroId,
+    'old_value' => $oldValue,
+    'new_value' => $newValue
   ]);
 }
