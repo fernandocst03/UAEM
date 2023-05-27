@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-primary {
+  @apply px-4 py-1 text-sm font-bold text-gray-100 transition bg-gray-900 rounded hover:text-gray-100 hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply px-4 py-1 text-sm font-bold text-gray-100 transition bg-blue-500 rounded hover:text-gray-100 hover:bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+.danger-button {
+  @apply px-4 py-2 text-xs font-bold text-gray-100 uppercase transition bg-red-600 rounded hover:text-gray-100 hover:bg-red-500 focus:outline-none focus:ring-1 focus:ring-red-600 focus:ring-offset-2;
+}
+
+.title {
+  @apply text-base font-bold text-gray-900;
+}
+
+.text {
+  @apply text-sm text-gray-900;
+}
+
+.text-secondary {
+  @apply text-sm font-normal text-gray-700;
+}
+
+.card-container {
+  @apply flex flex-col p-3 leading-normal bg-white rounded shadow;
+}
+
+table.dataTable.stripe tbody tr.odd,
+table.dataTable.display tbody tr.odd {
+  background: #f4f6fc;
+}
