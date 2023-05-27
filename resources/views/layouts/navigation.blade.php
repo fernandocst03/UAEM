@@ -80,8 +80,26 @@
               </button>
             </x-slot>
             <x-slot name="content">
-              <x-dropdown-link :href="route('acuerdos-cu')">
+              <x-dropdown-link :href="route('formato-911')">
                 {{ __('Presentación') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('personal-administrativo.index')">
+                {{ __('Personal Administrativo') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('personal-docente.index')">
+                {{ __('Personal Docente') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('acuerdos-cu')">
+                {{ __('Grupos de antiguedad del personal docente') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('acuerdos-cu')">
+                {{ __('Grupos de edad del personal docente') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('acuerdos-cu')">
+                {{ __('Infraestructuras') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('acuerdos-cu')">
+                {{ __('Unidades academicas') }}
               </x-dropdown-link>
             </x-slot>
           </x-dropdown>
