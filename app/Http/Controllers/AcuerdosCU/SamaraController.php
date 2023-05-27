@@ -46,6 +46,8 @@ class SamaraController extends Controller
       'sesion' => 'required'
     ]);
 
+    sleep(1);
+
     if ($validator->fails()) {
       return redirect()->back()->withErrors($validator);
     } else {
@@ -145,6 +147,8 @@ class SamaraController extends Controller
         $oldValue = json_encode($old_value),
         $newValue = json_encode($samara)
       );
+
+      sleep(1);
 
       return redirect()->route('samaras.edit', ['samara' => $id])->with('success', 'Samara editado correctamente.');
     }

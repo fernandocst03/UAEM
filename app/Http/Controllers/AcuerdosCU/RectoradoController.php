@@ -34,8 +34,9 @@ class RectoradoController extends Controller
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'ciclo' => ['required', 'regex:/^[0-9]{4}[-][0-9]{4}$/']
+      'ciclo' => ['required', 'integer', 'regex:/^[0-9]{4}[-][0-9]{4}$/']
     ]);
+    sleep(1);
 
     if ($validator->fails()) {
       return redirect()->back()->withErrors($validator);
@@ -97,6 +98,7 @@ class RectoradoController extends Controller
         $oldValue = json_encode($old_value),
         $newValue = json_encode($rectorado)
       );
+      sleep(1);
 
       return redirect()->route('rectorados.edit', ['rectorado' => $id])
         ->with('success', 'Rectorado actualizado correctamente');

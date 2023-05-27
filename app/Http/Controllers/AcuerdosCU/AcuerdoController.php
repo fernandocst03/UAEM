@@ -42,7 +42,7 @@ class AcuerdoController extends Controller
       'acuerdoCorto' => ['required', 'string'],
       'paginaSamara' => ['integer'],
     ]);
-
+    sleep(1);
     if ($validator->fails()) {
       return redirect()->back()->withErrors($validator);
     } else {
@@ -111,7 +111,7 @@ class AcuerdoController extends Controller
       'acuerdo' => ['required', 'string'],
       'acuerdoCorto' => ['required', 'string'],
     ]);
-
+    sleep(1);
     if (!$validator->fails()) {
       $acuerdo = Acuerdo::find($id);
       $old_value = $acuerdo->getOriginal();

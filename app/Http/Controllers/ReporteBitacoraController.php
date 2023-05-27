@@ -13,12 +13,12 @@ class ReporteBitacoraController extends Controller
     $fechaInicio = $request->fechaInicio;
     $fechaFin = $request->fechaFin;
     $tipoAccion = $request->tipoAccion;
-
     $bitacoras = Bitacora::orderBy('id', 'desc')
       ->accion($tipoAccion)
       ->fecha($fechaInicio, $fechaFin)
       ->get();
 
+    sleep(1);
     return view('AcuerdosCU.Reporte.bitacora', compact('bitacoras'));
   }
 }

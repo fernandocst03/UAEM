@@ -33,6 +33,8 @@ class SesionController extends Controller
       'tipoSesion' => ['required']
     ]);
 
+    sleep(1);
+
     if ($validator->fails()) {
       return redirect()->back()->withErrors($validator);
     } else {
@@ -81,6 +83,7 @@ class SesionController extends Controller
       'fecha' => ['required', 'date'],
       'tipoSesion' => ['required']
     ]);
+    sleep(1);
 
     if ($validator->fails()) {
       return redirect()->back()->withErrors($validator);

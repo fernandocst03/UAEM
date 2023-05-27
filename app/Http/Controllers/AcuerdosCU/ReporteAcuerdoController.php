@@ -22,6 +22,8 @@ class ReporteAcuerdoController extends Controller
       ->fecha($fechaInicio, $fechaFin)
       ->get();
 
+    sleep(1);
+
     return view('AcuerdosCU.Reporte.acuerdo', compact('acuerdos', 'tipoAcuerdos', 'request'));
   }
 }
