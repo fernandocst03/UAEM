@@ -70,12 +70,15 @@
                   placeholder="{{ __('0000-0000') }}" />
                 <x-input-error :messages="$errors->get('ciclo')" class="mt-2" />
               </div>
-              <div class="flex justify-end pb-4 mt-6 text-gray-100">
+              <div class="flex justify-end gap-2 pb-4 mt-6 text-gray-100">
                 <x-danger-button x-on:click="$dispatch('close')" type="button">
                   {{ __('Cancelar') }}
                 </x-danger-button>
-                <x-primary-button class="px-3 py-1 ml-3 bg-gray-800 rounded-md">
-                  {{ __('Crear rectorado') }}
+                <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                  <span>Crear Rectorado</span>
+                  <span x-show="loading">
+                    <x-loaders.spinner />
+                  </span>
                 </x-primary-button>
               </div>
             </form>

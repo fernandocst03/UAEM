@@ -73,7 +73,7 @@
 
                 <div class="flex flex-col justify-center gap-2">
                   <x-input-label for="fecha" :value="__('Fecha')" />
-                  <input type="date" name="fecha" id="fecha" required
+                  <input type="date" name="fecha" id="fecha"
                     class="mt-2 border-gray-300 rounded-md border-1 w-fit">
                   <x-input-error :messages="$errors->get('fecha')" class="mt-2" />
                 </div>
@@ -93,8 +93,11 @@
                   <x-danger-button x-on:click="$dispatch('close')" type="button">
                     {{ __('Cancelar') }}
                   </x-danger-button>
-                  <x-primary-button class="px-3 py-1 ml-3 bg-gray-800 rounded-md">
-                    {{ __('Crear sesión') }}
+                  <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                    <span>Crear Sesión</span>
+                    <span x-show="loading">
+                      <x-loaders.spinner />
+                    </span>
                   </x-primary-button>
                 </div>
               </form>

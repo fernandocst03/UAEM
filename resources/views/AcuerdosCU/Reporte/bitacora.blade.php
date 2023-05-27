@@ -46,16 +46,21 @@
             </select>
           </div>
         </div>
-        <div class="flex justify-center gap-2 mt-1">
+        <div class="flex justify-center gap-2 mt-4">
           <a href="{{ route('reporte.bitacoras') }}" class="flex items-center uppercase btn-secondary">Borrar
             filtros</a>
-          <x-primary-button>Buscar</x-primary-button>
+          <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+            <span>Buscar</span>
+            <span x-show="loading">
+              <x-loaders.spinner />
+            </span>
+          </x-primary-button>
         </div>
       </form>
     </article>
 
     <article class="relative card-container">
-      <x-loaders.skeleton />
+      {{-- <x-loaders.skeleton /> --}}
       <h4 class="text-lg font-bold">Resultados</h4>
       <table class="table stripe" id="bitacoras">
         <thead class="bg-gray-900 text-gray-50">

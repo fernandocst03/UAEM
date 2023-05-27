@@ -46,7 +46,12 @@
         <div class="flex justify-center gap-2 mt-4">
           <a href="{{ route('reporte.acuerdos') }}" class="flex items-center uppercase btn-secondary">Borrar
             filtros</a>
-          <x-primary-button>Buscar</x-primary-button>
+          <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+            <span>Buscar</span>
+            <span x-show="loading">
+              <x-loaders.spinner />
+            </span>
+          </x-primary-button>
         </div>
       </form>
     </article>

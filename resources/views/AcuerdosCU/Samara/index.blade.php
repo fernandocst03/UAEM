@@ -97,10 +97,15 @@
                   placeholder="URL" />
               </div>
 
-              <div class="flex justify-end gap-3 mt-16">
+              <div class="flex justify-end gap-1 mt-16">
                 <x-danger-button type="button" x-on:click="$dispatch('close')">Cancelar
                 </x-danger-button>
-                <x-primary-button>Crear Samará</x-primary-button>
+                <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                  <span>Crear Samará</span>
+                  <span x-show="loading">
+                    <x-loaders.spinner />
+                  </span>
+                </x-primary-button>
               </div>
 
             </form>
@@ -142,7 +147,7 @@
                 <td>{{ date('d-m-y', strtotime($samara->fecha)) }}</td>
                 <td>{{ sizeOf($samara->samarasesion) }}</td>
                 <td>
-                  <div class="flex gap-1">
+                  <div class="flex gap-2">
                     <a href="{{ route('samaras.show', ['samara' => $samara->id]) }}" class="btn-primary">
                       Ver
                     </a>

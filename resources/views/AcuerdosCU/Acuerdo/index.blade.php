@@ -142,7 +142,12 @@
 
                 <div class="flex justify-end gap-1 mt-4">
                   <x-danger-button type="button" x-on:click="$dispatch('close')">Cancelar</x-danger-button>
-                  <x-primary-button class="w-min">{{ __('Crear') }}</x-primary-button>
+                  <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                    <span>Crear Acuerdo</span>
+                    <span x-show="loading">
+                      <x-loaders.spinner />
+                    </span>
+                  </x-primary-button>
                 </div>
               </form>
             </div>
@@ -211,7 +216,7 @@
                   @endif
                 </td>
                 <td>
-                  <div class="flex gap-1">
+                  <div class="flex gap-2">
                     <a href="{{ route('acuerdos.show', ['acuerdo' => $item->id]) }}" class="btn-primary">Ver</a>
                     @if (Auth::check() && (Auth::user()->role->role = 'Administrador'))
                       <a href="{{ route('acuerdos.edit', ['acuerdo' => $item->id]) }}"

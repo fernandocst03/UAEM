@@ -43,7 +43,12 @@
         </div>
 
         <div class="flex items-center gap-2">
-          <x-primary-button>{{ __('Guardar') }}</x-primary-button>
+          <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+            <span>Actualizar</span>
+            <span x-show="loading">
+              <x-loaders.spinner />
+            </span>
+          </x-primary-button>
           @if ($message = Session::get('success'))
             <x-alerts.success :text="$message" />
           @endif
