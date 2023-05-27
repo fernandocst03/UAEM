@@ -19,4 +19,9 @@ class HomeController extends BaseController
     $last_five_samaras = Samara::orderBy('id', 'desc')->take(5)->get();
     return view('AcuerdosCU.presentacion', compact('last_sesion', 'last_five_samaras'));
   }
+
+  public function index_formato911()
+  {
+    return view('Formato911.presentacion');
+  }
 }
