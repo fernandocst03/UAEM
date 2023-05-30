@@ -159,6 +159,8 @@
             </x-primary-button>
             @if ($messages = Session::get('success'))
               <x-alerts.success :text="$messages" />
+            @elseif($messages = Session::get('warning'))
+              <x-alerts.warning :text="$messages" />
             @endif
           </div>
         </form>

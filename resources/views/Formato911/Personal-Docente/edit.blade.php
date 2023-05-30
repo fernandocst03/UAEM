@@ -5,8 +5,8 @@
         Formato 911
       </x-nav-link>
       <x-arrow />
-      <x-nav-link href="{{ route('personal-administrativo.index') }}">
-        Personal Administrativo
+      <x-nav-link href="{{ route('personal-docente.index') }}">
+        Personal Docente
       </x-nav-link>
       <x-arrow />
       <x-nav-link :active="true">
@@ -110,6 +110,8 @@
             </x-primary-button>
             @if ($messages = Session::get('success'))
               <x-alerts.success :text="$messages" />
+            @elseif ($messages = Session::get('warning'))
+              <x-alerts.warning :text="$messages" />
             @endif
           </div>
         </form>
