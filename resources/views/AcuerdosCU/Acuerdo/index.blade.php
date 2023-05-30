@@ -166,67 +166,71 @@
 
     <section class="flex flex-col gap-5">
       <article class="card-container">
-        <div class="flex flex-col gap-1 mb-4">
-          <h2 class="title">Acuerdos de la ultima sesion</h2>
-          <a class="text-secondary w-fit" href="{{ route('sesiones.show', ['sesione' => $lastSesion->id]) }}">Fecha
-            de
-            la sesion:
-            {{ $lastSesion->fecha }}</a>
-        </div>
-        <table id="ultima_sesion" class="table px-2 stripe">
-          <thead class="bg-gray-900 text-gray-50">
-            <tr>
-              <th>Tipo del acuerdo</th>
-              <th>Otro tipo</th>
-              <th>Punto</th>
-              <th>Acuerdo corto</th>
-              <th>Acuerdo</th>
-              <th>Observaciones</th>
-              <th>Pagina samara</th>
-              <th>Opciones</th>
-            </tr>
-          </thead>
-          <tbody class="font-normal">
-            @foreach ($lastSesion->acuerdos as $item)
+        @if (!empty($acuerdos))
+          <div class="flex flex-col gap-1 mb-4">
+            <h2 class="title">Acuerdos de la ultima sesion</h2>
+            <a class="text-secondary w-fit" href="{{ route('sesiones.show', ['sesione' => $lastSesion->id]) }}">Fecha
+              de
+              la sesion:
+              {{ $lastSesion->fecha }}</a>
+          </div>
+          <table id="ultima_sesion" class="table px-2 stripe">
+            <thead class="bg-gray-900 text-gray-50">
               <tr>
-                <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
-                <td>
-                  @if ($item->tipo_otro)
-                    <p>{{ $item->tipo_otrp }}</p>
-                  @else
-                    <p class="italic text-secondary">Ninguno</p>
-                  @endif
-                </td>
-                <td>{{ $item->punto }}</td>
-                <td>{{ $item->acuerdo_corto }}</td>
-                <td>{{ $item->acuerdo }}</td>
-                <td>
-                  @if ($item->observaciones)
-                    <p>{{ $item->observaciones }}</p>
-                  @else
-                    <p class="italic text-secondary">Sin observaciones</p>
-                  @endif
-                </td>
-                <td>
-                  @if ($item->pagina_samara)
-                    <p>{{ $item->pagina_samara }}</p>
-                  @else
-                    <p class="italic text-secondary">Ninguno</p>
-                  @endif
-                </td>
-                <td>
-                  <div class="flex gap-2">
-                    <a href="{{ route('acuerdos.show', ['acuerdo' => $item->id]) }}" class="btn-primary">Ver</a>
-                    @if (Auth::check() && (Auth::user()->role->role = 'Administrador'))
-                      <a href="{{ route('acuerdos.edit', ['acuerdo' => $item->id]) }}"
-                        class="btn-secondary">Editar</a>
-                    @endif
-                  </div>
-                </td>
+                <th>Tipo del acuerdo</th>
+                <th>Otro tipo</th>
+                <th>Punto</th>
+                <th>Acuerdo corto</th>
+                <th>Acuerdo</th>
+                <th>Observaciones</th>
+                <th>Pagina samara</th>
+                <th>Opciones</th>
               </tr>
-            @endforeach
-          </tbody>
-        </table>
+            </thead>
+            <tbody class="font-normal">
+              @foreach ($lastSesion->acuerdos as $item)
+                <tr>
+                  <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
+                  <td>
+                    @if ($item->tipo_otro)
+                      <p>{{ $item->tipo_otrp }}</p>
+                    @else
+                      <p class="italic text-secondary">Ninguno</p>
+                    @endif
+                  </td>
+                  <td>{{ $item->punto }}</td>
+                  <td>{{ $item->acuerdo_corto }}</td>
+                  <td>{{ $item->acuerdo }}</td>
+                  <td>
+                    @if ($item->observaciones)
+                      <p>{{ $item->observaciones }}</p>
+                    @else
+                      <p class="italic text-secondary">Sin observaciones</p>
+                    @endif
+                  </td>
+                  <td>
+                    @if ($item->pagina_samara)
+                      <p>{{ $item->pagina_samara }}</p>
+                    @else
+                      <p class="italic text-secondary">Ninguno</p>
+                    @endif
+                  </td>
+                  <td>
+                    <div class="flex gap-2">
+                      <a href="{{ route('acuerdos.show', ['acuerdo' => $item->id]) }}" class="btn-primary">Ver</a>
+                      @if (Auth::check() && (Auth::user()->role->role = 'Administrador'))
+                        <a href="{{ route('acuerdos.edit', ['acuerdo' => $item->id]) }}"
+                          class="btn-secondary">Editar</a>
+                      @endif
+                    </div>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        @else
+          <p class="italic text-center text-secondary">Sin información disponible</p>
+        @endif
       </article>
     </section>
   </section>

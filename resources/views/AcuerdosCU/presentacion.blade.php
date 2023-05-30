@@ -36,60 +36,66 @@
     </article>
 
     <article class="card-container">
-      <a href="{{ route('sesiones.show', ['sesione' => $last_sesion->id]) }}" class="text-lg font-bold">Ultima sesión</a>
-      <div>
-        <p class="text-md">Fecha de la sesión: {{ date('d-m-y', strtotime($last_sesion->fecha)) }} </p>
-        <p class="text-md">Tipo de la sesion: {{ $last_sesion->sesionTipo->tipo }} </p>
-        <p class="mt-5 font-semibold text-md">Acuerdos</p>
+      @if (empty($last_sesion))
+        <p class="italic text-center text-secondary">Información no disponible</p>
+      @else
+        <a href="{{ route('sesiones.show', ['sesione' => $last_sesion->id]) }}" class="text-lg font-bold">Ultima
+          sesión</a>
+
         <div>
-          <table id="ultima_sesion" class="table stripe" style="width: 100%">
-            <thead class="bg-gray-900 text-gray-50">
-              <tr>
-                <th>Punto</th>
-                <th>Tipo acuerdo</th>
-                <th>Acuerdo corto</th>
-                <th>Acuerdo</th>
-                <th>Observaciones</th>
-                <th>Pagina Samara</th>
-                @if (Auth::check() && Auth::user()->role->id == 1)
-                  <th>Opciones</th>
-                @endif
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($last_sesion->acuerdos as $acuerdos)
+          <p class="title">Fecha de la sesión: {{ date('d-m-y', strtotime($last_sesion->fecha)) }} </p>
+          <p class="text">Tipo de la sesion: {{ $last_sesion->sesionTipo->tipo }} </p>
+          <p class="text">Acuerdos</p>
+          <div>
+            <table id="ultima_sesion" class="table stripe" style="width: 100%">
+              <thead class="bg-gray-900 text-gray-50 text-md">
                 <tr>
-                  <td>{{ $acuerdos->punto }}</td>
-                  <td>{{ $acuerdos->tipoAcuerdo->tipo_acuerdo }}</td>
-                  <td>{{ $acuerdos->acuerdo_corto }}</td>
-                  <td>{{ $acuerdos->acuerdo }}</td>
-                  <td>
-                    @if ($acuerdos->observaciones == null)
-                      Sin observaciones
-                    @else
-                      {{ $acuerdos->observaciones }}
-                    @endif
-                  </td>
-                  <th>{{ $acuerdos->pagina_samara }}</th>
+                  <th>Punto</th>
+                  <th>Tipo acuerdo</th>
+                  <th>Acuerdo corto</th>
+                  <th>Acuerdo</th>
+                  <th>Observaciones</th>
+                  <th>Pagina Samara</th>
                   @if (Auth::check() && Auth::user()->role->id == 1)
-                    <td>
-                      <a class="btn-primary w-fit" href="{{ route('acuerdos.edit', ['acuerdo' => $acuerdos->id]) }}">
-                        Editar
-                      </a>
-                    </td>
+                    <th>Opciones</th>
                   @endif
                 </tr>
-              @endforeach
-          </table>
+              </thead>
+              <tbody class="text">
+                @foreach ($last_sesion->acuerdos as $acuerdos)
+                  <tr>
+                    <td>{{ $acuerdos->punto }}</td>
+                    <td>{{ $acuerdos->tipoAcuerdo->tipo_acuerdo }}</td>
+                    <td>{{ $acuerdos->acuerdo_corto }}</td>
+                    <td>{{ $acuerdos->acuerdo }}</td>
+                    <td>
+                      @if ($acuerdos->observaciones == null)
+                        Sin observaciones
+                      @else
+                        {{ $acuerdos->observaciones }}
+                      @endif
+                    </td>
+                    <th>{{ $acuerdos->pagina_samara }}</th>
+                    @if (Auth::check() && Auth::user()->role->id == 1)
+                      <td>
+                        <a class="btn-primary w-fit" href="{{ route('acuerdos.edit', ['acuerdo' => $acuerdos->id]) }}">
+                          Editar
+                        </a>
+                      </td>
+                    @endif
+                  </tr>
+                @endforeach
+            </table>
+          </div>
         </div>
-      </div>
+      @endif
     </article>
 
     <article class="card-container">
-      <h4 class="text-lg font-bold">Ultimos 5 Samaras</h4>
+      <h4 class="title">Ultimos 5 Samaras</h4>
       <div class="flex flex-col gap-4 mt-2">
-        <table id="ultimos_5_samaras" class="table table-striped stripe" style="width: 100%">
-          <thead class="bg-gray-900 text-gray-50">
+        <table id="ultimos_5_samaras" class="table stripe" style="width: 100%">
+          <thead class="bg-gray-900 text-gray-50 text-md">
             <tr>
               <th>Menendez Samará</th>
               <th>Ciclo</th>
@@ -98,7 +104,7 @@
               <th>PDF</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text">
             @foreach ($last_five_samaras as $samara)
               <tr>
                 <td>{{ $samara->numero }}</td>
