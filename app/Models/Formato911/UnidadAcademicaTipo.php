@@ -9,7 +9,6 @@ class UnidadAcademicaTipo extends Model
 {
   use HasFactory;
 
-  protected $connection = 'mysql_formato911';
   protected $table = 'mieg_unidad_academica_tipo';
   protected $fillable = [
     'id',

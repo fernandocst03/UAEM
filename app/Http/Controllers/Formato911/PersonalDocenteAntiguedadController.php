@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Formato911\AntiguedadGrupo;
 use App\Models\Formato911\PersonalDocenteAntiguedad;
 use App\Models\Formato911\UnidadAcademica;
+use Exception;
+use Illuminate\Support\Facades\Validator;
 
 class PersonalDocenteAntiguedadController extends Controller
 {
@@ -19,11 +21,7 @@ class PersonalDocenteAntiguedadController extends Controller
     $grupoAntiguedad = AntiguedadGrupo::select()->orderBy('id')->get();
     $personalDocente = PersonalDocenteAntiguedad::select()->orderBy('id')->get();
 
-    return view('formato_911.personal_docente_antiguedad.index', [
-      'personalDocente' => $personalDocente,
-      'unidadesAcademicas' => $unidadesAcademicas,
-      'grupoAntiguedad' => $grupoAntiguedad
-    ]);
+    return view('Formato911.Personal-Docente-Antiguedad.index', compact('unidadesAcademicas', 'grupoAntiguedad', 'personalDocente'));
   }
 
   /**
@@ -39,25 +37,33 @@ class PersonalDocenteAntiguedadController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
-      'anio' => ['required'],
-      'unidad_academica' => ['required'],
-      'grupo_antiguedad' => ['required'],
-      'hombres' => ['required'],
-      'mujeres' => ['required'],
-    ]);
+    try {
+      $validator = Validator::make($request->all(), [
+        'anio' => ['required', 'integer'],
+        'unidad_academica' => ['required', 'integer'],
+        'grupo_antiguedad' => ['required', 'integer'],
+        'hombres' => ['required', 'integer'],
+        'mujeres' => ['required', 'integer'],
+      ]);
 
-    $personal = PersonalDocenteAntiguedad::create([
-      'unidad_academica_id' => $request->unidad_academica,
-      'anio' => $request->anio,
-      'grupo_id' => $request->grupo_antiguedad,
-      'hombres' => $request->hombres,
-      'mujeres' => $request->mujeres,
-      'total' => $request->hombres + $request->mujeres,
-      'created_at' => now()
-    ]);
+      sleep(1);
+      $personal = PersonalDocenteAntiguedad::create([
+        'unidad_academica_id' => $request->unidad_academica,
+        'anio' => $request->anio,
+        'grupo_id' => $request->grupo_antiguedad,
+        'hombres' => $request->hombres,
+        'mujeres' => $request->mujeres,
+        'total' => $request->hombres + $request->mujeres,
+        'created_at' => now()
+      ]);
 
-    return redirect()->route('personal-docente-antiguedad.index');
+      return redirect()->route('personal-docente-antiguedad.index')
+        ->with('success', 'Personal docente por grupo de antiguedad creado correctamente.');
+    } catch (Exception $e) {
+      return redirect()->route('personal-docente-antiguedad.index')
+        ->with('warning', 'Ocurrio un error al intentar crear el personal docente por grupo de antiguedad.')
+        ->withErrors($validator);
+    }
   }
 
   /**
@@ -65,10 +71,8 @@ class PersonalDocenteAntiguedadController extends Controller
    */
   public function show(string $id)
   {
-    $personal = PersonalDocenteAntiguedad::find($id);
-    return view('formato_911.personal_docente_antiguedad.show', [
-      'personal' => $personal
-    ]);
+    $personalDocente = PersonalDocenteAntiguedad::find($id);
+    return view('Formato911.Personal-Docente-Antiguedad.show', compact('personalDocente'));
   }
 
   /**
@@ -77,12 +81,9 @@ class PersonalDocenteAntiguedadController extends Controller
   public function edit(string $id)
   {
     $grupoAntiguedad = AntiguedadGrupo::select()->orderBy('id')->get();
-    $personal = PersonalDocenteAntiguedad::find($id);
+    $personalDocente = PersonalDocenteAntiguedad::find($id);
 
-    return view('formato_911.personal_docente_antiguedad.edit', [
-      'personal' => $personal,
-      'grupoAntiguedad' => $grupoAntiguedad
-    ]);
+    return view('Formato911.Personal-Docente-Antiguedad.edit', compact('grupoAntiguedad', 'personalDocente'));
   }
 
   /**
@@ -90,23 +91,31 @@ class PersonalDocenteAntiguedadController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $request->validate([
-      'anio' => ['required'],
-      'grupo_antiguedad' => ['required'],
-      'hombres' => ['required'],
-      'mujeres' => ['required'],
-    ]);
 
-    $personal = PersonalDocenteAntiguedad::find($id);
-    $personal->anio = $request->anio;
-    $personal->grupo_id = $request->grupo_antiguedad;
-    $personal->hombres = $request->hombres;
-    $personal->mujeres = $request->mujeres;
-    $personal->total = $request->hombres + $request->mujeres;
-    $personal->updated_at = now();
-    $personal->save();
+    try {
+      $validator = Validator::make($request->all(), [
+        'anio' => ['required', 'integer'],
+        'grupo_antiguedad' => ['required', 'integer'],
+        'hombres' => ['required', 'integer'],
+        'mujeres' => ['required', 'integer'],
+      ]);
+      sleep(1);
+      $personal = PersonalDocenteAntiguedad::find($id);
+      $personal->anio = $request->anio;
+      $personal->grupo_id = $request->grupo_antiguedad;
+      $personal->hombres = $request->hombres;
+      $personal->mujeres = $request->mujeres;
+      $personal->total = $request->hombres + $request->mujeres;
+      $personal->updated_at = now();
+      $personal->save();
 
-    return redirect()->route('personal-docente-antiguedad.edit', ['personal_docente_antiguedad' => $id]);
+      return redirect()->route('personal-docente-antiguedad.edit', ['personal_docente_antiguedad' => $id])
+        ->with('success', 'Actualizado correctamente.');
+    } catch (Exception $e) {
+      return redirect()->route('personal-docente-antiguedad.edit', ['personal_docente_antiguedad' => $id])
+        ->with('warning', 'Ocurrio un error al intentar actualizar el personal docente por grupo de antiguedad.')
+        ->withErrors($validator);
+    }
   }
 
   /**
@@ -120,6 +129,32 @@ class PersonalDocenteAntiguedadController extends Controller
 
     $personal = PersonalDocenteAntiguedad::find($id);
     $personal->delete();
+
+    return redirect()->route('personal-docente-antiguedad.index')->with('warning', 'Personal Administrativo eliminado correctamente');
+  }
+
+  public function file(Request $request, int $id)
+  {
+    $request->validateWithBag('userDeletion', [
+      'password' => ['required', 'current-password'],
+    ]);
+
+    $personalDocenteAntiguedad = PersonalDocenteAntiguedad::find($id);
+    $personalDocenteAntiguedad->status = false;
+    $personalDocenteAntiguedad->save();
+
+    return redirect()->route('personal-docente-antiguedad.index');
+  }
+
+  public function unarchive(Request $request, int $id)
+  {
+    $request->validateWithBag('userDeletion', [
+      'password' => ['required', 'current-password'],
+    ]);
+
+    $personalDocenteAntiguedad = PersonalDocenteAntiguedad::find($id);
+    $personalDocenteAntiguedad->status = true;
+    $personalDocenteAntiguedad->save();
 
     return redirect()->route('personal-docente-antiguedad.index');
   }

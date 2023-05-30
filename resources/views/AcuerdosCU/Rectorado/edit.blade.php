@@ -23,8 +23,7 @@
         @method('patch')
         <div class="w-1/3 mt-6">
           <x-input-label for="ciclo" :value="__('Ciclo')" />
-          <x-text-input id="ciclo" name="ciclo" type="text" class="block w-full mt-1" :value="$rectorado->ciclo"
-            required autofocus />
+          <x-text-input id="ciclo" name="ciclo" type="text" class="block w-full mt-1" :value="$rectorado->ciclo" />
           <x-input-error :messages="$errors->userDeletion->get('ciclo')" class="mt-2" />
         </div>
         <div class="flex gap-2">
@@ -36,6 +35,8 @@
           </x-primary-button>
           @if ($message = Session::get('success'))
             <x-alerts.success :text="$message" />
+          @elseif ($message = Session::get('warning'))
+            <x-alerts.warning :text="$message" />
           @endif
         </div>
         @if (Auth::check() && Auth::user()->role->role == 'Administrador')

@@ -9,7 +9,6 @@ class UnidadDependencia extends Model
 {
   use HasFactory;
 
-  protected $connection = 'mysql_formato911';
   protected $table = 'sipei_unidades_dependencias';
   protected $fillable = [
     'id',

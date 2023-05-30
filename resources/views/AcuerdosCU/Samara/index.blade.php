@@ -21,7 +21,7 @@
         </x-primary-button>
         <x-modal name="create">
           <div class="p-5">
-            <form action="" method="post" class="flex flex-col gap-2">
+            <form action="{{ route('samaras.store') }}" method="post" class="flex flex-col gap-2">
               @csrf
               <h2 class="font-bold">Crea un nuevo samará</h2>
 
@@ -138,9 +138,9 @@
               <th>PDF</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text">
             @foreach ($last_rectorado->samaras as $samara)
-              <tr class="text">
+              <tr>
                 <td>{{ $samara->numero }}</td>
                 <td>{{ $samara->anio }}</td>
                 <td>{{ $samara->rectorado->ciclo }}</td>

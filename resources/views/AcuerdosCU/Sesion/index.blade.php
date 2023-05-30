@@ -107,7 +107,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 my-3">
+    <section class="w-full h-10 my-1">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))
@@ -165,8 +165,8 @@
             </tr>
           </thead>
           <tbody class="font-normal">
-            @foreach ($samara->samarasesion as $sesiones)
-              @if ($sesiones->sesion->status)
+            @if (!empty($samara))
+              @foreach ($samara->samarasesion as $sesiones)
                 <tr class="text-sm">
                   <td>{{ date('d-m-Y', strtotime($sesiones->sesion->fecha)) }}</td>
                   <td>{{ $sesiones->sesion->sesionTipo->tipo }}</td>
@@ -180,8 +180,8 @@
                     @endif
                   </td>
                 </tr>
-              @endif
-            @endforeach
+              @endforeach
+            @endif
           </tbody>
         </table>
       </article>

@@ -62,7 +62,8 @@
               <h2 class="title">Crear nuevo Rectorado</h2>
               <p class="text-secondary">Introdusca el periodo del nuevo rectorado</p>
             </div>
-            <form method="post" {{-- action="{{ route('rectorado.create') }}" --}}>
+            <form method="post" action="{{ route('rectorados.store') }}">
+              @method('post')
               @csrf
               <div class="pb-5">
                 <x-input-label for="ciclo" value="{{ __('Ciclo') }}" />
@@ -135,7 +136,7 @@
                       </svg>
                     </a>
                   @else
-                    <p>PDF sin asignar</p>
+                    <p class="italic text-secondary">PDF sin asignar</p>
                   @endif
                   <div class="flex gap-2">
                     <a href="{{ route('samaras.show', ['samara' => $samara->id]) }}" class="btn-primary">Ver</a>

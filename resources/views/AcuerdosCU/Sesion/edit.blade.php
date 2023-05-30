@@ -30,6 +30,7 @@
         <div class="w-1/3 mt-6">
           <x-input-label for="tipoSesion" :value="__('Tipo de sesion')" />
           <select name="tipoSesion" id="tipoSesion" class="mt-2 border-gray-300 rounded-md border-1">
+            <option value="">Elige un tipo de sesión</option>
             <option value="1" @if (old('state', $sesion->sesionTipo->id) == '1') {{ 'selected' }} @endif>Ordinaria</option>
             <option value="2" @if (old('state', $sesion->sesionTipo->id) == '2') {{ 'selected' }} @endif>Extraordinaria</option>
             <option value="3" @if (old('state', $sesion->sesionTipo->id) == '3') {{ 'selected' }} @endif>Solemne</option>
@@ -51,6 +52,8 @@
           </x-primary-button>
           @if ($message = Session::get('success'))
             <x-alerts.success :text="$message" />
+          @elseif ($message = Session::get('warning'))
+            <x-alerts.warning :text="$message" />
           @endif
         </div>
       </form>

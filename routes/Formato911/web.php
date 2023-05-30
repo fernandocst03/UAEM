@@ -18,12 +18,32 @@ Route::resource('/formato-911/personal-docente-edad', PersonalDocenteEdadControl
 Route::resource('/formato-911/infraestructuras', InfraestructuraController::class);
 Route::get('/formato-911/unidades-academicas', UnidadAcademicaController::class)->name('unidades-academicas.index');
 
+// Personal administrativo
 Route::patch('/formato-911/personal-administrativo/{id}/file', [PersonalAdministrativoController::class, 'file'])
   ->name('personal-administrativo.file');
 Route::patch('/formato-911/personal-administrativo/{id}/unarchive', [PersonalAdministrativoController::class, 'unarchive'])
   ->name('personal-administrativo.unarchive');
 
+// Personal docente
 Route::patch('/formato-911/personal-docente/{id}/file', [PersonalDocenteController::class, 'file'])
   ->name('personal-docente.file');
 Route::patch('/formato-911/personal-docente/{id}/unarchive', [PersonalDocenteController::class, 'unarchive'])
   ->name('personal-docente.unarchive');
+
+// Personal docente antiguedad
+Route::patch('/formato-911/personal-docente-antiguedad/{id}/file', [PersonalDocenteAntiguedadController::class, 'file'])
+  ->name('personal-docente-antiguedad.file');
+Route::patch('/formato-911/personal-docente-antiguedad/{id}/unarchive', [PersonalDocenteAntiguedadController::class, 'unarchive'])
+  ->name('personal-docente-antiguedad.unarchive');
+
+// Personal docente edad
+Route::patch('/formato-911/personal-docente-edad/{id}/file', [PersonalDocenteEdadController::class, 'file'])
+  ->name('personal-docente-edad.file');
+Route::patch('/formato-911/personal-docente-edad/{id}/unarchive', [PersonalDocenteEdadController::class, 'unarchive'])
+  ->name('personal-docente-edad.unarchive');
+
+// Infraestructura
+Route::patch('/formato-911/infraestructura/{id}/file', [InfraestructuraController::class, 'file'])
+  ->name('infraestructura.file');
+Route::patch('/formato-911/personal-docente-edad/{id}/unarchive', [InfraestructuraController::class, 'unarchive'])
+  ->name('infraestructura.unarchive');

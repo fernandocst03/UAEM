@@ -5,8 +5,8 @@
         Formato 911
       </x-nav-link>
       <x-arrow />
-      <x-nav-link href="{{ route('personal-docente.index') }}">
-        Personal Docente
+      <x-nav-link href="{{ route('personal-docente-antiguedad.index') }}">
+        Personal Docente por Antiguedad
       </x-nav-link>
       <x-arrow />
       <x-nav-link :active="true">
@@ -26,10 +26,23 @@
         <h2 class="text-lg font-semibold text-gray-900">Personal Docente</h2>
         <p class="text-sm font-normal text-gray-500">Actualice la informacion del personal docente de la unidad
           academica de {{ $personalDocente->unidadAcademica->unidadDependencia->unidad_dependencia }} </p>
-        <form action="{{ route('personal-docente.update', ['personal_docente' => $personalDocente->id]) }}" method="post"
-          class="flex flex-col gap-8 mt-6">
+        <form
+          action="{{ route('personal-docente-antiguedad.update', ['personal_docente_antiguedad' => $personalDocente->id]) }}"
+          method="post" class="flex flex-col gap-8 mt-6">
           @csrf
           @method('patch')
+
+          <div class="flex flex-col gap-1">
+            <x-input-label for="" :value="__('Grupo antiguedad')" />
+            <select name="grupo_antiguedad" id="grupo_antiguedad" class="border border-gray-300 rounded w-fit">
+              <option value="">Selecciona una opcion</option>
+              @foreach ($grupoAntiguedad as $item)
+                <option value="{{ $item->id }}" @if (old('state', $personalDocente->grupo_id) == $item->id) {{ 'selected' }} @endif>
+                  {{ $item->grupo }}</option>
+              @endforeach
+            </select>
+            <x-input-error class="mt-1" :messages="$errors->get('grupo_antiguedad')" />
+          </div>
 
           <div class="flex flex-col gap-1">
             <x-input-label for="anio" :value="__('Año')" />
@@ -39,75 +52,17 @@
           </div>
 
           <div class="flex flex-col gap-1">
-            <x-input-label for="directivos" :value="__('PITC')" />
-            <div class="flex gap-4">
-              <div class="flex flex-col justify-center gap-1">
-                <x-input-label for="pitc_h" :value="__('Hombres')" class="text-secondary" />
-                <x-text-input id="pitc_h" name="pitc_h" value="{{ $personalDocente->pitc_h }}" type="text"
-                  class="w-fit" />
-                <x-input-error class="mt-1" :messages="$errors->get('pitc_h')" />
-              </div>
-              <div class="flex flex-col justify-center gap-1">
-                <x-input-label for="pitc_m" :value="__('Mujeres')" class="text-secondary" />
-                <x-text-input id="pitc_m" name="pitc_m" value="{{ $personalDocente->pitc_m }}" type="text"
-                  class="w-fit" />
-                <x-input-error class="mt-1" :messages="$errors->get('pitc_m')" />
-              </div>
-            </div>
+            <x-input-label for="hombres" :value="__('Hombres')" />
+            <x-text-input id="hombres" name="hombres" value="{{ $personalDocente->hombres }}" type="text"
+              class="w-fit" />
+            <x-input-error class="mt-1" :messages="$errors->get('hombres')" />
           </div>
 
           <div class="flex flex-col gap-1">
-            <x-input-label for="docentes" :value="__('P34T')" />
-            <div class="flex gap-4">
-              <div class="flex flex-col justify-center gap-1">
-                <x-input-label for="p34t_h" :value="__('Hombres')" class="text-secondary" />
-                <x-text-input id="p34t_h" name="p34t_h" value="{{ $personalDocente->p34t_h }}" type="text"
-                  class="w-fit" />
-                <x-input-error class="mt-1" :messages="$errors->get('p34t_h')" />
-              </div>
-              <div class="flex flex-col justify-center gap-1">
-                <x-input-label for="p34t_m" :value="__('Mujeres')" class="text-secondary" />
-                <x-text-input id="p34t_m" name="p34t_m" value="{{ $personalDocente->p34t_m }}" type="text"
-                  class="w-fit" />
-                <x-input-error class="mt-1" :messages="$errors->get('p34t_m')" />
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-col gap-1">
-            <x-input-label for="" :value="__('PMT')" />
-            <div class="flex gap-4">
-              <div class="flex flex-col justify-center gap-1">
-                <x-input-label for="pmt_h" :value="__('Mujeres')" class="text-secondary" />
-                <x-text-input id="pmt_h" name="pmt_h" value="{{ $personalDocente->pmt_h }}" type="text"
-                  class="w-fit" />
-                <x-input-error class="mt-1" :messages="$errors->get('pmt_h')" />
-              </div>
-              <div class="flex flex-col justify-center gap-1">
-                <x-input-label for="pmt_m" :value="__('Mujeres')" class="text-secondary" />
-                <x-text-input id="pmt_m" name="pmt_m" value="{{ $personalDocente->pmt_m }}" type="text"
-                  class="w-fit" />
-                <x-input-error class="mt-1" :messages="$errors->get('pmt_m')" />
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-col gap-1">
-            <x-input-label for="" :value="__('PPH')" />
-            <div class="flex gap-4">
-              <div class="flex flex-col justify-center gap-1">
-                <x-input-label for="pph_h" :value="__('Mujeres')" class="text-secondary" />
-                <x-text-input id="pph_h" name="pph_h" value="{{ $personalDocente->pph_h }}" type="text"
-                  class="w-fit" />
-                <x-input-error class="mt-1" :messages="$errors->get('pph_h')" />
-              </div>
-              <div class="flex flex-col justify-center gap-1">
-                <x-input-label for="pph_m" :value="__('Mujeres')" class="text-secondary" />
-                <x-text-input id="pph_m" name="pph_m" value="{{ $personalDocente->pph_m }}" type="text"
-                  class="w-fit" />
-                <x-input-error class="mt-1" :messages="$errors->get('pph_m')" />
-              </div>
-            </div>
+            <x-input-label for="mujeres" :value="__('Mujeres')" />
+            <x-text-input id="mujeres" name="mujeres" value="{{ $personalDocente->mujeres }}" type="text"
+              class="w-fit" />
+            <x-input-error class="mt-1" :messages="$errors->get('mujeres')" />
           </div>
 
           <div class="flex items-center gap-2">
@@ -132,7 +87,7 @@
         <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
           <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
             <div class="flex flex-col justify-center w-2/3">
-              <h4 class="title">Eliminar Personal Docente</h4>
+              <h4 class="title">Eliminar Personal Docente por Antiguedad</h4>
               <p class="text-secondary">Al eliminar este personal docente, no se podra recuperar mas adelante de
                 este
                 registro, por favor, este seguro.</p>
@@ -143,7 +98,7 @@
             <x-modal name="confirm-delete">
               <div>
                 <form method="post"
-                  action="{{ route('personal-docente.destroy', ['personal_docente' => $personalDocente->id]) }}"
+                  action="{{ route('personal-docente-antiguedad.destroy', ['personal_docente_antiguedad' => $personalDocente->id]) }}"
                   class="p-6">
                   @csrf
                   @method('delete')
@@ -175,7 +130,7 @@
           @if ($personalDocente->status)
             <div class="flex items-center justify-between py-5 px-7 ">
               <div class="flex flex-col justify-center w-2/3">
-                <h4 class="title">Archivar Personal Docente</h4>
+                <h4 class="title">Archivar Personal Docente por Antiguedad</h4>
                 <p class="text-secondary">Archiva este Personal docente, lo podras recuperar en un futuro si asi
                   lo
                   deseas.</p>
@@ -185,7 +140,8 @@
               </x-danger-button>
               <x-modal name="confirm-file">
                 <div>
-                  <form method="post" action="{{ route('personal-docente.file', ['id' => $personalDocente->id]) }}"
+                  <form method="post"
+                    action="{{ route('personal-docente-antiguedad.file', ['id' => $personalDocente->id]) }}"
                     class="p-6">
                     @csrf
                     @method('patch')
@@ -216,7 +172,7 @@
           @elseif (!$personalDocente->status)
             <div class="flex items-center justify-between py-5 px-7 ">
               <div class="flex flex-col justify-center w-2/3">
-                <h4 class="title">Recuperar Personal Docente</h4>
+                <h4 class="title">Recuperar Personal Docente por Antiguedad</h4>
                 <p class="text-secondary">Puede recuperar el Personal docente, de esta forma la información sera
                   visible a los usuarios nuevamente</p>
               </div>
@@ -227,7 +183,7 @@
               <x-modal name="confirm-unarchive">
                 <div>
                   <form method="post"
-                    action="{{ route('personal-docente.unarchive', ['id' => $personalDocente->id]) }}"
+                    action="{{ route('personal-docente-antiguedad.unarchive', ['id' => $personalDocente->id]) }}"
                     class="p-6">
                     @csrf
                     @method('patch')

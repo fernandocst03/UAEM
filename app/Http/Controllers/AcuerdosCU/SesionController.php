@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AcuerdosCU\Sesion;
 use App\Models\AcuerdosCU\Samara;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class SesionController extends Controller
@@ -28,16 +29,13 @@ class SesionController extends Controller
 
   public function store(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'fecha' => ['required', 'date'],
-      'tipoSesion' => ['required']
-    ]);
+    try {
+      $validator = Validator::make($request->all(), [
+        'fecha' => ['required', 'date'],
+        'tipoSesion' => ['required']
+      ]);
 
-    sleep(1);
-
-    if ($validator->fails()) {
-      return redirect()->back()->withErrors($validator);
-    } else {
+      sleep(1);
 
       $sesion = Sesion::create([
         'fecha' => $request->fecha,
@@ -51,7 +49,12 @@ class SesionController extends Controller
         $registroId = $sesion->id,
         $newValue = $sesion
       );
-      return redirect()->route('sesiones.index')->with('success', 'Sesion del dia ' . $fecha . ' creada correctamente.');
+      return redirect()->route('sesiones.index')
+        ->with('success', 'Sesion del dia ' . $fecha . ' creada correctamente.');
+    } catch (Exception $e) {
+      return redirect()->route('sesiones.index')
+        ->with('warning', 'Error al crear la sesión')
+        ->withErrors($validator);
     }
   }
 
@@ -79,15 +82,12 @@ class SesionController extends Controller
 
   public function update(Request $request, string $id)
   {
-    $validator = Validator::make($request->all(), [
-      'fecha' => ['required', 'date'],
-      'tipoSesion' => ['required']
-    ]);
-    sleep(1);
-
-    if ($validator->fails()) {
-      return redirect()->back()->withErrors($validator);
-    } else {
+    try {
+      $validator = Validator::make($request->all(), [
+        'fecha' => ['required', 'date'],
+        'tipoSesion' => ['required']
+      ]);
+      sleep(1);
       $sesion = Sesion::find($id);
       $old_value = $sesion->getOriginal();
 
@@ -104,6 +104,9 @@ class SesionController extends Controller
 
       $sesion->save();
       return redirect()->route('sesiones.edit', ['sesione' => $sesion->id])->with('success', 'Sesion actializada correctamente.');
+    } catch (Exception $e) {
+      return redirect()->route('sesiones.edit', ['sesione' => $sesion->id])->with('warning', 'Error al editar la sesion')
+        ->withErrors($validator);
     }
   }
 

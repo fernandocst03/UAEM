@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Formato911\UnidadAcademica;
 use App\Models\Formato911\PersonalDocente;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class PersonalDocenteController extends Controller
@@ -26,20 +27,21 @@ class PersonalDocenteController extends Controller
    */
   public function store(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'unidad_academica' => ['required'],
-      'anio' => ['required', 'integer', 'min:0'],
-      'pitc_h' => ['required', 'integer', 'min:0'],
-      'pitc_m' => ['required', 'integer', 'min:0'],
-      'p34t_h' => ['required', 'integer', 'min:0'],
-      'p34t_m' => ['required', 'integer', 'min:0'],
-      'pmt_h' => ['required', 'integer', 'min:0'],
-      'pmt_m' => ['required', 'integer', 'min:0'],
-      'pph_h' => ['required', 'integer', 'min:0'],
-      'pph_m' => ['required', 'integer', 'min:0'],
-    ]);
+    try {
+      $validator = Validator::make($request->all(), [
+        'unidad_academica' => ['required'],
+        'anio' => ['required', 'integer', 'min:0'],
+        'pitc_h' => ['required', 'integer', 'min:0'],
+        'pitc_m' => ['required', 'integer', 'min:0'],
+        'p34t_h' => ['required', 'integer', 'min:0'],
+        'p34t_m' => ['required', 'integer', 'min:0'],
+        'pmt_h' => ['required', 'integer', 'min:0'],
+        'pmt_m' => ['required', 'integer', 'min:0'],
+        'pph_h' => ['required', 'integer', 'min:0'],
+        'pph_m' => ['required', 'integer', 'min:0'],
+      ]);
 
-    if (!$validator->fails()) {
+      sleep(1);
       $personalDocente = PersonalDocente::create([
         'unidad_academica_id' => $request->unidad_academica,
         'anio' => $request->anio,
@@ -57,10 +59,13 @@ class PersonalDocenteController extends Controller
         'pph_t' => $request->pph_h + $request->pph_m,
         'created_at' => now()
       ]);
-      sleep(1);
       return redirect()->route('personal-docente.index')
         ->with('success', 'Personal Docente creado correctamente');
-    } else return redirect()->back()->withErrors($validator);
+    } catch (Exception $e) {
+      return redirect()->back()
+        ->with('warning', 'Ocurrio un error al crear el Personal Docente ')
+        ->withErrors($validator);
+    }
   }
 
   /**
@@ -86,19 +91,19 @@ class PersonalDocenteController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $validator = Validator::make($request->all(), [
-      'anio' => ['required', 'integer', 'min:0'],
-      'pitc_h' => ['required', 'integer', 'min:0'],
-      'pitc_m' => ['required', 'integer', 'min:0'],
-      'p34t_h' => ['required', 'integer', 'min:0'],
-      'p34t_m' => ['required', 'integer', 'min:0'],
-      'pmt_h' => ['required', 'integer', 'min:0'],
-      'pmt_m' => ['required', 'integer', 'min:0'],
-      'pph_h' => ['required', 'integer', 'min:0'],
-      'pph_m' => ['required', 'integer', 'min:0'],
-    ]);
+    try {
+      $validator = Validator::make($request->all(), [
+        'anio' => ['required', 'integer', 'min:0'],
+        'pitc_h' => ['required', 'integer', 'min:0'],
+        'pitc_m' => ['required', 'integer', 'min:0'],
+        'p34t_h' => ['required', 'integer', 'min:0'],
+        'p34t_m' => ['required', 'integer', 'min:0'],
+        'pmt_h' => ['required', 'integer', 'min:0'],
+        'pmt_m' => ['required', 'integer', 'min:0'],
+        'pph_h' => ['required', 'integer', 'min:0'],
+        'pph_m' => ['required', 'integer', 'min:0'],
+      ]);
 
-    if (!$validator->fails()) {
       $personal = PersonalDocente::find($id);
       $personal->anio = $request->anio;
       $personal->pitc_h = $request->pitc_h;
@@ -118,7 +123,11 @@ class PersonalDocenteController extends Controller
       sleep(1);
       return redirect()->route('personal-docente.edit', ['personal_docente' => $id])
         ->with('success', 'Personal Docente se actualizado correctamente');
-    } else return redirect()->back()->withErrors($validator);
+    } catch (Exception $e) {
+      return redirect()->back()
+        ->with('warning', 'Ocurrio un error al actualizar el Personal Docente.')
+        ->withErrors($validator);
+    }
   }
 
   /**

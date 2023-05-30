@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AcuerdosCU;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AcuerdosCU\Rectorado;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class RectoradoController extends Controller
@@ -33,14 +34,12 @@ class RectoradoController extends Controller
    */
   public function store(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'ciclo' => ['required', 'integer', 'regex:/^[0-9]{4}[-][0-9]{4}$/']
-    ]);
-    sleep(1);
+    try {
+      $validator = Validator::make($request->all(), [
+        'ciclo' => ['required', 'regex:/^[0-9]{4}[-][0-9]{4}$/']
+      ]);
 
-    if ($validator->fails()) {
-      return redirect()->back()->withErrors($validator);
-    } else {
+      sleep(1);
       $rectorado = Rectorado::create([
         'ciclo' => $request->ciclo
       ]);
@@ -54,6 +53,10 @@ class RectoradoController extends Controller
 
       return redirect()->route('rectorados.index')
         ->with('success', 'Rectorado creado correctamente');
+    } catch (Exception $e) {
+      return redirect()->route('rectorados.index')
+        ->with('warning', 'Error al crear el rectorado')
+        ->WithErrors($validator);
     }
   }
 
@@ -79,13 +82,11 @@ class RectoradoController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $validator = Validator::make($request->all(), [
-      'ciclo' => ['required', 'regex:/^[0-9]{4}[-][0-9]{4}$/']
-    ]);
+    try {
+      $validator = Validator::make($request->all(), [
+        'ciclo' => ['required', 'regex:/^[0-9]{4}[-][0-9]{4}$/']
+      ]);
 
-    if ($validator->fails()) {
-      return redirect()->back()->withErrors($validator);
-    } else {
       $rectorado = Rectorado::find($id);
       $rectorado->ciclo = $request->input('ciclo');
       $old_value = $rectorado->getOriginal();
@@ -102,6 +103,10 @@ class RectoradoController extends Controller
 
       return redirect()->route('rectorados.edit', ['rectorado' => $id])
         ->with('success', 'Rectorado actualizado correctamente');
+    } catch (Exception $e) {
+      return redirect()->route('rectorados.edit', ['rectorado' => $id])
+        ->with('warning', 'Error al editar el rectorado')
+        ->withErrors($validator);
     }
   }
 

@@ -9,7 +9,6 @@ class Municipio extends Model
 {
   use HasFactory;
 
-  protected $connection = 'mysql_formato911';
   protected $table = 'mieg_municipios';
   protected $fillable = [
     'id',
