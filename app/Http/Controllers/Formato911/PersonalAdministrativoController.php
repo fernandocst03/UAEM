@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Formato911\PersonalAdministrativo;
 use App\Models\Formato911\UnidadAcademica;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class PersonalAdministrativoController extends Controller
@@ -36,26 +37,27 @@ class PersonalAdministrativoController extends Controller
   public function store(Request $request)
   {
 
-    $validator  = Validator::make($request->all(), [
-      'unidad_academica' => ['required', 'integer'],
-      'anio' => ['required', 'integer', 'regex:/^[0-9]{4}$/'],
-      'directivo_h' => ['required', 'integer', 'min:0'],
-      'directivo_m' => ['required', 'integer', 'min:0'],
-      'docente_h' => ['required', 'integer', 'min:0'],
-      'docente_m' => ['required', 'integer', 'min:0'],
-      'docente_investigador_h' => ['required', 'integer', 'min:0'],
-      'docente_investigador_m' => ['required', 'integer', 'min:0'],
-      'investigador_h' => ['required', 'integer', 'min:0'],
-      'investigador_m' => ['required', 'integer', 'min:0'],
-      'auxiliar_investigador_h' => ['required', 'integer', 'min:0'],
-      'auxiliar_investigador_m' => ['required', 'integer', 'min:0'],
-      'administrativos_h' => ['required', 'integer', 'min:0'],
-      'administrativos_m' => ['required', 'integer', 'min:0'],
-      'otros_h' => ['required', 'integer', 'min:0'],
-      'otros_m' => ['required', 'integer', 'min:0']
-    ]);
+    try {
+      $validator  = Validator::make($request->all(), [
+        'unidad_academica' => ['required', 'integer'],
+        'anio' => ['required', 'integer', 'regex:/^[0-9]{4}$/'],
+        'directivo_h' => ['required', 'integer', 'min:0'],
+        'directivo_m' => ['required', 'integer', 'min:0'],
+        'docente_h' => ['required', 'integer', 'min:0'],
+        'docente_m' => ['required', 'integer', 'min:0'],
+        'docente_investigador_h' => ['required', 'integer', 'min:0'],
+        'docente_investigador_m' => ['required', 'integer', 'min:0'],
+        'investigador_h' => ['required', 'integer', 'min:0'],
+        'investigador_m' => ['required', 'integer', 'min:0'],
+        'auxiliar_investigador_h' => ['required', 'integer', 'min:0'],
+        'auxiliar_investigador_m' => ['required', 'integer', 'min:0'],
+        'administrativos_h' => ['required', 'integer', 'min:0'],
+        'administrativos_m' => ['required', 'integer', 'min:0'],
+        'otros_h' => ['required', 'integer', 'min:0'],
+        'otros_m' => ['required', 'integer', 'min:0']
+      ]);
+      sleep(1);
 
-    if (!$validator->fails()) {
       $personalAdministrativo = PersonalAdministrativo::create([
         'unidad_academica_id' => $request->unidad_academica,
         'anio' => $request->anio,
@@ -81,9 +83,12 @@ class PersonalAdministrativoController extends Controller
         'otros_m' => $request->otros_m,
         'otros_t' => $request->otros_h + $request->otros_m,
       ]);
-      sleep(1);
-      return redirect()->route('personal-administrativo.index')->with('success', 'Personal Administrativo agregado correctamente');
-    } else return redirect()->back()->withErrors($validator);
+      return redirect()->route('personal-administrativo.index')
+        ->with('success', 'Personal Administrativo agregado correctamente');
+    } catch (Exception $e) {
+      return redirect()->route('personal-administrativo.index')
+        ->with('warning', 'Ocurrio un error al agregar el Personal Administrativo ' . $e->getMessage());
+    }
   }
 
   /**
@@ -109,52 +114,57 @@ class PersonalAdministrativoController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $request->validate([
-      'anio' => ['required'],
-      'directivo_h' => ['required'],
-      'directivo_m' => ['required'],
-      'docente_h' => ['required'],
-      'docente_m' => ['required'],
-      'docente_investigador_h' => ['required'],
-      'docente_investigador_m' => ['required'],
-      'investigador_h' => ['required'],
-      'investigador_m' => ['required'],
-      'auxiliar_investigador_h' => ['required'],
-      'auxiliar_investigador_m' => ['required'],
-      'administrativo_h' => ['required'],
-      'administrativo_m' => ['required'],
-      'otros_h' => ['required'],
-      'otros_m' => ['required']
-    ]);
+    try {
+      $request->validate([
+        'anio' => ['required'],
+        'directivo_h' => ['required'],
+        'directivo_m' => ['required'],
+        'docente_h' => ['required'],
+        'docente_m' => ['required'],
+        'docente_investigador_h' => ['required'],
+        'docente_investigador_m' => ['required'],
+        'investigador_h' => ['required'],
+        'investigador_m' => ['required'],
+        'auxiliar_investigador_h' => ['required'],
+        'auxiliar_investigador_m' => ['required'],
+        'administrativo_h' => ['required'],
+        'administrativo_m' => ['required'],
+        'otros_h' => ['required'],
+        'otros_m' => ['required']
+      ]);
+      sleep(1);
 
-    $perAdmin = PersonalAdministrativo::find($id);
-    $perAdmin->anio = $request->anio;
-    $perAdmin->directivo_h = $request->directivo_h;
-    $perAdmin->directivo_m = $request->directivo_m;
-    $perAdmin->directivo_t = $request->directivo_h + $request->directivo_m;
-    $perAdmin->docente_h = $request->docente_h;
-    $perAdmin->docente_m = $request->docente_h;
-    $perAdmin->docente_t = $request->docente_h + $request->docente_m;
-    $perAdmin->docente_investigador_h = $request->docente_investigador_h;
-    $perAdmin->docente_investigador_m = $request->docente_investigador_m;
-    $perAdmin->docente_investigador_t = $request->docente_investador_h + $request->docente_investigador_m;
-    $perAdmin->investigador_h = $request->investigador_h;
-    $perAdmin->investigador_m = $request->investigador_m;
-    $perAdmin->investigador_t = $request->investigador_h + $request->investigador_m;
-    $perAdmin->auxiliar_investigador_h = $request->auxiliar_investigador_h;
-    $perAdmin->auxiliar_investigador_m = $request->auxiliar_investigador_m;
-    $perAdmin->auxiliar_investigador_t = $request->auxiliar_investigador_h + $request->auxiliar_investigador_m;
-    $perAdmin->administrativo_h = $request->administrativo_h;
-    $perAdmin->administrativo_m = $request->administrativo_m;
-    $perAdmin->administrativo_t = $request->administrativo_h + $request->administrativo_m;
-    $perAdmin->otros_h = $request->otros_h;
-    $perAdmin->otros_m = $request->otros_m;
-    $perAdmin->otros_t = $request->otros_h + $request->otros_m;
-    $perAdmin->save();
-    sleep(1);
+      $perAdmin = PersonalAdministrativo::find($id);
+      $perAdmin->anio = $request->anio;
+      $perAdmin->directivo_h = $request->directivo_h;
+      $perAdmin->directivo_m = $request->directivo_m;
+      $perAdmin->directivo_t = $request->directivo_h + $request->directivo_m;
+      $perAdmin->docente_h = $request->docente_h;
+      $perAdmin->docente_m = $request->docente_h;
+      $perAdmin->docente_t = $request->docente_h + $request->docente_m;
+      $perAdmin->docente_investigador_h = $request->docente_investigador_h;
+      $perAdmin->docente_investigador_m = $request->docente_investigador_m;
+      $perAdmin->docente_investigador_t = $request->docente_investador_h + $request->docente_investigador_m;
+      $perAdmin->investigador_h = $request->investigador_h;
+      $perAdmin->investigador_m = $request->investigador_m;
+      $perAdmin->investigador_t = $request->investigador_h + $request->investigador_m;
+      $perAdmin->auxiliar_investigador_h = $request->auxiliar_investigador_h;
+      $perAdmin->auxiliar_investigador_m = $request->auxiliar_investigador_m;
+      $perAdmin->auxiliar_investigador_t = $request->auxiliar_investigador_h + $request->auxiliar_investigador_m;
+      $perAdmin->administrativo_h = $request->administrativo_h;
+      $perAdmin->administrativo_m = $request->administrativo_m;
+      $perAdmin->administrativo_t = $request->administrativo_h + $request->administrativo_m;
+      $perAdmin->otros_h = $request->otros_h;
+      $perAdmin->otros_m = $request->otros_m;
+      $perAdmin->otros_t = $request->otros_h + $request->otros_m;
+      $perAdmin->save();
 
-    return redirect()->route('personal-administrativo.edit', ['personal_administrativo' => $id])
-      ->with('success', 'Personal Administrativo actualizado correctamente');
+      return redirect()->route('personal-administrativo.edit', ['personal_administrativo' => $id])
+        ->with('success', 'Actualizado correctamente');
+    } catch (Exception $e) {
+      return redirect()->route('personal-administrativo.edit', ['personal_administrativo' => $id])
+        ->with('warning', 'Ocurrio un error al actualizar el Personal Administrativo ' . $e->getMessage());
+    }
   }
 
   /**

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Formato911\EdadGrupo;
 use App\Models\Formato911\PersonalDocenteEdad;
 use App\Models\Formato911\UnidadAcademica;
+use Exception;
+use Illuminate\Support\Facades\Validator;
 
 class PersonalDocenteEdadController extends Controller
 {
@@ -19,11 +21,7 @@ class PersonalDocenteEdadController extends Controller
     $grupoEdad = EdadGrupo::select()->orderBy('id')->get();
     $personalDocente = PersonalDocenteEdad::select()->orderBy('id')->get();
 
-    return view('formato_911.personal_docente_edad.index', [
-      'personalDocente' => $personalDocente,
-      'unidadesAcademicas' => $unidadesAcademicas,
-      'grupoEdad' => $grupoEdad
-    ]);
+    return view('Formato911.Personal-Docente-Edad.index', compact('unidadesAcademicas', 'grupoEdad', 'personalDocente'));
   }
 
   /**
@@ -39,7 +37,7 @@ class PersonalDocenteEdadController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'anio' => ['required'],
       'unidad_academica' => ['required'],
       'grupo_edad' => ['required'],
@@ -47,17 +45,24 @@ class PersonalDocenteEdadController extends Controller
       'mujeres' => ['required'],
     ]);
 
-    $personal = PersonalDocenteEdad::create([
-      'unidad_academica_id' => $request->unidad_academica,
-      'anio' => $request->anio,
-      'grupo_id' => $request->grupo_edad,
-      'hombres' => $request->hombres,
-      'mujeres' => $request->mujeres,
-      'total' => $request->hombres + $request->mujeres,
-      'created_at' => now()
-    ]);
+    try {
+      sleep(1);
+      $personal = PersonalDocenteEdad::create([
+        'unidad_academica_id' => $request->unidad_academica,
+        'anio' => $request->anio,
+        'grupo_id' => $request->grupo_edad,
+        'hombres' => $request->hombres,
+        'mujeres' => $request->mujeres,
+        'total' => $request->hombres + $request->mujeres,
+        'created_at' => now()
+      ]);
 
-    return redirect()->route('personal-docente-edad.index');
+      return redirect()->route('personal-docente-edad.index')
+        ->with('success', 'Personal Docente por Edad creado correctamente');
+    } catch (Exception $e) {
+      return redirect()->route('personal-docente-edad.index')
+        ->with('warning', 'No se pudo crear el Personal Docente por Edad: ' . $e->getMessage())->withErrors($validator);
+    }
   }
 
   /**
@@ -65,10 +70,8 @@ class PersonalDocenteEdadController extends Controller
    */
   public function show(string $id)
   {
-    $personal = PersonalDocenteEdad::find($id);
-    return view('formato_911.personal_docente_edad.show', [
-      'personal' => $personal
-    ]);
+    $personalDocente = PersonalDocenteEdad::find($id);
+    return view('Formato911.Personal-Docente-Edad.show', compact('personalDocente'));
   }
 
   /**
@@ -77,12 +80,9 @@ class PersonalDocenteEdadController extends Controller
   public function edit(string $id)
   {
     $grupoEdad = EdadGrupo::select()->orderBy('id')->get();
-    $personal = PersonalDocenteEdad::find($id);
+    $personalDocente = PersonalDocenteEdad::find($id);
 
-    return view('formato_911.personal_docente_edad.edit', [
-      'personal' => $personal,
-      'grupoEdad' => $grupoEdad
-    ]);
+    return view('Formato911.Personal-Docente-Edad.edit', compact('grupoEdad', 'personalDocente'));
   }
 
   /**
@@ -90,23 +90,29 @@ class PersonalDocenteEdadController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $request->validate([
-      'anio' => ['required', 'regex:/^[0-9]{4}/'],
-      'grupo_antiguedad' => ['required'],
-      'hombres' => ['required'],
-      'mujeres' => ['required'],
-    ]);
 
-    $personal = PersonalDocenteEdad::find($id);
-    $personal->anio = $request->anio;
-    $personal->grupo_id = $request->grupo_antiguedad;
-    $personal->hombres = $request->hombres;
-    $personal->mujeres = $request->mujeres;
-    $personal->total = $request->hombres + $request->mujeres;
-    $personal->updated_at = now();
-    $personal->save();
+    try {
+      $request->validate([
+        'anio' => ['required', 'regex:/^[0-9]{4}/'],
+        'grupo_edad' => ['required'],
+        'hombres' => ['required'],
+        'mujeres' => ['required'],
+      ]);
+      sleep(1);
+      $personal = PersonalDocenteEdad::find($id);
+      $personal->anio = $request->anio;
+      $personal->grupo_id = $request->grupo_edad;
+      $personal->hombres = $request->hombres;
+      $personal->mujeres = $request->mujeres;
+      $personal->total = $request->hombres + $request->mujeres;
+      $personal->updated_at = now();
+      $personal->save();
 
-    return redirect()->route('personal-docente-edad.edit', ['personal_docente_edad' => $id])->with('status', 'success');
+      return redirect()->route('personal-docente-edad.edit', ['personal_docente_edad' => $id])->with('success', 'Actualizado correctamente.');
+    } catch (Exception $e) {
+      return redirect()->route('personal-docente-edad.edit', ['personal_docente_edad' => $id])
+        ->with('warning', 'Ocurrio un error al intentar actualizar el personal docente por grupo de edad. ' . $e->getMessage());
+    }
   }
 
   /**
