@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AcuerdosCU\Acuerdo;
 use App\Models\AcuerdosCU\AcuerdoTipo;
 use App\Models\AcuerdosCU\Sesion;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -35,17 +36,15 @@ class AcuerdoController extends Controller
    */
   public function store(Request $request, $id = null)
   {
-    $validator  = Validator::make($request->all(), [
-      'tipoAcuerdo' => ['required', 'integer'],
-      'punto' => ['required', 'integer'],
-      'acuerdo' => ['required', 'string'],
-      'acuerdoCorto' => ['required', 'string'],
-      'paginaSamara' => ['integer'],
-    ]);
-    sleep(1);
-    if ($validator->fails()) {
-      return redirect()->back()->withErrors($validator);
-    } else {
+    try {
+      $validator  = Validator::make($request->all(), [
+        'tipoAcuerdo' => ['required', 'integer'],
+        'punto' => ['required', 'integer'],
+        'acuerdo' => ['required', 'string'],
+        'acuerdoCorto' => ['required', 'string'],
+        'paginaSamara' => ['integer'],
+      ]);
+      sleep(1);
 
       $acuerdo = Acuerdo::create([
         'sesion_id' => $id | $request->sesionId,
@@ -69,6 +68,10 @@ class AcuerdoController extends Controller
 
       return redirect()->route('sesiones.show', ['sesione' => $sesion])
         ->with('success', 'Acuerdo creado correctamente');
+    } catch (Exception $e) {
+      return redirect()->back()
+        ->with('warning', 'Error al crear el acuerdo.')
+        ->withErrors($validator);
     }
   }
 
@@ -105,14 +108,16 @@ class AcuerdoController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $validator  = Validator::make($request->all(), [
-      'tipoAcuerdo' => ['required', 'integer'],
-      'punto' => ['required', 'integer'],
-      'acuerdo' => ['required', 'string'],
-      'acuerdoCorto' => ['required', 'string'],
-    ]);
-    sleep(1);
-    if (!$validator->fails()) {
+    try {
+      $validator  = Validator::make($request->all(), [
+        'tipoAcuerdo' => ['required', 'integer'],
+        'punto' => ['required', 'integer'],
+        'acuerdo' => ['required', 'string'],
+        'acuerdoCorto' => ['required', 'string'],
+        'paginaSamara' => ['integer']
+      ]);
+      sleep(1);
+
       $acuerdo = Acuerdo::find($id);
       $old_value = $acuerdo->getOriginal();
 
@@ -132,7 +137,11 @@ class AcuerdoController extends Controller
         $newValue = json_encode($acuerdo)
       );
       return redirect()->route('acuerdos.edit', ['acuerdo' => $id])->with('success', 'Editado correctamente');
-    } else return redirect()->back()->withErrors($validator);
+    } catch (Exception $e) {
+      return redirect()->route('acuerdos.edit', ['acuerdo' => $id])
+        ->with('warning', 'Error al editar el acuerdo.')
+        ->withErrors($validator);
+    }
   }
 
   /**

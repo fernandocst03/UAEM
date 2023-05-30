@@ -9,6 +9,7 @@ use App\Models\AcuerdosCU\Samara;
 use App\Models\AcuerdosCU\SamaraSesion;
 use App\Models\AcuerdosCU\Rectorado;
 use App\Models\AcuerdosCU\Sesion;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class SamaraController extends Controller
@@ -38,19 +39,17 @@ class SamaraController extends Controller
    */
   public function store(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'anio' => ['required', 'alpha'],
-      'numero' => ['required', 'integer'],
-      'fecha' => 'required',
-      'rectorado' => 'required',
-      'sesion' => 'required'
-    ]);
+    try {
+      $validator = Validator::make($request->all(), [
+        'anio' => ['required', 'alpha'],
+        'numero' => ['required', 'integer'],
+        'fecha' => ['required', 'date'],
+        'rectorado' => 'required',
+        'sesion' => 'required'
+      ]);
 
-    sleep(1);
+      sleep(1);
 
-    if ($validator->fails()) {
-      return redirect()->back()->withErrors($validator);
-    } else {
       $samara = Samara::create([
         'anio' => $request->anio,
         'numero' => $request->numero,
@@ -80,6 +79,9 @@ class SamaraController extends Controller
       );
 
       return redirect()->route('samaras.index')->with('success', 'Samará ' . $numeroSamara . ' creado correctamente.');
+    } catch (Exception $e) {
+      return redirect()->route('samaras.index')->with('warning', 'Error al crear el samará.')
+        ->withErrors($validator);
     }
   }
 
@@ -120,16 +122,14 @@ class SamaraController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $validator = Validator::make($request->all(), [
-      'anio' => ['required', 'alpha', 'regex:/^[A-Z]/'],
-      'numero' => ['required', 'integer', 'regex:/^[0-9]/'],
-      'fecha' => 'required',
-      'rectorado' => 'required',
-    ]);
+    try {
+      $validator = Validator::make($request->all(), [
+        'anio' => ['required', 'regex:/^[A-Z]/'],
+        'numero' => ['required', 'integer', 'regex:/^[0-9]/'],
+        'fecha' => 'required',
+        'rectorado' => 'required',
+      ]);
 
-    if ($validator->fails()) {
-      return redirect()->back()->withErrors($validator);
-    } else {
       $samara = Samara::find($id);
       $old_value = $samara->getOriginal();
 
@@ -147,10 +147,10 @@ class SamaraController extends Controller
         $oldValue = json_encode($old_value),
         $newValue = json_encode($samara)
       );
-
-      sleep(1);
-
       return redirect()->route('samaras.edit', ['samara' => $id])->with('success', 'Samara editado correctamente.');
+    } catch (Exception $e) {
+      return redirect()->route('samaras.edit', ['samara' => $id])->with('warning', 'Error al editar el samara.')
+        ->withErrors($validator);
     }
   }
 
