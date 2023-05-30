@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalAdministrativo extends Model
 {
   use HasFactory;
-  protected $connection = 'mysql_formato911';
   protected $table = 'mieg_formato911_personal_administrativo';
   protected $fillable = [
     'unidad_academica_id',

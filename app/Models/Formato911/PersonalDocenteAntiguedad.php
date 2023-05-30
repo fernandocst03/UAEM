@@ -9,7 +9,6 @@ class PersonalDocenteAntiguedad extends Model
 {
   use HasFactory;
 
-  protected $connection = 'mysql_formato911';
   protected $table = 'mieg_formato911_personal_docente_antiguedad';
   protected $fillable = [
     'anio',
