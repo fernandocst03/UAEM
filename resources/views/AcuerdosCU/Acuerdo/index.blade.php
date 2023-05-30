@@ -140,7 +140,7 @@
                   <x-input-error :messages="$errors->get('paginaSamara')" class="mt-1" />
                 </div>
 
-                <div class="flex justify-end gap-1 mt-4">
+                <div class="flex justify-end gap-2 mt-4">
                   <x-danger-button type="button" x-on:click="$dispatch('close')">Cancelar</x-danger-button>
                   <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
                     <span>Crear Acuerdo</span>
@@ -156,8 +156,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 my-3">
-      {{-- <x-success text="hola" /> --}}
+    <section class="w-full h-10 my-1">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))

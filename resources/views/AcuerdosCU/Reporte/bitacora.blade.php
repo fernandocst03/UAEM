@@ -61,7 +61,7 @@
 
     <article class="relative card-container">
       {{-- <x-loaders.skeleton /> --}}
-      <h4 class="text-lg font-bold">Resultados</h4>
+      <h4 class="mb-2 text-lg font-bold">Resultados</h4>
       <table class="table stripe" id="bitacoras">
         <thead class="bg-gray-900 text-gray-50">
           <tr class="text-md ">

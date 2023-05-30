@@ -107,7 +107,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 my-3">
+    <section class="w-full h-10 my-1">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))

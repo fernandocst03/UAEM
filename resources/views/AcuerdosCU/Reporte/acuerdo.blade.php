@@ -57,7 +57,7 @@
     </article>
 
     <article class="relative card-container">
-      <x-loaders.skeleton />
+      {{-- <x-loaders.skeleton /> --}}
       <h4 class="text-lg font-bold">Resultados</h4>
       <table class="table stripe" id="acuerdos">
         <thead class="bg-gray-900 text-gray-50">
@@ -86,7 +86,9 @@
                 <a
                   href="{{ route('sesiones.show', ['sesione' => $item->sesion->id]) }}">{{ date('d-M-Y', strtotime($item->sesion->fecha)) }}</a>
               </td>
-              <td>{{ $item->punto }}</td>
+              <td>
+                <a href="{{ route('acuerdos.show', ['acuerdo' => $item->id]) }}">{{ $item->punto }}</a>
+              </td>
               <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
               <td>{{ $item->acuerdo }}</td>
               <td>
