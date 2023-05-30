@@ -40,8 +40,11 @@
         </a>
       @endif
 
-      <x-primary-button class="ml-3">
-        {{ __('Iniciar sesión') }}
+      <x-primary-button class="gap-2 m-3" x-data="{ loading: false }" x-on:click="loading = true">
+        <span>Iniciar sesión</span>
+        <span x-show="loading">
+          <x-loaders.spinner />
+        </span>
       </x-primary-button>
     </div>
   </form>
