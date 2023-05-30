@@ -138,9 +138,9 @@
               <th>PDF</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text">
             @foreach ($last_rectorado->samaras as $samara)
-              <tr class="text">
+              <tr>
                 <td>{{ $samara->numero }}</td>
                 <td>{{ $samara->anio }}</td>
                 <td>{{ $samara->rectorado->ciclo }}</td>
