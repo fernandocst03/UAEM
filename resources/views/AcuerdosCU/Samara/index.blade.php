@@ -21,7 +21,7 @@
         </x-primary-button>
         <x-modal name="create">
           <div class="p-5">
-            <form action="" method="post" class="flex flex-col gap-2">
+            <form action="{{ route('samaras.store') }}" method="post" class="flex flex-col gap-2">
               @csrf
               <h2 class="font-bold">Crea un nuevo samará</h2>
 
