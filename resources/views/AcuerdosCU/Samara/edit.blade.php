@@ -45,6 +45,7 @@
         <div class="w-1/3 mt-6">
           <x-input-label for="rectorado" :value="__('Rectorado')" />
           <select name="rectorado" id="rectorado" class="mt-2 border-gray-300 rounded-md border-1">
+            <option value="">Elige un rectorado</option>
             @foreach ($rectorados as $rectorado)
               <option value="{{ $rectorado->id }}" @if (old('state', $samara->rectorado_id) == $rectorado->id) {{ 'selected' }} @endif>
                 {{ $rectorado->ciclo }}</option>
@@ -85,6 +86,8 @@
           </x-primary-button>
           @if ($message = Session::get('success'))
             <x-alerts.success :text="$message" />
+          @elseif ($message = Session::get('warning'))
+            <x-alerts.warning :text="$message" />
           @endif
         </div>
 
