@@ -38,11 +38,11 @@ class PersonalDocenteEdadController extends Controller
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'anio' => ['required'],
-      'unidad_academica' => ['required'],
-      'grupo_edad' => ['required'],
-      'hombres' => ['required'],
-      'mujeres' => ['required'],
+      'unidad_academica' => ['required', 'integer'],
+      'anio' => ['required', 'regex:/^[0-9]{4}/', 'integer'],
+      'grupo_edad' => ['required', 'integer'],
+      'hombres' => ['required', 'integer'],
+      'mujeres' => ['required', 'integer'],
     ]);
 
     try {
@@ -61,7 +61,8 @@ class PersonalDocenteEdadController extends Controller
         ->with('success', 'Personal Docente por Edad creado correctamente');
     } catch (Exception $e) {
       return redirect()->route('personal-docente-edad.index')
-        ->with('warning', 'No se pudo crear el Personal Docente por Edad: ' . $e->getMessage())->withErrors($validator);
+        ->with('warning', 'No se pudo crear el Personal Docente por Edad.')
+        ->withErrors($validator);
     }
   }
 
@@ -92,12 +93,13 @@ class PersonalDocenteEdadController extends Controller
   {
 
     try {
-      $request->validate([
-        'anio' => ['required', 'regex:/^[0-9]{4}/'],
-        'grupo_edad' => ['required'],
-        'hombres' => ['required'],
-        'mujeres' => ['required'],
+      $validator = Validator::make($request->all(), [
+        'anio' => ['required', 'regex:/^[0-9]{4}/', 'integer'],
+        'grupo_edad' => ['required', 'integer'],
+        'hombres' => ['required', 'integer'],
+        'mujeres' => ['required', 'integer'],
       ]);
+
       sleep(1);
       $personal = PersonalDocenteEdad::find($id);
       $personal->anio = $request->anio;
@@ -111,7 +113,8 @@ class PersonalDocenteEdadController extends Controller
       return redirect()->route('personal-docente-edad.edit', ['personal_docente_edad' => $id])->with('success', 'Actualizado correctamente.');
     } catch (Exception $e) {
       return redirect()->route('personal-docente-edad.edit', ['personal_docente_edad' => $id])
-        ->with('warning', 'Ocurrio un error al intentar actualizar el personal docente por grupo de edad. ' . $e->getMessage());
+        ->with('warning', 'Ocurrio un error al intentar actualizar el personal docente por grupo de edad.')
+        ->WithErrors($validator);
     }
   }
 

@@ -39,11 +39,11 @@ class PersonalDocenteAntiguedadController extends Controller
   {
     try {
       $validator = Validator::make($request->all(), [
-        'anio' => ['required'],
-        'unidad_academica' => ['required'],
-        'grupo_antiguedad' => ['required'],
-        'hombres' => ['required'],
-        'mujeres' => ['required'],
+        'anio' => ['required', 'integer'],
+        'unidad_academica' => ['required', 'integer'],
+        'grupo_antiguedad' => ['required', 'integer'],
+        'hombres' => ['required', 'integer'],
+        'mujeres' => ['required', 'integer'],
       ]);
 
       sleep(1);
@@ -61,7 +61,8 @@ class PersonalDocenteAntiguedadController extends Controller
         ->with('success', 'Personal docente por grupo de antiguedad creado correctamente.');
     } catch (Exception $e) {
       return redirect()->route('personal-docente-antiguedad.index')
-        ->with('warning', 'Ocurrio un error al intentar crear el personal docente por grupo de antiguedad. ' . $e->getMessage());
+        ->with('warning', 'Ocurrio un error al intentar crear el personal docente por grupo de antiguedad.')
+        ->withErrors($validator);
     }
   }
 
@@ -93,10 +94,10 @@ class PersonalDocenteAntiguedadController extends Controller
 
     try {
       $validator = Validator::make($request->all(), [
-        'anio' => ['required'],
-        'grupo_antiguedad' => ['required'],
-        'hombres' => ['required'],
-        'mujeres' => ['required'],
+        'anio' => ['required', 'integer'],
+        'grupo_antiguedad' => ['required', 'integer'],
+        'hombres' => ['required', 'integer'],
+        'mujeres' => ['required', 'integer'],
       ]);
       sleep(1);
       $personal = PersonalDocenteAntiguedad::find($id);
@@ -112,7 +113,8 @@ class PersonalDocenteAntiguedadController extends Controller
         ->with('success', 'Actualizado correctamente.');
     } catch (Exception $e) {
       return redirect()->route('personal-docente-antiguedad.edit', ['personal_docente_antiguedad' => $id])
-        ->with('warning', 'Ocurrio un error al intentar actualizar el personal docente por grupo de antiguedad. ' . $e->getMessage());
+        ->with('warning', 'Ocurrio un error al intentar actualizar el personal docente por grupo de antiguedad.')
+        ->withErrors($validator);
     }
   }
 

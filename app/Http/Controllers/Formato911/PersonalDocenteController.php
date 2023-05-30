@@ -63,7 +63,8 @@ class PersonalDocenteController extends Controller
         ->with('success', 'Personal Docente creado correctamente');
     } catch (Exception $e) {
       return redirect()->back()
-        ->with('warning', 'Ocurrio un error al crear el Personal Docente ' . $e->getMessage());
+        ->with('warning', 'Ocurrio un error al crear el Personal Docente ')
+        ->withErrors($validator);
     }
   }
 
@@ -124,7 +125,8 @@ class PersonalDocenteController extends Controller
         ->with('success', 'Personal Docente se actualizado correctamente');
     } catch (Exception $e) {
       return redirect()->back()
-        ->with('warning', 'Ocurrio un error al actualizar el Personal Docente ' . $e->getMessage());
+        ->with('warning', 'Ocurrio un error al actualizar el Personal Docente.')
+        ->withErrors($validator);
     }
   }
 

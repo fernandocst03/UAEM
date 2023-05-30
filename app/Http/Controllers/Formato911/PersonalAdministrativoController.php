@@ -87,7 +87,8 @@ class PersonalAdministrativoController extends Controller
         ->with('success', 'Personal Administrativo agregado correctamente');
     } catch (Exception $e) {
       return redirect()->route('personal-administrativo.index')
-        ->with('warning', 'Ocurrio un error al agregar el Personal Administrativo ' . $e->getMessage());
+        ->with('warning', 'Ocurrio un error al agregar el Personal Administrativo ')
+        ->withErrors($validator);
     }
   }
 
@@ -115,22 +116,22 @@ class PersonalAdministrativoController extends Controller
   public function update(Request $request, string $id)
   {
     try {
-      $request->validate([
-        'anio' => ['required'],
-        'directivo_h' => ['required'],
-        'directivo_m' => ['required'],
-        'docente_h' => ['required'],
-        'docente_m' => ['required'],
-        'docente_investigador_h' => ['required'],
-        'docente_investigador_m' => ['required'],
-        'investigador_h' => ['required'],
-        'investigador_m' => ['required'],
-        'auxiliar_investigador_h' => ['required'],
-        'auxiliar_investigador_m' => ['required'],
-        'administrativo_h' => ['required'],
-        'administrativo_m' => ['required'],
-        'otros_h' => ['required'],
-        'otros_m' => ['required']
+      $validator = Validator::make($request->all(), [
+        'anio' => ['required', 'integer', 'regex:/^[0-9]{4}$/'],
+        'directivo_h' => ['required', 'integer', 'min:0'],
+        'directivo_m' => ['required', 'integer', 'min:0'],
+        'docente_h' => ['required', 'integer', 'min:0'],
+        'docente_m' => ['required', 'integer', 'min:0'],
+        'docente_investigador_h' => ['required', 'integer', 'min:0'],
+        'docente_investigador_m' => ['required', 'integer', 'min:0'],
+        'investigador_h' => ['required', 'integer', 'min:0'],
+        'investigador_m' => ['required', 'integer', 'min:0'],
+        'auxiliar_investigador_h' => ['required', 'integer', 'min:0'],
+        'auxiliar_investigador_m' => ['required', 'integer', 'min:0'],
+        'administrativos_h' => ['required', 'integer', 'min:0'],
+        'administrativos_m' => ['required', 'integer', 'min:0'],
+        'otros_h' => ['required', 'integer', 'min:0'],
+        'otros_m' => ['required', 'integer', 'min:0']
       ]);
       sleep(1);
 
@@ -163,7 +164,8 @@ class PersonalAdministrativoController extends Controller
         ->with('success', 'Actualizado correctamente');
     } catch (Exception $e) {
       return redirect()->route('personal-administrativo.edit', ['personal_administrativo' => $id])
-        ->with('warning', 'Ocurrio un error al actualizar el Personal Administrativo ' . $e->getMessage());
+        ->with('warning', 'Ocurrio un error al actualizar el Personal Administrativo.')
+        ->withErrors($validator);
     }
   }
 
