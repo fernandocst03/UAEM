@@ -26,26 +26,31 @@
         <div class="w-1/3 mt-6">
           <x-input-label for="tipoAcuerdo" :value="__('Tipo de acuerdo')" />
           <select name="tipoAcuerdo" id="tipoAcuerdo" class="mt-2 border-gray-300 rounded-md border-1">
+            <option value="">Seleccione un tipo de acuerdo</option>
             @foreach ($tipoAcuerdos as $item)
               <option value="{{ $item->id }}" @if (old('state', $acuerdo->acuerdo_tipo_id) == $item->id) {{ 'selected' }} @endif>
                 {{ $item->tipo_acuerdo }}</option>
             @endforeach
           </select>
+          <x-input-error :messages="$errors->get('tipoAcuerdo')" class="mt-1" />
         </div>
         <div class="w-1/3 mt-6">
           <x-input-label for="punto" :value="__('Punto')" />
           <x-text-input id="punto" name="punto" type="text" class="block w-full mt-1" :value="$acuerdo->punto"
             required autofocus autocomplete="name" />
+          <x-input-error :messages="$errors->get('punto')" class="mt-1" />
         </div>
         <div class="w-1/3 mt-6">
           <x-input-label for="acuerdo" :value="__('Acuerdo')" />
           <textarea class='w-full pt-4 mt-2 border-gray-300 rounded-md resize-none border-1' name="acuerdo" id="acuerdo"
             cols="30" rows="15">{{ $acuerdo->acuerdo }}</textarea>
+          <x-input-error :messages="$errors->get('acuerdo')" class="mt-1" />
         </div>
         <div class="w-1/3 mt-6">
           <x-input-label for="acuerdoCorto" :value="__('Acuerdo Corto')" />
           <textarea class='w-full pt-4 mt-2 border-gray-300 rounded-md resize-none border-1' name="acuerdoCorto" id="acuerdo"
             cols="30" rows="15">{{ $acuerdo->acuerdo_corto }}</textarea>
+          <x-input-error :messages="$errors->get('acuerdoCorto')" class="mt-1" />
         </div>
         <div class="w-1/3 mt-6">
           <x-input-label for="observaciones" :value="__('Observaciones')" />
@@ -54,8 +59,9 @@
         </div>
         <div class="w-1/3 mt-6">
           <x-input-label for="paginaSamara" :value="__('Pagina Samara')" />
-          <x-text-input id="paginaSamara" name="paginaSamara" type="text" class="block w-full mt-1" :value="$acuerdo->pagina_samara"
-            autofocus autocomplete="name" />
+          <x-text-input id="paginaSamara" name="paginaSamara" type="text" class="block w-full mt-1"
+            :value="$acuerdo->pagina_samara" autofocus autocomplete="name" />
+          <x-input-error :messages="$errors->get('paginaSamara')" class="mt-1" />
         </div>
         <div class="flex gap-2 mt-7">
           <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
@@ -66,6 +72,8 @@
           </x-primary-button>
           @if ($message = Session::get('success'))
             <x-alerts.success :text="$message" />
+          @elseif ($message = Session::get('warning'))
+            <x-alerts.warning :text="$message" />
           @endif
         </div>
         <div class="pb-10">
@@ -128,7 +136,8 @@
             </x-danger-button>
             <x-modal name="confirm-file">
               <div>
-                <form method="post" action="{{ route('acuerdo.file', ['acuerdo' => $acuerdo->id]) }}" class="p-6">
+                <form method="post" action="{{ route('acuerdo.file', ['acuerdo' => $acuerdo->id]) }}"
+                  class="p-6">
                   @csrf
                   @method('patch')
                   <h2 class="title">
@@ -155,7 +164,7 @@
               </div>
             </x-modal>
           </div>
-        @elseif (!$rectorado->status)
+        @elseif (!$acuerdo->status)
           <div class="flex items-center justify-between py-5 px-7 ">
             <div class="flex flex-col justify-center w-2/3">
               <h4 class="title">Recuperar Acuerdo</h4>

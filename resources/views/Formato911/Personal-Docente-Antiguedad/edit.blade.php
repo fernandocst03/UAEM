@@ -41,24 +41,28 @@
                   {{ $item->grupo }}</option>
               @endforeach
             </select>
+            <x-input-error class="mt-1" :messages="$errors->get('grupo_antiguedad')" />
           </div>
 
           <div class="flex flex-col gap-1">
             <x-input-label for="anio" :value="__('Año')" />
             <x-text-input id="anio" name="anio" value="{{ $personalDocente->anio }}" type="text"
               class="w-fit" />
+            <x-input-error class="mt-1" :messages="$errors->get('anio')" />
           </div>
 
           <div class="flex flex-col gap-1">
             <x-input-label for="hombres" :value="__('Hombres')" />
             <x-text-input id="hombres" name="hombres" value="{{ $personalDocente->hombres }}" type="text"
               class="w-fit" />
+            <x-input-error class="mt-1" :messages="$errors->get('hombres')" />
           </div>
 
           <div class="flex flex-col gap-1">
             <x-input-label for="mujeres" :value="__('Mujeres')" />
             <x-text-input id="mujeres" name="mujeres" value="{{ $personalDocente->mujeres }}" type="text"
               class="w-fit" />
+            <x-input-error class="mt-1" :messages="$errors->get('mujeres')" />
           </div>
 
           <div class="flex items-center gap-2">

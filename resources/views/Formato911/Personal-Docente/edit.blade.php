@@ -35,6 +35,7 @@
             <x-input-label for="anio" :value="__('Año')" />
             <x-text-input id="anio" name="anio" value="{{ $personalDocente->anio }}" type="text"
               class="w-fit" />
+            <x-input-error class="mt-1" :messages="$errors->get('anio')" />
           </div>
 
           <div class="flex flex-col gap-1">
@@ -44,11 +45,13 @@
                 <x-input-label for="pitc_h" :value="__('Hombres')" class="text-secondary" />
                 <x-text-input id="pitc_h" name="pitc_h" value="{{ $personalDocente->pitc_h }}" type="text"
                   class="w-fit" />
+                <x-input-error class="mt-1" :messages="$errors->get('pitc_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pitc_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pitc_m" name="pitc_m" value="{{ $personalDocente->pitc_m }}" type="text"
                   class="w-fit" />
+                <x-input-error class="mt-1" :messages="$errors->get('pitc_m')" />
               </div>
             </div>
           </div>
@@ -60,11 +63,13 @@
                 <x-input-label for="p34t_h" :value="__('Hombres')" class="text-secondary" />
                 <x-text-input id="p34t_h" name="p34t_h" value="{{ $personalDocente->p34t_h }}" type="text"
                   class="w-fit" />
+                <x-input-error class="mt-1" :messages="$errors->get('p34t_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="p34t_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="p34t_m" name="p34t_m" value="{{ $personalDocente->p34t_m }}" type="text"
                   class="w-fit" />
+                <x-input-error class="mt-1" :messages="$errors->get('p34t_m')" />
               </div>
             </div>
           </div>
@@ -76,11 +81,13 @@
                 <x-input-label for="pmt_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pmt_h" name="pmt_h" value="{{ $personalDocente->pmt_h }}" type="text"
                   class="w-fit" />
+                <x-input-error class="mt-1" :messages="$errors->get('pmt_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pmt_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pmt_m" name="pmt_m" value="{{ $personalDocente->pmt_m }}" type="text"
                   class="w-fit" />
+                <x-input-error class="mt-1" :messages="$errors->get('pmt_m')" />
               </div>
             </div>
           </div>
@@ -92,11 +99,13 @@
                 <x-input-label for="pph_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pph_h" name="pph_h" value="{{ $personalDocente->pph_h }}" type="text"
                   class="w-fit" />
+                <x-input-error class="mt-1" :messages="$errors->get('pph_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pph_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pph_m" name="pph_m" value="{{ $personalDocente->pph_m }}" type="text"
                   class="w-fit" />
+                <x-input-error class="mt-1" :messages="$errors->get('pph_m')" />
               </div>
             </div>
           </div>
