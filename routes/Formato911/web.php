@@ -11,42 +11,42 @@ use App\Http\Controllers\Formato911\UnidadAcademicaController;
 
 Route::get('/formato-911', [HomeController::class, 'index_formato911'])->name('formato-911');
 
-Route::resource('/formato-911/personal-administrativo', PersonalAdministrativoController::class);
-Route::resource('/formato-911/personal-docente', PersonalDocenteController::class);
-Route::resource('/formato-911/personal-docente-antiguedad', PersonalDocenteAntiguedadController::class);
-Route::resource('/formato-911/personal-docente-edad', PersonalDocenteEdadController::class);
-Route::resource('/formato-911/infraestructuras', InfraestructuraController::class);
+Route::resource('/formato-911/personal-administrativo', PersonalAdministrativoController::class)->middleware('auth');
+Route::resource('/formato-911/personal-docente', PersonalDocenteController::class)->middleware('auth');
+Route::resource('/formato-911/personal-docente-antiguedad', PersonalDocenteAntiguedadController::class)->middleware('auth');
+Route::resource('/formato-911/personal-docente-edad', PersonalDocenteEdadController::class)->middleware('auth');
+Route::resource('/formato-911/infraestructuras', InfraestructuraController::class)->middleware('auth');
 Route::get('/formato-911/unidades-academicas', UnidadAcademicaController::class)->name('unidades-academicas.index');
 
 // Personal administrativo
 Route::patch('/formato-911/personal-administrativo/{id}/file', [PersonalAdministrativoController::class, 'file'])
-  ->name('personal-administrativo.file');
+  ->name('personal-administrativo.file')->middleware('auth');
 Route::patch('/formato-911/personal-administrativo/{id}/unarchive', [PersonalAdministrativoController::class, 'unarchive'])
-  ->name('personal-administrativo.unarchive');
+  ->name('personal-administrativo.unarchive')->middleware('auth');
 
 // Personal docente
 Route::patch('/formato-911/personal-docente/{id}/file', [PersonalDocenteController::class, 'file'])
-  ->name('personal-docente.file');
+  ->name('personal-docente.file')->middleware('auth');
 Route::patch('/formato-911/personal-docente/{id}/unarchive', [PersonalDocenteController::class, 'unarchive'])
-  ->name('personal-docente.unarchive');
+  ->name('personal-docente.unarchive')->middleware('auth');
 
 // Personal docente antiguedad
 Route::patch('/formato-911/personal-docente-antiguedad/{id}/file', [PersonalDocenteAntiguedadController::class, 'file'])
-  ->name('personal-docente-antiguedad.file');
+  ->name('personal-docente-antiguedad.file')->middleware('auth');
 Route::patch('/formato-911/personal-docente-antiguedad/{id}/unarchive', [PersonalDocenteAntiguedadController::class, 'unarchive'])
-  ->name('personal-docente-antiguedad.unarchive');
+  ->name('personal-docente-antiguedad.unarchive')->middleware('auth');
 
 // Personal docente edad
 Route::patch('/formato-911/personal-docente-edad/{id}/file', [PersonalDocenteEdadController::class, 'file'])
-  ->name('personal-docente-edad.file');
+  ->name('personal-docente-edad.file')->middleware('auth');
 Route::patch('/formato-911/personal-docente-edad/{id}/unarchive', [PersonalDocenteEdadController::class, 'unarchive'])
-  ->name('personal-docente-edad.unarchive');
+  ->name('personal-docente-edad.unarchive')->middleware('auth');
 
 // Infraestructura
 Route::patch('/formato-911/infraestructura/{id}/file', [InfraestructuraController::class, 'file'])
-  ->name('infraestructura.file');
+  ->name('infraestructura.file')->middleware('auth');
 Route::patch('/formato-911/personal-docente-edad/{id}/unarchive', [InfraestructuraController::class, 'unarchive'])
-  ->name('infraestructura.unarchive');
+  ->name('infraestructura.unarchive')->middleware('auth');
 
 
 /*
