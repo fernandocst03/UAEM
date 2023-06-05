@@ -140,7 +140,7 @@
           </thead>
           <tbody class="text">
             @foreach ($last_rectorado->samaras as $samara)
-              <tr>
+              <tr class="{{ $samara->status ? '' : 'opacity-40' }}">
                 <td>{{ $samara->numero }}</td>
                 <td>{{ $samara->anio }}</td>
                 <td>{{ $samara->rectorado->ciclo }}</td>

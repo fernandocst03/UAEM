@@ -158,7 +158,7 @@
             </x-danger-button>
             <x-modal name="confirm-file-rectorado">
               <div>
-                <form method="post" class="p-6">
+                <form method="post" class="p-6" action="{{ route('samaras.file', ['samara' => $samara->id]) }}">
                   @csrf
                   @method('patch')
                   <h2 class="title">
@@ -192,13 +192,13 @@
               <p class="font-normal text-gray-600">Recuperar este samará </p>
             </div>
             <x-primary-button x-data=""
-              x-on:click.prevent="$dispatch('open-modal', 'confirm-rectorado-recover')"
-              class="flex items-center gap-4 px-3 py-2 font-bold text-gray-200 bg-gray-600 rounded-md opacity-2 hover:bg-red-700">
+              x-on:click.prevent="$dispatch('open-modal', 'confirm-rectorado-recover')">
               Recuperar
             </x-primary-button>
             <x-modal name="confirm-rectorado-recover">
               <div>
-                <form method="post" class="p-6">
+                <form method="post" class="p-6"
+                  action="{{ route('samaras.unarchive', ['samara' => $samara->id]) }}">
                   @csrf
                   @method('patch')
                   <h2 class="title">
@@ -213,12 +213,12 @@
                       placeholder="{{ __('Password') }}" />
                     <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
                   </div>
-                  <div class="flex justify-end mt-6">
-                    <x-primary-button type="button" x-on:click="$dispatch('close')" class="btn-cancel-delete">
+                  <div class="flex justify-end gap-2 mt-6">
+                    <x-danger-button type="button" x-on:click="$dispatch('close')" class="btn-cancel-delete">
                       {{ __('Cancelar') }}
-                    </x-primary-button>
+                    </x-danger-button>
                     <x-primary-button>
-                      {{ __('Archivar rectorado') }}
+                      {{ __('Recuperar samará') }}
                     </x-primary-button>
                   </div>
                 </form>

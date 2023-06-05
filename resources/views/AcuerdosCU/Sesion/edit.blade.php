@@ -115,7 +115,7 @@
             </x-danger-button>
             <x-modal name="confirm-archivaded">
               <div>
-                <form method="post"{{--  action="{{ route('sesiones.file', ['sesion' => $sesion->id]) }}" --}} class="p-6">
+                <form method="post" action="{{ route('sesiones.file', ['sesion' => $sesion->id]) }}" class="p-6">
                   @csrf
                   @method('patch')
                   <h2 class="title">
@@ -142,7 +142,7 @@
               </div>
             </x-modal>
           </div>
-        @elseif (!$rectorado->status)
+        @elseif (!$sesion->status)
           <div class="flex items-center justify-between py-5 px-7 ">
             <div class="flex flex-col justify-center w-2/3">
               <h4 class="title">Recuperar Sesión</h4>
@@ -155,7 +155,8 @@
             </x-primary-button>
             <x-modal name="confirm-rectorado-archivaded">
               <div>
-                <form method="post" {{-- action="{{ route('sesion.unarchive', ['sesion' => $sesion->id]) }}" --}} class="p-6">
+                <form method="post" action="{{ route('sesiones.unarchive', ['sesion' => $sesion->id]) }}"
+                  class="p-6">
                   @csrf
                   @method('patch')
                   <h2 class="font-bold text-primary">

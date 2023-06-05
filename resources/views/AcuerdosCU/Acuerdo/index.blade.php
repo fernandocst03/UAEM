@@ -37,7 +37,7 @@
                     class="underline">archivo</a>.
                 </p>
               </div>
-              <form {{-- action="{{ route('acuerdos.import') }} " --}} method="post" enctype="multipart/form-data">
+              <form action="{{ route('aceurdos.import') }} " method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col justify-center w-full">
                   <label class="block">
@@ -49,7 +49,12 @@
                   <div class="flex items-center justify-end gap-2 mt-4">
                     <button x-on:click="$dispatch('close')" type="button"
                       class="danger-button">{{ __('Cancelar') }}</button>
-                    <x-primary-button type="submit">{{ __('Importar') }}</x-primary-button>
+                    <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                      <span>Importar</span>
+                      <span x-show="loading">
+                        <x-loaders.spinner />
+                      </span>
+                    </x-primary-button>
                   </div>
                 </div>
               </form>
@@ -166,7 +171,7 @@
 
     <section class="flex flex-col gap-5">
       <article class="card-container">
-        @if (!empty($acuerdos))
+        @if (!empty($lastSesion->acuerdos))
           <div class="flex flex-col gap-1 mb-4">
             <h2 class="title">Acuerdos de la ultima sesion</h2>
             <a class="text-secondary w-fit" href="{{ route('sesiones.show', ['sesione' => $lastSesion->id]) }}">Fecha
@@ -189,7 +194,7 @@
             </thead>
             <tbody class="font-normal">
               @foreach ($lastSesion->acuerdos as $item)
-                <tr>
+                <tr class="{{ $item->status ? '' : 'opacity-40' }}">
                   <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
                   <td>
                     @if ($item->tipo_otro)
