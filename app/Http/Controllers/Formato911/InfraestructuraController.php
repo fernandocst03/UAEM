@@ -21,8 +21,11 @@ class InfraestructuraController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
-    $infraestructuras = Infraestructura::orderBy('id', 'desc')->where('status', true)->get();
+    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
+      ->where('tipo_id', "!=", "13")
+      ->orderBy('id')
+      ->get();
+    $infraestructuras = Infraestructura::orderBy('id', 'desc')->get();
     return view('Formato911.Infraestructura.index', compact('infraestructuras', 'unidadesAcademicas'));
   }
 
@@ -85,9 +88,9 @@ class InfraestructuraController extends Controller
         $registro_nuevo = $infraestructura
       );
 
-      return redirect()->route('infraestructura.index')->with('success', 'Infraestructura creada correctamente');
+      return redirect()->route('infraestructuras.index')->with('success', 'Infraestructura creada correctamente');
     } catch (Exception  $e) {
-      return redirect()->route('infraestructuras.index')->with('warning', 'Error al crear la infraestructura.')
+      return redirect()->route('infraestructuras.index')->with('warning', 'Error al crear la infraestructura.' . $e->getMessage())
         ->withErrors($validator);
     }
   }

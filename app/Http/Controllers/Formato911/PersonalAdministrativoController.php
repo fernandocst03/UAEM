@@ -18,7 +18,10 @@ class PersonalAdministrativoController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
+    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
+      ->where('tipo_id', "!=", "13")
+      ->orderBy('id')
+      ->get();
     $personalAdministrativo = PersonalAdministrativo::select()->orderBy('id', 'DESC')->get();
     sleep(1);
 

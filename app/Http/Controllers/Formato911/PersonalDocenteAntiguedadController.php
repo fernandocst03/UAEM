@@ -19,7 +19,10 @@ class PersonalDocenteAntiguedadController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
+    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
+      ->where('tipo_id', "!=", "13")
+      ->orderBy('id')
+      ->get();
     $grupoAntiguedad = AntiguedadGrupo::select()->orderBy('id')->get();
     $personalDocente = PersonalDocenteAntiguedad::select()->orderBy('id')->get();
 

@@ -18,7 +18,10 @@ class PersonalDocenteController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
+    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
+      ->where('tipo_id', "!=", "13")
+      ->orderBy('id')
+      ->get();
     $personalDocente = PersonalDocente::select()->orderBy('id')->get();
 
     return view('Formato911.Personal-Docente.index', compact('unidadesAcademicas', 'personalDocente'));

@@ -19,7 +19,10 @@ class PersonalDocenteEdadController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
+    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
+      ->where('tipo_id', "!=", "13")
+      ->orderBy('id')
+      ->get();
     $grupoEdad = EdadGrupo::select()->orderBy('id')->get();
     $personalDocente = PersonalDocenteEdad::select()->orderBy('id')->get();
 
@@ -132,7 +135,7 @@ class PersonalDocenteEdadController extends Controller
     $personal = PersonalDocenteEdad::find($id);
     $personal->delete();
 
-    return redirect()->route('personal-docente-antiguedad.index');
+    return redirect()->route('personal-docente-edad.index')->with('warning', 'Personal Docente por Edad eliminado correctamente');
   }
 
   public function import(Request $request)
@@ -157,5 +160,31 @@ class PersonalDocenteEdadController extends Controller
     } catch (Exception  $e) {
       return back()->with('warning', 'Error al importar: ' . $e->getMessage());
     }
+  }
+
+  public function file(Request $request, int $id)
+  {
+    $request->validateWithBag('userDeletion', [
+      'password' => ['required', 'current-password'],
+    ]);
+
+    $personalDocente = PersonalDocenteEdad::find($id);
+    $personalDocente->status = false;
+    $personalDocente->save();
+
+    return redirect()->route('personal-docente-edad.index');
+  }
+
+  public function unarchive(Request $request, int $id)
+  {
+    $request->validateWithBag('userDeletion', [
+      'password' => ['required', 'current-password'],
+    ]);
+
+    $personalDocente = PersonalDocenteEdad::find($id);
+    $personalDocente->status = true;
+    $personalDocente->save();
+
+    return redirect()->route('personal-docente-edad.index');
   }
 }
