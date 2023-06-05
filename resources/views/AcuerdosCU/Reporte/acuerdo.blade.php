@@ -26,7 +26,7 @@
           <div class="flex flex-col items-center justify-center gap-1">
             <label for="fechaInicio">Fecha inicio</label>
             <input type="date" name="fechaInicio" id="fechaInicio" class="border-[1px] border-gray-300 rounded"
-              value="<?php echo date('Y-m-d'); ?>" required>
+              value="2023-01-01" required>
           </div>
           <div class="flex flex-col items-center justify-center gap-1">
             <label for="fechaFin">Fecha fin</label>
@@ -59,14 +59,14 @@
     <article class="relative card-container">
       {{-- <x-loaders.skeleton /> --}}
       <h4 class="text-lg font-bold">Resultados</h4>
-      <table class="table stripe" id="acuerdos">
+      <table class="table stripe" id="acuerdos" style="width: 100%">
         <thead class="bg-gray-900 text-gray-50">
           <tr class="text-md">
             <th>Samara</th>
             <th>Fecha</th>
             <th>Punto</th>
             <th>Tipo de acuerdo</th>
-            <th>Acuerdo</th>
+            <th>Acuerdo Corto</th>
             <th>Observaciones</th>
           </tr>
         </thead>
@@ -87,10 +87,10 @@
                   href="{{ route('sesiones.show', ['sesione' => $item->sesion->id]) }}">{{ date('d-M-Y', strtotime($item->sesion->fecha)) }}</a>
               </td>
               <td>
-                <a href="{{ route('acuerdos.show', ['acuerdo' => $item->id]) }}">{{ $item->punto }}</a>
+                {{-- <a href="{{ route('acuerdos.show', ['acuerdo' => $item->id]) }}"> --}}{{ $item->punto }}{{-- </a> --}}
               </td>
               <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
-              <td>{{ $item->acuerdo }}</td>
+              <td>{{ $item->acuerdo_corto }}</td>
               <td>
                 @if ($item->observaciones)
                   <p>{{ $item->observaciones }}</p>
@@ -109,7 +109,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', datatable('#acuerdos'))
+  document.addEventListener('DOMContentLoaded', datatable({
+    id: '#acuerdos',
+    props: {
+      orderBy: [0, 'desc'],
+      scroll: 'false',
+      fileName: 'Reporte de acuerdos',
+      columns: [0, 1, 2, 3, 4, 5]
+    }
+  }))
 </script>
