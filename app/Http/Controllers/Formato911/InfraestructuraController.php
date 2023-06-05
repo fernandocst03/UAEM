@@ -228,16 +228,16 @@ class InfraestructuraController extends Controller
     return redirect()->route('infraestructuras.index');
   }
 
-  /* public function import(Request $request)
+  public function import(Request $request)
   {
     $validator = Validator::make($request->all(), [
       'file' => 'required|mimes:xlsx, xls'
     ]);
 
+    sleep(1);
+
     try {
       if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator);
-      } else {
         $file = $request->file('file');
 
         $import = new InfraestructuraImport;
@@ -246,9 +246,9 @@ class InfraestructuraController extends Controller
         // dd('Row count: ' . $import->getRowCount());
         $numero = $import->getRowCount();
         return redirect()->route('infraestructura.index')->with('success', 'Se importaron ' . $numero . ' registros.');
-      }
+      } else return redirect()->back()->withErrors($validator);
     } catch (Exception  $e) {
-      return back()->with('error', 'error ' . $e->getMessage());
+      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
     }
-  } */
+  }
 }
