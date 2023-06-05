@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AcuerdosCU;
 
 use App\Http\Controllers\Controller;
+use App\Imports\AcuerdoImport;
 use App\Models\AcuerdosCU\Acuerdo;
 use App\Models\AcuerdosCU\AcuerdoTipo;
 use App\Models\AcuerdosCU\Sesion;
@@ -10,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AcuerdoController extends Controller
 {
@@ -192,5 +194,29 @@ class AcuerdoController extends Controller
     $acuerdo->save();
 
     return redirect()->route('acuerdos.index');
+  }
+
+  public function import(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'file' => 'required|mimes:xlsx, xls'
+    ]);
+
+    sleep(1);
+
+    try {
+      if ($validator->fails()) {
+        $file = $request->file('file');
+
+        $import = new AcuerdoImport;
+        Excel::import($import, $file);
+
+        // dd('Row count: ' . $import->getRowCount());
+
+        return redirect()->route('personal-administrativo.index')->with('success', 'Importado correctamente');
+      } else return redirect()->back()->withErrors($validator);
+    } catch (Exception  $e) {
+      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
+    }
   }
 }

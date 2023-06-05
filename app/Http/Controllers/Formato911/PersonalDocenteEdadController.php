@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Formato911;
 
 use App\Http\Controllers\Controller;
+use App\Imports\PersonalDocenteEdadImport;
 use Illuminate\Http\Request;
 use App\Models\Formato911\EdadGrupo;
 use App\Models\Formato911\PersonalDocenteEdad;
 use App\Models\Formato911\UnidadAcademica;
 use Exception;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PersonalDocenteEdadController extends Controller
 {
@@ -17,7 +19,10 @@ class PersonalDocenteEdadController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
+    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
+      ->where('tipo_id', "!=", "13")
+      ->orderBy('id')
+      ->get();
     $grupoEdad = EdadGrupo::select()->orderBy('id')->get();
     $personalDocente = PersonalDocenteEdad::select()->orderBy('id')->get();
 
@@ -130,6 +135,56 @@ class PersonalDocenteEdadController extends Controller
     $personal = PersonalDocenteEdad::find($id);
     $personal->delete();
 
-    return redirect()->route('personal-docente-antiguedad.index');
+    return redirect()->route('personal-docente-edad.index')->with('warning', 'Personal Docente por Edad eliminado correctamente');
+  }
+
+  public function import(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'file' => 'required|mimes:xlsx, xls'
+    ]);
+
+    sleep(1);
+
+    try {
+      if ($validator->fails()) {
+        $file = $request->file('file');
+
+        $import = new PersonalDocenteEdadImport;
+        Excel::import($import, $file);
+
+        // dd('Row count: ' . $import->getRowCount());
+        $numero = $import->getRowCount();
+        return redirect()->route('personal-administrativo.index')->with('success', 'Se importaron ' . $numero . ' registros.');
+      } else return redirect()->back()->withErrors($validator);
+    } catch (Exception  $e) {
+      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
+    }
+  }
+
+  public function file(Request $request, int $id)
+  {
+    $request->validateWithBag('userDeletion', [
+      'password' => ['required', 'current-password'],
+    ]);
+
+    $personalDocente = PersonalDocenteEdad::find($id);
+    $personalDocente->status = false;
+    $personalDocente->save();
+
+    return redirect()->route('personal-docente-edad.index');
+  }
+
+  public function unarchive(Request $request, int $id)
+  {
+    $request->validateWithBag('userDeletion', [
+      'password' => ['required', 'current-password'],
+    ]);
+
+    $personalDocente = PersonalDocenteEdad::find($id);
+    $personalDocente->status = true;
+    $personalDocente->save();
+
+    return redirect()->route('personal-docente-edad.index');
   }
 }

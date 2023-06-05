@@ -37,7 +37,7 @@
                     class="underline">archivo</a>.
                 </p>
               </div>
-              <form {{-- action="{{ route('acuerdos.import') }} " --}} method="post" enctype="multipart/form-data">
+              <form action="{{ route('aceurdos.import') }} " method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col justify-center w-full">
                   <label class="block">
@@ -49,7 +49,12 @@
                   <div class="flex items-center justify-end gap-2 mt-4">
                     <button x-on:click="$dispatch('close')" type="button"
                       class="danger-button">{{ __('Cancelar') }}</button>
-                    <x-primary-button type="submit">{{ __('Importar') }}</x-primary-button>
+                    <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                      <span>Importar</span>
+                      <span x-show="loading">
+                        <x-loaders.spinner />
+                      </span>
+                    </x-primary-button>
                   </div>
                 </div>
               </form>
@@ -166,7 +171,7 @@
 
     <section class="flex flex-col gap-5">
       <article class="card-container">
-        @if (!empty($acuerdos))
+        @if (!empty($lastSesion->acuerdos))
           <div class="flex flex-col gap-1 mb-4">
             <h2 class="title">Acuerdos de la ultima sesion</h2>
             <a class="text-secondary w-fit" href="{{ route('sesiones.show', ['sesione' => $lastSesion->id]) }}">Fecha
@@ -174,14 +179,13 @@
               la sesion:
               {{ $lastSesion->fecha }}</a>
           </div>
-          <table id="ultima_sesion" class="table px-2 stripe">
+          <table id="ultima_sesion" class="table px-2 stripe" style="width: 100%">
             <thead class="bg-gray-900 text-gray-50">
               <tr>
                 <th>Tipo del acuerdo</th>
                 <th>Otro tipo</th>
                 <th>Punto</th>
                 <th>Acuerdo corto</th>
-                <th>Acuerdo</th>
                 <th>Observaciones</th>
                 <th>Pagina samara</th>
                 <th>Opciones</th>
@@ -189,7 +193,7 @@
             </thead>
             <tbody class="font-normal">
               @foreach ($lastSesion->acuerdos as $item)
-                <tr>
+                <tr class="{{ $item->status ? '' : 'opacity-40' }}">
                   <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
                   <td>
                     @if ($item->tipo_otro)
@@ -200,7 +204,6 @@
                   </td>
                   <td>{{ $item->punto }}</td>
                   <td>{{ $item->acuerdo_corto }}</td>
-                  <td>{{ $item->acuerdo }}</td>
                   <td>
                     @if ($item->observaciones)
                       <p>{{ $item->observaciones }}</p>
@@ -238,7 +241,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', datatable('ultima_sesion'))
+  document.addEventListener('DOMContentLoaded', datatable({
+    id: '#ultima_sesion',
+    props: {
+      orderBy: [0, 'desc'],
+      scroll: 'false',
+      fileName: 'Acuerdos de la ultima sesión: {{ $lastSesion->fecha }}',
+      columns: [0, 1, 2, 3, 4, 5]
+    }
+  }))
 </script>

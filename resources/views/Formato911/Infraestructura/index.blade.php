@@ -36,7 +36,7 @@
                   este <a href="" class="underline">archivo.</a>.
                 </p>
               </div>
-              <form action=" " method="post" enctype="multipart/form-data">
+              <form action="{{ route('infraestructuras.import') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col justify-center w-full">
                   <label class="block">
@@ -47,7 +47,12 @@
                   </label>
                   <div class="flex items-center justify-end gap-2 mt-4">
                     <x-danger-button>Cancelar</x-danger-button>
-                    <x-primary-button type="submit">Importar</x-primary-button>
+                    <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                      <span>Importar</span>
+                      <span x-show="loading">
+                        <x-loaders.spinner />
+                      </span>
+                    </x-primary-button>
                   </div>
                 </div>
               </form>
@@ -219,7 +224,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 mt-2 text-green-900">
+    <section class="w-full h-10 mt-1 mb-1 text-green-900">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))
@@ -228,7 +233,7 @@
     </section>
 
     <section class="card-container ">
-      <table class="table stripe" id="infraestructuras">
+      <table class="table stripe" id="infraestructuras" style="width: 100%">
         <thead class="text-sm bg-gray-900 text-gray-50">
           <tr>
             <th>Unidad academica</th>
@@ -238,9 +243,9 @@
             <th>Año</th>
             <th>Tipo inmueble</th>
             <th>Tipo aula</th>
-            <th>Aulas existentes</th>
-            <th>Talleres existentes</th>
-            <th>Laboratorios existentes</th>
+            <th>Aulas en uso</th>
+            <th>Talleres en uso</th>
+            <th>Laboratorios en uso</th>
             <th>Laboratorios de computo</th>
             <th>Biblioteca</th>
             <th>Opciones</th>
@@ -248,7 +253,7 @@
         </thead>
         <tbody class="text">
           @foreach ($infraestructuras as $infraestructura)
-            <tr>
+            <tr class="{{ $infraestructura->status ? '' : 'opacity-40' }}">
               <td>{{ $infraestructura->unidadAcademica->unidadDependencia->unidad_dependencia }}</td>
               <td>{{ $infraestructura->unidadAcademica->tipoUnidadAcademica->tipo }}</td>
               <td>{{ $infraestructura->unidadAcademica->municipio->municipio }}</td>
@@ -256,9 +261,9 @@
               <td>{{ $infraestructura->anio }}</td>
               <td>{{ $infraestructura->tipoConstruccion->tipo }}</td>
               <td>{{ $infraestructura->tipoPropiedad->tipo }}</td>
-              <td>{{ $infraestructura->aulas_existentes }}</td>
-              <td>{{ $infraestructura->talleres_existentes }}</td>
-              <td>{{ $infraestructura->laboratorios_existentes }}</td>
+              <td>{{ $infraestructura->aulas_en_uso }}</td>
+              <td>{{ $infraestructura->talleres_en_uso }}</td>
+              <td>{{ $infraestructura->laboratorios_en_uso }}</td>
               <td>{{ $infraestructura->laboratorios_computo }}</td>
               <td>
                 @if ($infraestructura->biblioteca)
@@ -287,7 +292,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  $(document).ready(datatable('#infraestructuras'))
+  $(document).ready(datatable({
+    id: '#infraestructuras',
+    props: {
+      orderBy: [4, 'desc'],
+      scroll: 'true',
+      fileName: 'Infraestructuras',
+      columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+  }))
 </script>

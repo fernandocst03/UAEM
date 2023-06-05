@@ -37,7 +37,7 @@
                   este <a href="" class="underline">archivo</a>.
                 </p>
               </div>
-              <form {{-- action="{{ route('acuerdos.import') }} " --}} method="post" enctype="multipart/form-data">
+              <form action="{{ route('sesiones.import') }} " method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col justify-center w-full">
                   <label class="block">
@@ -49,7 +49,12 @@
                   <div class="flex items-center justify-end gap-2 mt-4">
                     <button x-on:click="$dispatch('close')" type="button"
                       class="danger-button">{{ __('Cancelar') }}</button>
-                    <x-primary-button type="submit">{{ __('Importar') }}</x-primary-button>
+                    <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                      <span>Importar</span>
+                      <span x-show="loading">
+                        <x-loaders.spinner />
+                      </span>
+                    </x-primary-button>
                   </div>
                 </div>
               </form>
@@ -118,8 +123,8 @@
     <section class="flex flex-col gap-5">
       <article class="card-container">
         <h2 class="mb-2 title">Sesiones sin samará asignado</h2>
-        <table id="sesionesSinSamaras" class="table px-2 stripe">
-          <thead class="bg-gray-900 text-gray-50">
+        <table id="sesionesSinSamaras" class="table stripe" style="width: 100%">
+          <thead class="bg-gray-900 text-gray-50 text-md">
             <tr>
               <th>Fecha</th>
               <th>Tipo de sesion</th>
@@ -128,10 +133,10 @@
               <th></th>
             </tr>
           </thead>
-          <tbody class="font-normal">
+          <tbody class="text">
             @foreach ($sesiones as $sesion)
-              @if ($sesion->status && $sesion->samarasesion == null)
-                <tr class="text-sm">
+              @if ($sesion->samarasesion == null)
+                <tr class="{{ $sesion->status ? '' : 'opacity-40' }}">
                   <td>{{ date('d-m-y', strtotime($sesion->fecha)) }}</td>
                   <td>{{ $sesion->sesionTipo->tipo }}</td>
                   <td class="italic text-secondary">{{ __('Sin samara asiganado') }}</td>
@@ -154,8 +159,11 @@
       </article>
 
       <article class="card-container">
-        <h2 class="mb-2 title">Sesiones del ultimo samará</h2>
-        <table id="sesionesUltimosamara" class="table px-2 stripe">
+        <h2 class="mb-1 title">Sesiones del ultimo samará</h2>
+        <p class="text-secondary">Número del Samará: {{ $samara->numero }}</p>
+        <p class="text-secondary">Rectorado: {{ $samara->rectorado->ciclo }}</p>
+        <p class="mb-2 text-secondary">Fecha: {{ $samara->fecha }}</p>
+        <table id="sesionesUltimosamara" class="table stripe" style="width: 100%">
           <thead class="bg-gray-900 text-gray-50">
             <tr>
               <th>Fecha</th>
@@ -164,10 +172,10 @@
               <th>Opciones</th>
             </tr>
           </thead>
-          <tbody class="font-normal">
+          <tbody class="text">
             @if (!empty($samara))
               @foreach ($samara->samarasesion as $sesiones)
-                <tr class="text-sm">
+                <tr class="{{ $sesiones->sesion->status ? '' : 'opacity-40' }}">
                   <td>{{ date('d-m-Y', strtotime($sesiones->sesion->fecha)) }}</td>
                   <td>{{ $sesiones->sesion->sesionTipo->tipo }}</td>
                   <td>{{ sizeOf($sesiones->sesion->acuerdos) }}</td>
@@ -193,10 +201,26 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', [
-    datatable('#sesionesSinSamaras'),
-    datatable('#sesionesUltimosamara')
+    datatable({
+      id: '#sesionesSinSamaras',
+      props: {
+        orderBy: [0, 'desc'],
+        scroll: 'false',
+        fileName: 'Sesiones sin Samará asignado',
+        columns: [0, 1, 2, 3, 4]
+      }
+    }),
+    datatable({
+      id: '#sesionesUltimosamara',
+      props: {
+        orderBy: [0, 'desc'],
+        scroll: 'false',
+        fileName: 'Sesiones del ultimo Samará - {{ $samara->numero }}',
+        columns: [0, 1, 2]
+      }
+    })
   ])
 </script>

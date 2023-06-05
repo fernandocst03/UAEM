@@ -40,7 +40,7 @@
         </div>
         <div class="mt-12">
           <p class="mb-3 text">Informacion del Personal Docente por Antiguedad</p>
-          <table class="table" id="personalDocenteAntiguedad">
+          <table class="table" id="personalDocenteAntiguedad" style="width: 100%">
             <thead class="text-sm bg-gray-900 text-gray-50">
               <tr>
                 <th>Año</th>
@@ -65,7 +65,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  $(document).ready(datatable('#personalDocenteAntiguedad'))
+  $(document).ready(datatable({
+    id: '#personalDocenteAntiguedad',
+    props: {
+      orderBy: [0, 'desc'],
+      scroll: 'true',
+      fileName: '{{ $personalDocente->unidadAcademica->unidadDependencia->unidad_dependencia }} - Personal docente por grupo de antiguedad - {{ $personalDocente->anio }}',
+      columns: [0, 1, 2, 3]
+    }
+  }))
 </script>

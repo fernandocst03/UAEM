@@ -17,9 +17,9 @@
 
     <section class="flex flex-col items-center w-full gap-16 mt-20">
 
-      <article class='flex flex-col items-center w-2/3'>
+      <article class='flex flex-col items-center w-2/4'>
         <h2 class="pb-4 text-xl font-bold text-blue-600">Misión</h2>
-        <p class='text-sm text-center text-gray-500'>La UAEM es una institución educativa que forma profesionales
+        <p class='text-center text-secondary'>La UAEM es una institución educativa que forma profesionales
           en los
           niveles Medio
           Superior y Superior, que sean competentes para la vida y líderes académicos en investigación,
@@ -34,9 +34,9 @@
           sociedad democrática en constante movimiento.</p>
       </article>
 
-      <article class='flex flex-col items-center w-2/3'>
+      <article class='flex flex-col items-center w-2/4'>
         <h2 class="pb-4 text-xl font-bold text-blue-600">Visión</h2>
-        <p class='text-sm text-center text-gray-500'>Para 2023, la UAEM se consolida como una institución de
+        <p class='text-center text-secondary'>Para 2023, la UAEM se consolida como una institución de
           excelencia
           académica,
           sustentable, incluyente y segura, reconocida por la calidad de sus egresados, el impacto de su

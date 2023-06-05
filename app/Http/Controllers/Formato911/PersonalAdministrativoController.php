@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Formato911\PersonalAdministrativo;
 use App\Models\Formato911\UnidadAcademica;
-use Exception;
 use Illuminate\Support\Facades\Validator;
+use App\Imports\PersonalAdministrativoImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Exception;
 
 class PersonalAdministrativoController extends Controller
 {
@@ -16,7 +18,10 @@ class PersonalAdministrativoController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
+    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
+      ->where('tipo_id', "!=", "13")
+      ->orderBy('id')
+      ->get();
     $personalAdministrativo = PersonalAdministrativo::select()->orderBy('id', 'DESC')->get();
     sleep(1);
 
@@ -208,5 +213,29 @@ class PersonalAdministrativoController extends Controller
     $personalAdministrativo->save();
 
     return redirect()->route('personal-administrativo.index');
+  }
+
+  public function import(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'file' => 'required|mimes:xlsx, xls'
+    ]);
+
+    sleep(1);
+
+    try {
+      if ($validator->fails()) {
+        $file = $request->file('file');
+
+        $import = new PersonalAdministrativoImport;
+        Excel::import($import, $file);
+
+        // dd('Row count: ' . $import->getRowCount());
+        $numero = $import->getRowCount();
+        return redirect()->route('personal-administrativo.index')->with('success', 'Se importaron ' . $numero . ' registros.');
+      } else return redirect()->back()->withErrors($validator);
+    } catch (Exception  $e) {
+      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
+    }
   }
 }

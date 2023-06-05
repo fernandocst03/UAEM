@@ -112,7 +112,12 @@
 
                 <div class="flex justify-end gap-1 mt-4">
                   <x-danger-button type="button" x-on:click="$dispatch('close')">Cancelar</x-danger-button>
-                  <x-primary-button class="w-min">{{ __('Crear') }}</x-primary-button>
+                  <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                    <span>Crear Sesión</span>
+                    <span x-show="loading">
+                      <x-loaders.spinner />
+                    </span>
+                  </x-primary-button>
                 </div>
               </form>
             </div>
@@ -130,12 +135,12 @@
 
       <article class="">
         <h2 class="mb-3 text">Acuerdos de la sesión</h2>
-        <table id="acuerdos" class="table">
+        <table id="acuerdos" class="table" style="width: 100%">
           <thead class="w-full bg-gray-900 text-gray-50">
             <tr>
               <th>Punto</th>
               <th>Tipo acuerdo</th>
-              <th>Acuerdo</th>
+              <th>Acuerdo corto</th>
               <th>Observaciones</th>
               <th>Pagina Samara</th>
               <th>Opciones</th>
@@ -146,7 +151,7 @@
               <tr>
                 <td>{{ $acuerdo->punto }}</td>
                 <td>{{ $acuerdo->tipoAcuerdo->tipo_acuerdo }}</td>
-                <td>{{ $acuerdo->acuerdo }}</td>
+                <td>{{ $acuerdo->acuerdo_corto }}</td>
                 <td>
                   @if ($acuerdo->observaciones)
                     {{ $acuerdo->observaciones }}
@@ -182,7 +187,15 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', datatable('#acuerdos'))
+  document.addEventListener('DOMContentLoaded', datatable({
+    id: '#acuerdos',
+    props: {
+      orderBy: [0, 'asc'],
+      scroll: 'false',
+      fileName: 'Acuerdos de la sesión del: {{ $sesion->fecha }}',
+      columns: [0, 1, 2, 3, 4]
+    }
+  }))
 </script>

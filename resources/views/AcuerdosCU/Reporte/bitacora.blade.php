@@ -27,7 +27,7 @@
           <div class="flex flex-col items-center justify-center gap-1">
             <label for="fechaInicio">Fecha inicio</label>
             <input type="date" name="fechaInicio" id="fechaInicio" class="border-[1px] border-gray-300 rounded"
-              value="<?php echo date('Y-m-d'); ?>" required>
+              value="2023-01-01" required>
           </div>
           <div class="flex flex-col items-center justify-center gap-1">
             <label for="fechaFin">Fecha fin</label>
@@ -62,7 +62,7 @@
     <article class="relative card-container">
       {{-- <x-loaders.skeleton /> --}}
       <h4 class="mb-2 text-lg font-bold">Resultados</h4>
-      <table class="table stripe" id="bitacoras">
+      <table class="table stripe" id="bitacoras" style="width: 100%">
         <thead class="bg-gray-900 text-gray-50">
           <tr class="text-md ">
             <th>Acción</th>
@@ -91,7 +91,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', datatable('#bitacoras'))
+  document.addEventListener('DOMContentLoaded', datatable({
+    id: '#bitacoras',
+    props: {
+      orderBy: [2, 'desc'],
+      scroll: 'false',
+      fileName: 'Reporte de bitacoras',
+      columns: [0, 1, 2, 3, 4]
+    }
+  }))
 </script>

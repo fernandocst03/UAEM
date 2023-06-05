@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Formato911;
 
 use App\Http\Controllers\Controller;
+use App\Imports\PersonalDocenteAntiguedadImport;
 use Illuminate\Http\Request;
 use App\Models\Formato911\AntiguedadGrupo;
 use App\Models\Formato911\PersonalDocenteAntiguedad;
 use App\Models\Formato911\UnidadAcademica;
-use Exception;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use Exception;
 
 class PersonalDocenteAntiguedadController extends Controller
 {
@@ -17,7 +19,10 @@ class PersonalDocenteAntiguedadController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
+    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
+      ->where('tipo_id', "!=", "13")
+      ->orderBy('id')
+      ->get();
     $grupoAntiguedad = AntiguedadGrupo::select()->orderBy('id')->get();
     $personalDocente = PersonalDocenteAntiguedad::select()->orderBy('id')->get();
 
@@ -157,5 +162,29 @@ class PersonalDocenteAntiguedadController extends Controller
     $personalDocenteAntiguedad->save();
 
     return redirect()->route('personal-docente-antiguedad.index');
+  }
+
+  public function import(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'file' => 'required|mimes:xlsx, xls'
+    ]);
+
+    sleep(1);
+
+    try {
+      if ($validator->fails()) {
+        $file = $request->file('file');
+
+        $import = new PersonalDocenteAntiguedadImport;
+        Excel::import($import, $file);
+
+        // dd('Row count: ' . $import->getRowCount());
+        $numero = $import->getRowCount();
+        return redirect()->route('personal-docente-antiguedad.index')->with('success', 'Se importaron ' . $numero . ' registros.');
+      } else return redirect()->back()->withErrors($validator);
+    } catch (Exception  $e) {
+      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
+    }
   }
 }
