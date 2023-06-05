@@ -60,7 +60,7 @@
 
     </article>
 
-    <article class="px-4 py-8 mt-10 rounded shadow bg-slate-50">
+    <article class="mt-9 card-container">
       <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
 
         <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
@@ -189,57 +189,3 @@
   </section>
 
 </x-app-layout>
-
-<script>
-  $(document).ready(function() {
-    $('#ultimo_samara').DataTable({
-      "language": {
-        "lengthMenu": "Mostrar _MENU_ registros por pagina",
-        "zeroRecords": "Nada encontrado",
-        "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-        "infoEmpty": "No records available",
-        "infoFiltered": "(Filtrado de _MAX_ registros totales)",
-        "search": "Buscar",
-        "paginate": {
-          "next": "Siguiente",
-          "previous": "Anterior"
-        }
-      },
-      "dom": 'Bfrtip',
-      "buttons": [
-        'excel', {
-          extend: 'pdf',
-          text: 'PDF ',
-          orientation: 'landscape',
-          pageSize: 'LETTER',
-        }
-      ]
-    });
-  });
-
-  $(document).ready(function() {
-    $('#sesiones_sin_samaras').DataTable({
-      "language": {
-        "lengthMenu": "Mostrar _MENU_ registros por pagina",
-        "zeroRecords": "Nada encontrado",
-        "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-        "infoEmpty": "No records available",
-        "infoFiltered": "(Filtrado de _MAX_ registros totales)",
-        "search": "Buscar",
-        "paginate": {
-          "next": "Siguiente",
-          "previous": "Anterior"
-        }
-      },
-      "dom": 'Bfrtip',
-      "buttons": [
-        'excel', {
-          extend: 'pdf',
-          text: 'PDF ',
-          orientation: 'landscape',
-          pageSize: 'LETTER',
-        }
-      ]
-    });
-  });
-</script>

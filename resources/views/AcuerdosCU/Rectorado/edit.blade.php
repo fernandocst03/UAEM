@@ -45,7 +45,7 @@
       </form>
     </article>
 
-    <article class="card-container">
+    <article class="card-container mt-9">
       <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
         <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
           <div class="flex flex-col justify-center w-2/3">
