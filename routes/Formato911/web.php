@@ -47,3 +47,19 @@ Route::patch('/formato-911/infraestructura/{id}/file', [InfraestructuraControlle
   ->name('infraestructura.file');
 Route::patch('/formato-911/personal-docente-edad/{id}/unarchive', [InfraestructuraController::class, 'unarchive'])
   ->name('infraestructura.unarchive');
+
+
+/*
+    Importaciones
+  */
+
+Route::post('/formato-911/personal-administrativo/import', [PersonalAdministrativoController::class, 'import'])->middleware('auth')
+  ->name('personal-administrativo.import');
+Route::post('/formato-911/personal-docente/import', [PersonalDocenteController::class, 'import'])->middleware('auth')
+  ->name('personal-docente.import');
+Route::post('/formato-911/personal-docente-antiguedad/import', [PersonalDocenteAntiguedadController::class, 'import'])->middleware('auth')
+  ->name('personal-docente-antiguedad.import');
+Route::post('/formato-911/personal-docente-edad/import', [PersonalDocenteEdadController::class, 'import'])->middleware('auth')
+  ->name('personal-docente-edad.import');
+Route::post('/formato-911/infraestructura/import', [InfraestructuraController::class, 'import'])->middleware('auth')
+  ->name('infraestructuras.import');
