@@ -36,7 +36,7 @@
                   este <a href="" class="underline">archivo.</a>.
                 </p>
               </div>
-              <form action=" " method="post" enctype="multipart/form-data">
+              <form action="{{ route('infraestructuras.import') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col justify-center w-full">
                   <label class="block">
@@ -47,7 +47,12 @@
                   </label>
                   <div class="flex items-center justify-end gap-2 mt-4">
                     <x-danger-button>Cancelar</x-danger-button>
-                    <x-primary-button type="submit">Importar</x-primary-button>
+                    <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                      <span>Importar</span>
+                      <span x-show="loading">
+                        <x-loaders.spinner />
+                      </span>
+                    </x-primary-button>
                   </div>
                 </div>
               </form>
@@ -219,7 +224,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 mt-2 text-green-900">
+    <section class="w-full h-10 mt-1 mb-1 text-green-900">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))
@@ -248,7 +253,7 @@
         </thead>
         <tbody class="text">
           @foreach ($infraestructuras as $infraestructura)
-            <tr>
+            <tr class="{{ $infraestructura->status ? '' : 'opacity-40' }}">
               <td>{{ $infraestructura->unidadAcademica->unidadDependencia->unidad_dependencia }}</td>
               <td>{{ $infraestructura->unidadAcademica->tipoUnidadAcademica->tipo }}</td>
               <td>{{ $infraestructura->unidadAcademica->municipio->municipio }}</td>

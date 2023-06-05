@@ -112,7 +112,12 @@
 
                 <div class="flex justify-end gap-1 mt-4">
                   <x-danger-button type="button" x-on:click="$dispatch('close')">Cancelar</x-danger-button>
-                  <x-primary-button class="w-min">{{ __('Crear') }}</x-primary-button>
+                  <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                    <span>Crear Sesión</span>
+                    <span x-show="loading">
+                      <x-loaders.spinner />
+                    </span>
+                  </x-primary-button>
                 </div>
               </form>
             </div>

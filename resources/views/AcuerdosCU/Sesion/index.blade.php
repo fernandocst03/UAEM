@@ -37,7 +37,7 @@
                   este <a href="" class="underline">archivo</a>.
                 </p>
               </div>
-              <form {{-- action="{{ route('acuerdos.import') }} " --}} method="post" enctype="multipart/form-data">
+              <form action="{{ route('sesiones.import') }} " method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col justify-center w-full">
                   <label class="block">
@@ -49,7 +49,12 @@
                   <div class="flex items-center justify-end gap-2 mt-4">
                     <button x-on:click="$dispatch('close')" type="button"
                       class="danger-button">{{ __('Cancelar') }}</button>
-                    <x-primary-button type="submit">{{ __('Importar') }}</x-primary-button>
+                    <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                      <span>Importar</span>
+                      <span x-show="loading">
+                        <x-loaders.spinner />
+                      </span>
+                    </x-primary-button>
                   </div>
                 </div>
               </form>
@@ -119,7 +124,7 @@
       <article class="card-container">
         <h2 class="mb-2 title">Sesiones sin samará asignado</h2>
         <table id="sesionesSinSamaras" class="table px-2 stripe">
-          <thead class="bg-gray-900 text-gray-50">
+          <thead class="bg-gray-900 text-gray-50 text-md">
             <tr>
               <th>Fecha</th>
               <th>Tipo de sesion</th>
@@ -128,10 +133,10 @@
               <th></th>
             </tr>
           </thead>
-          <tbody class="font-normal">
+          <tbody class="text">
             @foreach ($sesiones as $sesion)
-              @if ($sesion->status && $sesion->samarasesion == null)
-                <tr class="text-sm">
+              @if ($sesion->samarasesion == null)
+                <tr class="{{ $sesion->status ? '' : 'opacity-40' }}">
                   <td>{{ date('d-m-y', strtotime($sesion->fecha)) }}</td>
                   <td>{{ $sesion->sesionTipo->tipo }}</td>
                   <td class="italic text-secondary">{{ __('Sin samara asiganado') }}</td>
@@ -164,10 +169,10 @@
               <th>Opciones</th>
             </tr>
           </thead>
-          <tbody class="font-normal">
+          <tbody class="text">
             @if (!empty($samara))
               @foreach ($samara->samarasesion as $sesiones)
-                <tr class="text-sm">
+                <tr class="{{ $sesiones->sesion->status ? '' : 'opacity-40' }}">
                   <td>{{ date('d-m-Y', strtotime($sesiones->sesion->fecha)) }}</td>
                   <td>{{ $sesiones->sesion->sesionTipo->tipo }}</td>
                   <td>{{ sizeOf($sesiones->sesion->acuerdos) }}</td>
