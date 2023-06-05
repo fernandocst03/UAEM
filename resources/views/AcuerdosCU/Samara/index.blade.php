@@ -184,8 +184,16 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
   document.addEventListener("DOMContentLoaded",
-    datatable('#ultimo_rectorado'));
+    datatable({
+      id: '#ultimo_rectorado',
+      props: {
+        orderBy: [3, 'desc'],
+        scroll: 'false',
+        fileName: 'Ultimo rectorado {{ $last_rectorado->ciclo }}',
+        columns: [0, 1, 2, 3, 4]
+      }
+    }));
 </script>

@@ -128,7 +128,7 @@
     </section>
 
     <section class="card-container ">
-      <table class="table stripe" id="personalAdministrativo">
+      <table class="table stripe" id="personalAdministrativo" style="width: 100%">
         <thead class="text-sm bg-gray-900 text-gray-50">
           <tr>
             <th>Unidad academica</th>
@@ -181,7 +181,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/dataTablesScrollX.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  $(document).ready(datatable('#personalAdministrativo'))
+  $(document).ready(datatable({
+    id: '#personalAdministrativo',
+    props: {
+      orderBy: [4, 'desc'],
+      scroll: 'true',
+      fileName: 'Persoal Administrativo',
+      columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+  }))
 </script>

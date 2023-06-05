@@ -122,7 +122,7 @@
     </section>
 
     <section class="card-container ">
-      <table class="table stripe" id="personalDocente">
+      <table class="table stripe" id="personalDocente" style="width: 100%">
         <thead class="text-sm bg-gray-900 text-gray-50">
           <tr>
             <th>Unidad academica</th>
@@ -169,7 +169,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  $(document).ready(datatable('#personalDocente'))
+  $(document).ready(datatable({
+    id: '#personalDocente',
+    props: {
+      orderBy: [4, 'desc'],
+      scroll: 'true',
+      fileName: 'Personal docente',
+      columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  }))
 </script>

@@ -233,7 +233,7 @@
     </section>
 
     <section class="card-container ">
-      <table class="table stripe" id="infraestructuras">
+      <table class="table stripe" id="infraestructuras" style="width: 100%">
         <thead class="text-sm bg-gray-900 text-gray-50">
           <tr>
             <th>Unidad academica</th>
@@ -243,9 +243,9 @@
             <th>Año</th>
             <th>Tipo inmueble</th>
             <th>Tipo aula</th>
-            <th>Aulas existentes</th>
-            <th>Talleres existentes</th>
-            <th>Laboratorios existentes</th>
+            <th>Aulas en uso</th>
+            <th>Talleres en uso</th>
+            <th>Laboratorios en uso</th>
             <th>Laboratorios de computo</th>
             <th>Biblioteca</th>
             <th>Opciones</th>
@@ -261,9 +261,9 @@
               <td>{{ $infraestructura->anio }}</td>
               <td>{{ $infraestructura->tipoConstruccion->tipo }}</td>
               <td>{{ $infraestructura->tipoPropiedad->tipo }}</td>
-              <td>{{ $infraestructura->aulas_existentes }}</td>
-              <td>{{ $infraestructura->talleres_existentes }}</td>
-              <td>{{ $infraestructura->laboratorios_existentes }}</td>
+              <td>{{ $infraestructura->aulas_en_uso }}</td>
+              <td>{{ $infraestructura->talleres_en_uso }}</td>
+              <td>{{ $infraestructura->laboratorios_en_uso }}</td>
               <td>{{ $infraestructura->laboratorios_computo }}</td>
               <td>
                 @if ($infraestructura->biblioteca)
@@ -292,7 +292,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  $(document).ready(datatable('#infraestructuras'))
+  $(document).ready(datatable({
+    id: '#infraestructuras',
+    props: {
+      orderBy: [4, 'desc'],
+      scroll: 'true',
+      fileName: 'Infraestructuras',
+      columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+  }))
 </script>

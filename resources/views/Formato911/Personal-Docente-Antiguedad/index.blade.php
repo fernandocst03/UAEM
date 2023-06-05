@@ -132,7 +132,7 @@
     </section>
 
     <section class="mt-1 card-container">
-      <table class="table stripe" id="personalDocenteAntiguedad">
+      <table class="table stripe" id="personalDocenteAntiguedad" style="width: 100%">
         <thead class="text-sm bg-gray-900 text-gray-50">
           <tr>
             <th>Unidad academica</th>
@@ -175,7 +175,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  $(document).ready(datatable('#personalDocenteAntiguedad'))
+  $(document).ready(datatable({
+    id: '#personalDocenteAntiguedad',
+    props: {
+      orderBy: [4, 'desc'],
+      scroll: 'true',
+      fileName: 'Personal docente por grupo de antiguedad',
+      columns: [0, 1, 2, 3, 4, 5, 6]
+    }
+  }))
 </script>

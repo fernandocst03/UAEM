@@ -92,7 +92,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  $(document).ready(datatable('#infraestructuras'))
+  $(document).ready(datatable({
+    id: '#infraestructuras',
+    props: {
+      orderBy: [0, 'desc'],
+      scroll: 'true',
+      fileName: '{{ $infraestructura->unidadAcademica->unidadDependencia->unidad_dependencia }} - Infraestructura - {{ $infraestructura->anio }}',
+      columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+  }))
 </script>

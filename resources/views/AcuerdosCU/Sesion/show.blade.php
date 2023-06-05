@@ -135,12 +135,12 @@
 
       <article class="">
         <h2 class="mb-3 text">Acuerdos de la sesión</h2>
-        <table id="acuerdos" class="table">
+        <table id="acuerdos" class="table" style="width: 100%">
           <thead class="w-full bg-gray-900 text-gray-50">
             <tr>
               <th>Punto</th>
               <th>Tipo acuerdo</th>
-              <th>Acuerdo</th>
+              <th>Acuerdo corto</th>
               <th>Observaciones</th>
               <th>Pagina Samara</th>
               <th>Opciones</th>
@@ -151,7 +151,7 @@
               <tr>
                 <td>{{ $acuerdo->punto }}</td>
                 <td>{{ $acuerdo->tipoAcuerdo->tipo_acuerdo }}</td>
-                <td>{{ $acuerdo->acuerdo }}</td>
+                <td>{{ $acuerdo->acuerdo_corto }}</td>
                 <td>
                   @if ($acuerdo->observaciones)
                     {{ $acuerdo->observaciones }}
@@ -187,7 +187,15 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', datatable('#acuerdos'))
+  document.addEventListener('DOMContentLoaded', datatable({
+    id: '#acuerdos',
+    props: {
+      orderBy: [0, 'asc'],
+      scroll: 'false',
+      fileName: 'Acuerdos de la sesión del: {{ $sesion->fecha }}',
+      columns: [0, 1, 2, 3, 4]
+    }
+  }))
 </script>

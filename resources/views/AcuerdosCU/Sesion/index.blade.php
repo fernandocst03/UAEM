@@ -123,7 +123,7 @@
     <section class="flex flex-col gap-5">
       <article class="card-container">
         <h2 class="mb-2 title">Sesiones sin samará asignado</h2>
-        <table id="sesionesSinSamaras" class="table px-2 stripe">
+        <table id="sesionesSinSamaras" class="table stripe" style="width: 100%">
           <thead class="bg-gray-900 text-gray-50 text-md">
             <tr>
               <th>Fecha</th>
@@ -159,8 +159,11 @@
       </article>
 
       <article class="card-container">
-        <h2 class="mb-2 title">Sesiones del ultimo samará</h2>
-        <table id="sesionesUltimosamara" class="table px-2 stripe">
+        <h2 class="mb-1 title">Sesiones del ultimo samará</h2>
+        <p class="text-secondary">Número del Samará: {{ $samara->numero }}</p>
+        <p class="text-secondary">Rectorado: {{ $samara->rectorado->ciclo }}</p>
+        <p class="mb-2 text-secondary">Fecha: {{ $samara->fecha }}</p>
+        <table id="sesionesUltimosamara" class="table stripe" style="width: 100%">
           <thead class="bg-gray-900 text-gray-50">
             <tr>
               <th>Fecha</th>
@@ -198,10 +201,26 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', [
-    datatable('#sesionesSinSamaras'),
-    datatable('#sesionesUltimosamara')
+    datatable({
+      id: '#sesionesSinSamaras',
+      props: {
+        orderBy: [0, 'desc'],
+        scroll: 'false',
+        fileName: 'Sesiones sin Samará asignado',
+        columns: [0, 1, 2, 3, 4]
+      }
+    }),
+    datatable({
+      id: '#sesionesUltimosamara',
+      props: {
+        orderBy: [0, 'desc'],
+        scroll: 'false',
+        fileName: 'Sesiones del ultimo Samará - {{ $samara->numero }}',
+        columns: [0, 1, 2]
+      }
+    })
   ])
 </script>
