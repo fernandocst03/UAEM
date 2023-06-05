@@ -140,7 +140,8 @@
               <x-modal name="confirm-file">
                 <div>
                   <form method="post"
-                    action="{{ route('personal-docente-edad.file', ['id' => $personalDocente->id]) }}" class="p-6">
+                    action="{{ route('personal-docente-antiguedad.file', ['id' => $personalDocente->id]) }}"
+                    class="p-6">
                     @csrf
                     @method('patch')
                     <h2 class="title">

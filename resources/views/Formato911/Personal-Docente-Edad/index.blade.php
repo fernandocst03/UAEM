@@ -36,7 +36,7 @@
                   este <a href="" class="underline">archivo.</a>.
                 </p>
               </div>
-              <form action="{{ route('personal-docente-edad.import') }}" method="post" enctype="multipart/form-data">
+              <form action=" " method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col justify-center w-full">
                   <label class="block">
@@ -47,12 +47,7 @@
                   </label>
                   <div class="flex items-center justify-end gap-2 mt-4">
                     <x-danger-button>Cancelar</x-danger-button>
-                    <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
-                      <span>Importar</span>
-                      <span x-show="loading">
-                        <x-loaders.spinner />
-                      </span>
-                    </x-primary-button>
+                    <x-primary-button type="submit">Importar</x-primary-button>
                   </div>
                 </div>
               </form>
@@ -131,7 +126,7 @@
     </section>
 
     <section class="mt-1 card-container">
-      <table class="table stripe" id="personalDocenteEdad" style="width: 100%">
+      <table class="table stripe" id="personalDocenteAntiguedad">
         <thead class="text-sm bg-gray-900 text-gray-50">
           <tr>
             <th>Unidad academica</th>
@@ -146,7 +141,7 @@
         </thead>
         <tbody class="text">
           @foreach ($personalDocente as $item)
-            <tr class="{{ $item->status ? '' : 'opacity-40' }}">
+            <tr>
               <td>{{ $item->unidadAcademica->unidadDependencia->unidad_dependencia }}</td>
               <td>{{ $item->unidadAcademica->tipoUnidadAcademica->tipo }}</td>
               <td>{{ $item->unidadAcademica->municipio->municipio }}</td>
@@ -174,15 +169,7 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/dataTableConfig.js') }}"></script>
+<script src="{{ asset('js/datatables.js') }}"></script>
 <script>
-  $(document).ready(datatable({
-    id: '#personalDocenteEdad',
-    props: {
-      orderBy: [4, 'desc'],
-      scroll: 'true',
-      fileName: 'Personal docente por grupo de edad',
-      columns: [0, 1, 2, 3, 4, 5, 6]
-    }
-  }))
+  $(document).ready(datatable('#personalDocenteAntiguedad'))
 </script>

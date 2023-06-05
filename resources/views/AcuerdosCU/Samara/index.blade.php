@@ -140,7 +140,7 @@
           </thead>
           <tbody class="text">
             @foreach ($last_rectorado->samaras as $samara)
-              <tr class="{{ $samara->status ? '' : 'opacity-40' }}">
+              <tr>
                 <td>{{ $samara->numero }}</td>
                 <td>{{ $samara->anio }}</td>
                 <td>{{ $samara->rectorado->ciclo }}</td>
@@ -184,16 +184,8 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/dataTableConfig.js') }}"></script>
+<script src="{{ asset('js/datatables.js') }}"></script>
 <script>
   document.addEventListener("DOMContentLoaded",
-    datatable({
-      id: '#ultimo_rectorado',
-      props: {
-        orderBy: [3, 'desc'],
-        scroll: 'false',
-        fileName: 'Ultimo rectorado {{ $last_rectorado->ciclo }}',
-        columns: [0, 1, 2, 3, 4]
-      }
-    }));
+    datatable('#ultimo_rectorado'));
 </script>

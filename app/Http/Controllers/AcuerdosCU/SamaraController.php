@@ -186,30 +186,4 @@ class SamaraController extends Controller
 
     return view('AcuerdosCU.Samara.showAll', compact('rectorados'));
   }
-
-  public function file(Request $request, int $id)
-  {
-    $request->validateWithBag('userDeletion', [
-      'password' => ['required', 'current-password'],
-    ]);
-
-    $samara = Samara::find($id);
-    $samara->status = false;
-    $samara->save();
-
-    return redirect()->route('samaras.index');
-  }
-
-  public function unarchive(Request $request, int $id)
-  {
-    $request->validateWithBag('userDeletion', [
-      'password' => ['required', 'current-password'],
-    ]);
-
-    $samara = Samara::find($id);
-    $samara->status = true;
-    $samara->save();
-
-    return redirect()->route('samaras.index');
-  }
 }

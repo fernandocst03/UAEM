@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Formato911;
 
 use App\Http\Controllers\Controller;
-use App\Imports\PersonalDocenteImport;
 use Illuminate\Http\Request;
 use App\Models\Formato911\UnidadAcademica;
 use App\Models\Formato911\PersonalDocente;
-use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Facades\Excel;
 use Exception;
+use Illuminate\Support\Facades\Validator;
 
 class PersonalDocenteController extends Controller
 {
@@ -18,10 +16,7 @@ class PersonalDocenteController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
-      ->where('tipo_id', "!=", "13")
-      ->orderBy('id')
-      ->get();
+    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
     $personalDocente = PersonalDocente::select()->orderBy('id')->get();
 
     return view('Formato911.Personal-Docente.index', compact('unidadesAcademicas', 'personalDocente'));
@@ -174,29 +169,5 @@ class PersonalDocenteController extends Controller
     $personalDocente->save();
 
     return redirect()->route('personal-docente.index');
-  }
-
-  public function import(Request $request)
-  {
-    $validator = Validator::make($request->all(), [
-      'file' => 'required|mimes:xlsx, xls'
-    ]);
-
-    sleep(1);
-
-    try {
-      if ($validator->fails()) {
-        $file = $request->file('file');
-
-        $import = new PersonalDocenteImport;
-        Excel::import($import, $file);
-
-        // dd('Row count: ' . $import->getRowCount());
-        $numero = $import->getRowCount();
-        return redirect()->route('personal-administrativo.index')->with('success', 'Se importaron ' . $numero . ' registros.');
-      } else return redirect()->back()->withErrors($validator);
-    } catch (Exception  $e) {
-      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
-    }
   }
 }

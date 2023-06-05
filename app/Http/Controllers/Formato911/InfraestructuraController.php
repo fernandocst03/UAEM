@@ -21,11 +21,8 @@ class InfraestructuraController extends Controller
    */
   public function index()
   {
-    $unidadesAcademicas = UnidadAcademica::where('tipo_id', "!=", "10")
-      ->where('tipo_id', "!=", "13")
-      ->orderBy('id')
-      ->get();
-    $infraestructuras = Infraestructura::orderBy('id', 'desc')->get();
+    $unidadesAcademicas = UnidadAcademica::select()->orderBy('id')->get();
+    $infraestructuras = Infraestructura::orderBy('id', 'desc')->where('status', true)->get();
     return view('Formato911.Infraestructura.index', compact('infraestructuras', 'unidadesAcademicas'));
   }
 
@@ -88,9 +85,9 @@ class InfraestructuraController extends Controller
         $registro_nuevo = $infraestructura
       );
 
-      return redirect()->route('infraestructuras.index')->with('success', 'Infraestructura creada correctamente');
+      return redirect()->route('infraestructura.index')->with('success', 'Infraestructura creada correctamente');
     } catch (Exception  $e) {
-      return redirect()->route('infraestructuras.index')->with('warning', 'Error al crear la infraestructura.' . $e->getMessage())
+      return redirect()->route('infraestructuras.index')->with('warning', 'Error al crear la infraestructura.')
         ->withErrors($validator);
     }
   }
@@ -231,16 +228,16 @@ class InfraestructuraController extends Controller
     return redirect()->route('infraestructuras.index');
   }
 
-  public function import(Request $request)
+  /* public function import(Request $request)
   {
     $validator = Validator::make($request->all(), [
       'file' => 'required|mimes:xlsx, xls'
     ]);
 
-    sleep(1);
-
     try {
       if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator);
+      } else {
         $file = $request->file('file');
 
         $import = new InfraestructuraImport;
@@ -249,9 +246,9 @@ class InfraestructuraController extends Controller
         // dd('Row count: ' . $import->getRowCount());
         $numero = $import->getRowCount();
         return redirect()->route('infraestructura.index')->with('success', 'Se importaron ' . $numero . ' registros.');
-      } else return redirect()->back()->withErrors($validator);
+      }
     } catch (Exception  $e) {
-      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
+      return back()->with('error', 'error ' . $e->getMessage());
     }
-  }
+  } */
 }

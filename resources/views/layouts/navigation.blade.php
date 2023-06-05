@@ -83,23 +83,21 @@
               <x-dropdown-link :href="route('formato-911')">
                 {{ __('Presentación') }}
               </x-dropdown-link>
-              @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-                <x-dropdown-link :href="route('personal-administrativo.index')">
-                  {{ __('Personal Administrativo') }}
-                </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente.index')">
-                  {{ __('Personal Docente') }}
-                </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente-antiguedad.index')">
-                  {{ __('Grupos de antiguedad del personal docente') }}
-                </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente-edad.index')">
-                  {{ __('Grupos de edad del personal docente') }}
-                </x-dropdown-link>
-                <x-dropdown-link :href="route('infraestructuras.index')">
-                  {{ __('Infraestructuras') }}
-                </x-dropdown-link>
-              @endif
+              <x-dropdown-link :href="route('personal-administrativo.index')">
+                {{ __('Personal Administrativo') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('personal-docente.index')">
+                {{ __('Personal Docente') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('personal-docente-antiguedad.index')">
+                {{ __('Grupos de antiguedad del personal docente') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('personal-docente-edad.index')">
+                {{ __('Grupos de edad del personal docente') }}
+              </x-dropdown-link>
+              <x-dropdown-link :href="route('infraestructuras.index')">
+                {{ __('Infraestructuras') }}
+              </x-dropdown-link>
               <x-dropdown-link :href="route('unidades-academicas.index')">
                 {{ __('Unidades academicas') }}
               </x-dropdown-link>

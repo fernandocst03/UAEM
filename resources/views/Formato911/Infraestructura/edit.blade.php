@@ -181,10 +181,10 @@
       </article>
     </section>
 
-    <section class="mt-9 card-container">
+    <section class="mt-3 card-container">
       <article class="">
         <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
-          <div class="flex items-center justify-between py-3 border-b-2 border-gray-300 px-7">
+          <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
             <div class="flex flex-col justify-center w-2/3">
               <h4 class="title">Eliminar Infraesstructura</h4>
               <p class="text-secondary">Al eliminar esta infraestructura, no se podra recuperar mas adelante de
@@ -227,7 +227,7 @@
           </div>
 
           @if ($infraestructura->status)
-            <div class="flex items-center justify-between py-3 px-7 ">
+            <div class="flex items-center justify-between py-5 px-7 ">
               <div class="flex flex-col justify-center w-2/3">
                 <h4 class="title">Archivar Infraestructura</h4>
                 <p class="text-secondary">Archiva esta infraestructura, lo podras recuperar en un futuro si asi
@@ -268,7 +268,7 @@
               </x-modal>
             </div>
           @elseif (!$infraestructura->status)
-            <div class="flex items-center justify-between py-3 px-7 ">
+            <div class="flex items-center justify-between py-5 px-7 ">
               <div class="flex flex-col justify-center w-2/3">
                 <h4 class="title">Recuperar Infraestructura</h4>
                 <p class="text-secondary">Puede recuperar la Infraestructura, de esta forma la información sera

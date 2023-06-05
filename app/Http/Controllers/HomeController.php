@@ -15,8 +15,8 @@ class HomeController extends BaseController
 
   public function index_acuerdosCU()
   {
-    $last_sesion = Sesion::orderBy('fecha', 'desc')->first();
-    $last_five_samaras = Samara::orderBy('fecha', 'desc')->take(5)->get();
+    $last_sesion = Sesion::orderBy('id', 'desc')->first();
+    $last_five_samaras = Samara::orderBy('id', 'desc')->take(5)->get();
     return view('AcuerdosCU.presentacion', compact('last_sesion', 'last_five_samaras'));
   }
 

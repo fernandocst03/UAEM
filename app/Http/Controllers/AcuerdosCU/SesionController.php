@@ -4,13 +4,11 @@ namespace App\Http\Controllers\AcuerdosCU;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Imports\SesionImport;
 use Illuminate\Http\Request;
 use App\Models\AcuerdosCU\Sesion;
 use App\Models\AcuerdosCU\Samara;
 use Exception;
 use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Facades\Excel;
 
 class SesionController extends Controller
 {
@@ -130,55 +128,5 @@ class SesionController extends Controller
       $oldValue = $sesion
     );
     return redirect()->route('sesiones.index')->with(['warning' => 'Sesión del dia ' . $fechaSesion . ' eliminada correctamente.']);
-  }
-
-  public function import(Request $request)
-  {
-    $validator = Validator::make($request->all(), [
-      'file' => 'required|mimes:xlsx, xls'
-    ]);
-
-    sleep(1);
-
-    try {
-      if ($validator->fails()) {
-        $file = $request->file('file');
-
-        $import = new SesionImport;
-        Excel::import($import, $file);
-
-        // dd('Row count: ' . $import->getRowCount());
-        $numero = $import->getRowCount();
-        return redirect()->route('personal-administrativo.index')->with('success', 'Se importaron ' . $numero . ' registros.');
-      } else return redirect()->back()->withErrors($validator);
-    } catch (Exception  $e) {
-      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
-    }
-  }
-
-  public function file(Request $request, int $id)
-  {
-    $request->validateWithBag('userDeletion', [
-      'password' => ['required', 'current-password'],
-    ]);
-
-    $sesion = Sesion::find($id);
-    $sesion->status = false;
-    $sesion->save();
-
-    return redirect()->route('sesiones.index');
-  }
-
-  public function unarchive(Request $request, int $id)
-  {
-    $request->validateWithBag('userDeletion', [
-      'password' => ['required', 'current-password'],
-    ]);
-
-    $sesion = Sesion::find($id);
-    $sesion->status = true;
-    $sesion->save();
-
-    return redirect()->route('sesiones.index');
   }
 }

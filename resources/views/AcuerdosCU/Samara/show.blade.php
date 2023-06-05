@@ -18,7 +18,7 @@
   </x-slot>
 
   <section class="flex flex-col px-24 mt-10">
-    <article class="card-container">
+    <article class="p-5 bg-white rounded shadow">
       <div class="flex items-center gap-2">
         <h2 class="title">
           {{ __('Menendez Samara número ') . $samara->numero }}
@@ -39,7 +39,9 @@
           <p class="text">Año: {{ $samara->anio }}</p>
         </div>
         <p class="mt-4 mb-2 font-bold text">Sesiones:</p>
-        <table id="sesiones" class="table stripe" style="width: 100%">
+
+
+        <table id="sesiones" class="table stripe">
           <thead class="bg-gray-900 text-gray-50">
             <tr>
               <th>Tipo sesión</th>
@@ -73,7 +75,7 @@
     </article>
 
     <article class="pb-20 mt-3">
-      <a href="{{ $samara->url_archivo }}" target="_blank" class="flex gap-2 btn-primary w-fit">Descargar
+      <a href="{{ $samara->url_archivo }}" target="_blank" class="flex btn-primary w-fit">Descargar
         PDF
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
           stroke="currentColor" class="w-5 h-5">
@@ -87,16 +89,8 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/dataTableConfig.js') }}"></script>
+<script src="{{ asset('js/datatables.js') }}"></script>
 <script>
   document.addEventListener("DOMContentLoaded",
-    datatable({
-      id: '#sesiones',
-      props: {
-        orderBy: [0, 'desc'],
-        scroll: 'false',
-        fileName: 'Sesiones del Samará: {{ $samara->numero }} ',
-        columns: [0, 1, 2]
-      }
-    }));
+    datatable('#sesiones'));
 </script>
