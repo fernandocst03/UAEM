@@ -179,14 +179,13 @@
               la sesion:
               {{ $lastSesion->fecha }}</a>
           </div>
-          <table id="ultima_sesion" class="table px-2 stripe">
+          <table id="ultima_sesion" class="table px-2 stripe" style="width: 100%">
             <thead class="bg-gray-900 text-gray-50">
               <tr>
                 <th>Tipo del acuerdo</th>
                 <th>Otro tipo</th>
                 <th>Punto</th>
                 <th>Acuerdo corto</th>
-                <th>Acuerdo</th>
                 <th>Observaciones</th>
                 <th>Pagina samara</th>
                 <th>Opciones</th>
@@ -205,7 +204,6 @@
                   </td>
                   <td>{{ $item->punto }}</td>
                   <td>{{ $item->acuerdo_corto }}</td>
-                  <td>{{ $item->acuerdo }}</td>
                   <td>
                     @if ($item->observaciones)
                       <p>{{ $item->observaciones }}</p>
@@ -243,7 +241,15 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', datatable('ultima_sesion'))
+  document.addEventListener('DOMContentLoaded', datatable({
+    id: '#ultima_sesion',
+    props: {
+      orderBy: [0, 'desc'],
+      scroll: 'false',
+      fileName: 'Acuerdos de la ultima sesión: {{ $lastSesion->fecha }}',
+      columns: [0, 1, 2, 3, 4, 5]
+    }
+  }))
 </script>

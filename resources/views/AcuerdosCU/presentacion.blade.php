@@ -46,14 +46,13 @@
           <p class="title">Fecha de la sesión: {{ date('d-m-y', strtotime($last_sesion->fecha)) }} </p>
           <p class="text">Tipo de la sesion: {{ $last_sesion->sesionTipo->tipo }} </p>
           <p class="text">Acuerdos</p>
-          <div>
+          <div class="mt-2">
             <table id="ultima_sesion" class="table stripe" style="width: 100%">
               <thead class="bg-gray-900 text-gray-50 text-md">
                 <tr>
                   <th>Punto</th>
                   <th>Tipo acuerdo</th>
                   <th>Acuerdo corto</th>
-                  <th>Acuerdo</th>
                   <th>Observaciones</th>
                   <th>Pagina Samara</th>
                   @if (Auth::check() && Auth::user()->role->id == 1)
@@ -67,7 +66,6 @@
                     <td>{{ $acuerdos->punto }}</td>
                     <td>{{ $acuerdos->tipoAcuerdo->tipo_acuerdo }}</td>
                     <td>{{ $acuerdos->acuerdo_corto }}</td>
-                    <td>{{ $acuerdos->acuerdo }}</td>
                     <td>
                       @if ($acuerdos->observaciones == null)
                         Sin observaciones
@@ -149,10 +147,26 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/datatables.js') }}"></script>
+<script src="{{ asset('js/dataTableConfig.js') }}"></script>
 <script>
   document.addEventListener("DOMContentLoaded", [
-    datatable('#ultima_sesion'),
-    datatable('#ultimos_5_samaras')
+    datatable({
+      id: '#ultima_sesion',
+      props: {
+        orderBy: [0, 'asc'],
+        scroll: 'false',
+        fileName: 'Acuerdos de la ultima sesion',
+        columns: [0, 1, 2, 3, 4]
+      }
+    }),
+    datatable({
+      id: '#ultimos_5_samaras',
+      props: {
+        orderBy: [2, 'desc'],
+        scroll: 'false',
+        fileName: 'Ultimos 5 Samarás',
+        columns: [0, 1, 2]
+      }
+    })
   ]);
 </script>
