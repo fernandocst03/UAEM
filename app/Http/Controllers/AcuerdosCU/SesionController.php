@@ -28,7 +28,6 @@ class SesionController extends Controller
     //
   }
 
-
   public function store(Request $request)
   {
     try {
@@ -60,7 +59,6 @@ class SesionController extends Controller
     }
   }
 
-
   public function show(int $id)
   {
     $sesion = Sesion::find($id);
@@ -74,13 +72,11 @@ class SesionController extends Controller
     return view('AcuerdosCU.Sesion.show', compact('sesion'));
   }
 
-
   public function edit(string $id)
   {
     $sesion = Sesion::find($id);
     return view('AcuerdosCU.Sesion.edit', compact('sesion'));
   }
-
 
   public function update(Request $request, string $id)
   {
@@ -112,7 +108,6 @@ class SesionController extends Controller
     }
   }
 
-
   public function destroy(string $id, Request $request)
   {
     $request->validateWithBag('userDeletion', [
@@ -141,16 +136,10 @@ class SesionController extends Controller
     sleep(1);
 
     try {
-      if ($validator->fails()) {
-        $file = $request->file('file');
-
-        $import = new SesionImport;
-        Excel::import($import, $file);
-
-        // dd('Row count: ' . $import->getRowCount());
-        $numero = $import->getRowCount();
-        return redirect()->route('personal-administrativo.index')->with('success', 'Se importaron ' . $numero . ' registros.');
-      } else return redirect()->back()->withErrors($validator);
+      $file = $request->file('file');
+      $import = new SesionImport;
+      Excel::import($import, $file);
+      return redirect()->route('sesiones.index')->with('success', 'Se realizo la importación correctamente.');
     } catch (Exception  $e) {
       return back()->with('warning', 'Error al importar: ' . $e->getMessage());
     }
