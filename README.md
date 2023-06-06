@@ -52,3 +52,7 @@ Generar una clave
 ```
 php artisan key:generate
 ```
+
+## :hamer:Funcionalidades del proyecto
+
+-`Crear`: Permite al usuario crear registros. -`Eliminar`: Permite al usuario eliminar registros. -`Editar`: Permite al usuario editar registros. -`Mostrar`: Permite al usuario mostrar registros. -`Importar`: Permite al usuario importar registros de forma masiva desde un documento Excel. -`Exportar`: Permite al usuario exportar registros en formato Excel o PDF. -`Generar reportes`: Permite al usuario generar reportes de registros de un periodo determinado.
