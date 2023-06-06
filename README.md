@@ -32,3 +32,23 @@ levantar el entorno de desarrollo
 ```
 npm run dev
 ```
+
+Crear el archivo .env y agregar la configuracion de la `Base de Datos`
+
+```php
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=uaem_database
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Generar una clave
+
+> La clave de aplicación es una cadena aleatoria almacenada en la clave APP*KEY dentro del archivo .env. Notarás que también falta.
+> \_Para crear la nueva clave e insertarla automáticamente en el .env, ejecutaremos:*
+
+```
+php artisan key:generate
+```
