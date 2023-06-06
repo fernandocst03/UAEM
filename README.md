@@ -53,7 +53,7 @@ Generar una clave
 php artisan key:generate
 ```
 
-## :hammer:Funcionalidades del proyecto
+## :hammer: Funcionalidades del proyecto
 
 - `Crear`: Permite al usuario crear registros.
 - `Eliminar`: Permite al usuario eliminar registros.
@@ -62,3 +62,11 @@ php artisan key:generate
 - `Importar`: Permite al usuario importar registros de forma masiva desde un documento Excel.
 - `Exportar`: Permite al usuario exportar registros en formato Excel o PDF.
 - `Generar reportes`: Permite al usuario generar reportes de registros de un periodo determinado.
+
+## :computer: Tecnologias utilizadas
+
+- `PHP 8`
+- `Laravel 10`
+- `JavaScript`
+- `Tailwind`
+- `Alpine JS`
