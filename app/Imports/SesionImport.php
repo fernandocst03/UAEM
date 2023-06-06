@@ -16,7 +16,7 @@ class SesionImport implements ToModel, WithHeadingRow, WithMultipleSheets
     ++$this->rows;
 
     return new Sesion([
-      'sesion_tipo_id' => $row['sesion_tipo_id'],
+      'tipo_id' => $row['sesion_tipo_id'],
       'fecha' => $row['fecha']
     ]);
   }
@@ -24,7 +24,7 @@ class SesionImport implements ToModel, WithHeadingRow, WithMultipleSheets
   public function sheets(): array
   {
     return [
-      'Importar' => new PersonalAdministrativoImport(),
+      'Importar' => new SesionImport(),
     ];
   }
 
