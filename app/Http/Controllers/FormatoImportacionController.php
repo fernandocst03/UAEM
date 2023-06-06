@@ -11,9 +11,10 @@ class FormatoImportacionController extends Controller
   public function __invoke($name)
   {
     try {
-      $fileName = storage_path('app/' . $name . '.xlsx');
-      dd($fileName);
-      return response()->download($fileName);
+      if (Storage::disk('public')->exists($name . '.xlsx')) {
+        $fileName = storage_path('app/public/' . $name . '.xlsx');
+        return response()->download($fileName);
+      }
     } catch (Exception $e) {
       return redirect()->back()->with('warning', 'Error al descargar el archivo ' . $e->getMessage());
     }
