@@ -173,16 +173,11 @@ class PersonalDocenteAntiguedadController extends Controller
     sleep(1);
 
     try {
-      if ($validator->fails()) {
-        $file = $request->file('file');
+      $file = $request->file('file');
+      $import = new PersonalDocenteAntiguedadImport;
+      Excel::import($import, $file);
 
-        $import = new PersonalDocenteAntiguedadImport;
-        Excel::import($import, $file);
-
-        // dd('Row count: ' . $import->getRowCount());
-        $numero = $import->getRowCount();
-        return redirect()->route('personal-docente-antiguedad.index')->with('success', 'Se importaron ' . $numero . ' registros.');
-      } else return redirect()->back()->withErrors($validator);
+      return redirect()->route('personal-docente-antiguedad.index')->with('success', 'Se la importación correctamente.');
     } catch (Exception  $e) {
       return back()->with('warning', 'Error al importar: ' . $e->getMessage());
     }

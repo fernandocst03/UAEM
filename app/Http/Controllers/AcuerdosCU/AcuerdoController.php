@@ -205,16 +205,11 @@ class AcuerdoController extends Controller
     sleep(1);
 
     try {
-      if ($validator->fails()) {
-        $file = $request->file('file');
+      $file = $request->file('file');
+      $import = new AcuerdoImport;
+      Excel::import($import, $file);
 
-        $import = new AcuerdoImport;
-        Excel::import($import, $file);
-
-        // dd('Row count: ' . $import->getRowCount());
-
-        return redirect()->route('personal-administrativo.index')->with('success', 'Importado correctamente');
-      } else return redirect()->back()->withErrors($validator);
+      return redirect()->route('acuerdos.index')->with('success', 'Se realizo la importación correctamente');
     } catch (Exception  $e) {
       return back()->with('warning', 'Error al importar: ' . $e->getMessage());
     }

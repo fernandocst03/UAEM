@@ -185,16 +185,11 @@ class PersonalDocenteController extends Controller
     sleep(1);
 
     try {
-      if ($validator->fails()) {
-        $file = $request->file('file');
+      $file = $request->file('file');
+      $import = new PersonalDocenteImport;
+      Excel::import($import, $file);
 
-        $import = new PersonalDocenteImport;
-        Excel::import($import, $file);
-
-        // dd('Row count: ' . $import->getRowCount());
-        $numero = $import->getRowCount();
-        return redirect()->route('personal-administrativo.index')->with('success', 'Se importaron ' . $numero . ' registros.');
-      } else return redirect()->back()->withErrors($validator);
+      return redirect()->route('personal-docente.index')->with('success', 'Se realizo la importación correctamente');
     } catch (Exception  $e) {
       return back()->with('warning', 'Error al importar: ' . $e->getMessage());
     }
