@@ -34,21 +34,22 @@
                   Seleccion el archivo con la informacion que desea importar,
                   por favor asegurese que la estructura de
                   los datos esta de manera correcta, en caso de no saber cual es la estructura correspondiente descargue
-                  este <a href="" class="underline">archivo</a>.
+                  este <a href="{{ route('formato.importacion', ['name' => 'formato-sesiones']) }}"
+                    class="underline">archivo</a>.
                 </p>
               </div>
               <form action="{{ route('sesiones.import') }} " method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col justify-center w-full">
                   <label class="block">
-                    <span class="sr-only">Choose profile photo</span>
+                    <span class="sr-only">Elegir un archivo</span>
                     <input type="file"
                       class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600 "
                       name="file" />
                   </label>
                   <div class="flex items-center justify-end gap-2 mt-4">
-                    <button x-on:click="$dispatch('close')" type="button"
-                      class="danger-button">{{ __('Cancelar') }}</button>
+                    <x-danger-button x-on:click="$dispatch('close')" type="button" class="danger-button">
+                      {{ __('Cancelar') }}</x-danger-button>
                     <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
                       <span>Importar</span>
                       <span x-show="loading">

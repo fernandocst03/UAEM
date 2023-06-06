@@ -33,7 +33,8 @@
                   Seleccion el archivo con la informacion que desea importar,
                   por favor asegurese que la estructura de
                   los datos esta de manera correcta, en caso de no saber cual es la estructura correspondiente descargue
-                  este <a href="" class="underline">archivo.</a>.
+                  este <a href="{{ route('formato.importacion', ['name' => 'formato-personal-administrativo']) }}"
+                    class="underline">archivo.</a>.
                 </p>
               </div>
               <form action="{{ route('personal-administrativo.import') }}" method="post" enctype="multipart/form-data">
@@ -46,7 +47,7 @@
                       name="file" />
                   </label>
                   <div class="flex items-center justify-end gap-2 mt-4">
-                    <x-danger-button>Cancelar</x-danger-button>
+                    <x-danger-button x-on:click="$dispatch('close')" type="button">Cancelar</x-danger-button>
                     <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
                       <span>Importar</span>
                       <span x-show="loading">
