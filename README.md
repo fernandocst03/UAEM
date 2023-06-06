@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Logo_de_la_UAEM.svg" width="400" alt="UAEM Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Uaem_Morelos_logo.png/1200px-Uaem_Morelos_logo.png" width="400" alt="UAEM Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
