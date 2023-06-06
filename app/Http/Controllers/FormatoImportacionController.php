@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -9,9 +10,12 @@ class FormatoImportacionController extends Controller
 {
   public function __invoke($name)
   {
-    if (Storage::exists($name . '.xlsx')) {
+    try {
       $fileName = storage_path('app/' . $name . '.xlsx');
+      dd($fileName);
       return response()->download($fileName);
-    } else return response('', 404);
+    } catch (Exception $e) {
+      return redirect()->back()->with('warning', 'Error al descargar el archivo ' . $e->getMessage());
+    }
   }
 }
