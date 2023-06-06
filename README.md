@@ -53,7 +53,7 @@ Generar una clave
 php artisan key:generate
 ```
 
-## :hamer:Funcionalidades del proyecto
+## :hammer:Funcionalidades del proyecto
 
 - `Crear`: Permite al usuario crear registros.
 - `Eliminar`: Permite al usuario eliminar registros.
