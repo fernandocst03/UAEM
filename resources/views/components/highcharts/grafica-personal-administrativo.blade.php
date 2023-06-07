@@ -10,6 +10,7 @@
   <script>
     generateChart({
       id: 'graficaPersonalAdministrativo',
+      title: 'Personal Adminstrativo',
       props: {
         anio: {{ $data->anio }},
         categories: [
