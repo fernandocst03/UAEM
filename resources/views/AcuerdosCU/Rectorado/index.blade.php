@@ -30,10 +30,11 @@
                 Seleccion el archivo con la informacion que desea importar,
                 por favor asegurese que la estructura de
                 los datos esta de manera correcta, en caso de no saber cual es la estructura correspondiente descargue
-                este <a href="" class="underline">archivo.</a>.
+                este <a href="{{ route('formato.importacion', ['name' => 'formato-rectorados']) }}"
+                  class="underline">archivo.</a>.
               </p>
             </div>
-            <form {{-- action="{{ route('acuerdos.import') }} " --}} method="post" enctype="multipart/form-data">
+            <form action="{{ route('rectorado.import') }} " method="post" enctype="multipart/form-data">
               @csrf
               <div class="flex flex-col justify-center w-full">
                 <label class="block">
@@ -43,8 +44,13 @@
                     name="file" />
                 </label>
                 <div class="flex items-center justify-end gap-2 mt-4">
-                  <button type="reset" class="danger-button">Eliminar archivo</button>
-                  <x-primary-button type="submit">Importar</x-primary-button>
+                  <x-danger-button type="reset" class="danger-button">Eliminar archivo</x-danger-button>
+                  <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
+                    <span>Importar</span>
+                    <span x-show="loading">
+                      <x-loaders.spinner />
+                    </span>
+                  </x-primary-button>
                 </div>
               </div>
             </form>
@@ -88,7 +94,7 @@
       </article>
     </section>
 
-    <section class="w-full h-10 mt-2 text-green-900">
+    <section class="w-full h-10 my-1 text-green-900">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))
