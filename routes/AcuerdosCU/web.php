@@ -20,6 +20,8 @@ Route::get('/acuerdos-cu/samaras/ver-todos', [SamaraController::class, 'showAll'
 Route::resource('/acuerdos-cu/samaras', SamaraController::class);
 Route::patch('/acuerdos-cu/samaras/{samara}/file', [SamaraController::class, 'file'])->name('samaras.file');
 Route::patch('/acuerdos-cu/samaras/{samara}/unarchive', [SamaraController::class, 'unarchive'])->name('samaras.unarchive');
+route::delete('acuerdos-cu/samaras/{samara}/sesion/{sesion}/delete', [SamaraController::class, 'deleteSession'])->name('samarasesion.delete');
+route::post('acuerdos-cu/samaras/{samara}/sesiones/add', [SamaraController::class, 'addSession'])->name('samarasesion.add');
 
 Route::resource('/acuerdos-cu/sesiones', SesionController::class);
 Route::post('/acuerdos-cu/sesiones/import', [SesionController::class, 'import'])->name('sesiones.import')->middleware('auth');

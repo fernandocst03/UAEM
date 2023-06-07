@@ -109,12 +109,10 @@ class SamaraController extends Controller
   public function edit(string $id)
   {
     $rectorados = Rectorado::orderBy('id', 'desc')->get();
+    $sesiones = Sesion::orderBy('fecha', 'desc')->get();
     $samara = Samara::where('id', $id)->firstOrFail();
 
-    return view('AcuerdosCU.Samara.edit', [
-      'samara' => $samara,
-      'rectorados' => $rectorados
-    ]);
+    return view('AcuerdosCU.Samara.edit', compact('rectorados', 'sesiones', 'samara'));
   }
 
   /**
@@ -211,5 +209,28 @@ class SamaraController extends Controller
     $samara->save();
 
     return redirect()->route('samaras.index');
+  }
+
+  public function deleteSession(int $samaraId, int $sesionId)
+  {
+    $samarasesion = SamaraSesion::select()->where('samara_id', $samaraId)->where('sesion_id', $sesionId)->firstOrFail();
+    $samarasesion->delete();
+    return redirect()->route('samaras.edit', ['samara' => $samaraId])->with('deleted', 'Se elimino la sesión correctamente.');
+  }
+
+  public function addSession(int $samaraId, Request $request)
+  {
+    if (sizeof($request->sesion) > 0) {
+
+      $sesiones = $request->sesion;
+      foreach ($sesiones as $sesion_id) {
+        $samarasesion = SamaraSesion::create([
+          'samara_id' => $samaraId,
+          'sesion_id' => $sesion_id
+        ]);
+      }
+    }
+
+    return redirect()->route('samaras.edit', ['samara' => $samaraId])->with('add', 'Sesiones agregadas correctamente');
   }
 }
