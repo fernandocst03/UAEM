@@ -36,7 +36,7 @@ class UnidadAcademicaController extends Controller
         ->anio($anio)
         ->get();
 
-      $personalDocentEdad = PersonalDocenteEdad::orderBy('grupo_id')
+      $personalDocenteEdad = PersonalDocenteEdad::orderBy('grupo_id')
         ->unidad($id)
         ->anio($anio)
         ->get();
@@ -47,7 +47,7 @@ class UnidadAcademicaController extends Controller
         ->first();
 
       sleep(1);
-      return view('Formato911.Unidad-Academica.index', compact('unidadAcademica', 'personalAdministrativo', 'personalDocente', 'infraestructura', 'personalDocentEdad', 'personalDocenteAntiguedad'));
+      return view('Formato911.Unidad-Academica.index', compact('unidadAcademica', 'personalAdministrativo', 'personalDocente', 'infraestructura', 'personalDocenteEdad', 'personalDocenteAntiguedad'));
     } else {
       $unidadAcademica = [];
       $personalAdministrativo = [];
