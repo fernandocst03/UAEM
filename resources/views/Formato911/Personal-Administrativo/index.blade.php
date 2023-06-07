@@ -120,7 +120,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 mt-2 text-green-900">
+    <section class="w-full h-10 my-1 text-green-900">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))
