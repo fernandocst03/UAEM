@@ -4,7 +4,7 @@ function generateChart({ id, props }) {
       type: 'column'
     },
     title: {
-      text: 'Personal docente'
+      text: props.title
     },
     subtitle: {
       text: 'Año ' + props.anio
