@@ -92,7 +92,7 @@
                   <x-input-error class="mt-1" :messages="$errors->get('anio')" />
                 </div>
 
-                <div class="flex flex-col gap-1 mt-5">
+                <div class="flex flex-col gap-1 mt-3">
                   <x-input-label for="grupo_antiguedad" :value="__('Grupo de antiguedad')" />
                   <select name="grupo_antiguedad" id="grupo_antiguedad" class="border border-gray-300 rounded w-fit">
                     <option value="">Selecciona un grupo de antiguedad</option>
@@ -181,7 +181,10 @@
   $(document).ready(datatable({
     id: '#personalDocenteAntiguedad',
     props: {
-      orderBy: [4, 'desc'],
+      orderBy: [
+        [4, 'desc'],
+        [5, 'asc']
+      ],
       scroll: 'true',
       fileName: 'Personal docente por grupo de antiguedad',
       columns: [0, 1, 2, 3, 4, 5, 6]

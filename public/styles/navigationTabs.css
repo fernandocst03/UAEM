@@ -1,0 +1,21 @@
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tab-content {
+  background-color: #fdfdfd;
+}
+
+.tab-content article {
+  display: none;
+}
+
+.tab-content .active {
+  display: block;
+}
+
+.tabs .active {
+  background-color: #fdfdfd;
+  color: #131314;
+}

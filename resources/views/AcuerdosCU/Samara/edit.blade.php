@@ -1,3 +1,5 @@
+<x-datatables.styles />
+
 <x-app-layout>
   <x-slot name="header">
     <div class="flex items-center gap-1 pt-1">
@@ -95,12 +97,76 @@
           <p class="text-secondary">Actializado ultima vez: {{ $samara->updated_at }} </p>
         </div>
       </form>
+
+    </article>
+
+    <article class="mt-6 card-container">
+      <div class="w-1/2 p-3 border-[1px] border-gray-800 rounded">
+        <h3 class="title">Sesiones del Samará</h3>
+        <p class="mt-3 mb-1 text">Elimina sesiones al samará</p>
+        <p class="mb-2 text-secondary">Seleccione las sesiones que desea eliminar</p>
+        @foreach ($samara->samarasesion as $item)
+          <div class="w-1/2 mt-2">
+            <form action="{{ route('samarasesion.delete', ['samara' => $samara->id, 'sesion' => $item->sesion->id]) }}"
+              method="POST">
+              @method('delete')
+              @csrf
+              <div class="flex border-gray-300 rounded border-[1px] p-2 justify-between">
+                <div class="flex items-center gap-1">
+                  <p class="text">Sesión {{ $item->sesion->sesionTipo->tipo }}</p>
+                  <p class="text"> : {{ $item->sesion->fecha }}</p>
+                </div>
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        @endforeach
+        <div class="my-2">
+          @if ($message = Session::get('deleted'))
+            <x-alerts.warning :text="$message" />
+          @endif
+        </div>
+      </div>
+
+      <div class="w-1/2 p-3 border-[1px] border-gray-800 rounded mt-3">
+        <p class="mb-1 text">Agrega sesiones al samará</p>
+        <p class="mb-2 text-secondary">Seleccione las sesiones que desea agregar</p>
+        <form action="{{ route('samarasesion.add', ['samara' => $samara->id]) }}" method="post">
+          @csrf
+          @method('post')
+          @foreach ($sesiones as $sesion)
+            @if ($sesion->samarasesion == null)
+              <div class="flex gap-3 border-[1px] w-fit border-gray-300 rounded p-2 items-center mb-2">
+                <input type="checkbox" value="{{ $sesion->id }}" class="ml-3 " name="sesion[]"
+                  id="{{ $sesion->id }}">
+                <div class="flex items-center gap-1">
+                  <p class="text">Sesión {{ $sesion->sesionTipo->tipo }}</p>
+                  <p class="text"> : {{ $sesion->fecha }}</p>
+                </div>
+              </div>
+            @endif
+          @endforeach
+          <x-primary-button class="mt-3" x-data="{ loading: false }" x-on:click="loading = true">
+            <span>Agregar</span>
+            <span x-show="loading">
+              <x-loaders.spinner />
+            </span>
+          </x-primary-button>
+        </form>
+
+      </div>
     </article>
 
     <article class="mt-6 card-container">
       <section class="flex flex-col w-1/2 border-[1px] rounded border-red-500">
 
-        <div class="flex items-center justify-between py-5 border-b-[1px] border-gray-300 px-7">
+        <div class="flex items-center justify-between py-3 border-b-[1px] border-gray-300 px-7">
           <div class="flex flex-col justify-center w-2/3">
             <h4 class="title">Eliminar Samará</h4>
             <p class="text-secondary">Elimina este samará, no se podra recuperar este registro, por favor,
@@ -145,7 +211,7 @@
         </div>
 
         @if ($samara->status)
-          <div class="flex items-center justify-between py-5 px-7 ">
+          <div class="flex items-center justify-between py-3 px-7 ">
             <div class="flex flex-col justify-center w-2/3">
               <h4 class="title">Archivar Samará</h4>
               <p class="text-secondary">Archiva este samará, lo podras recuperar en un futuro si asi lo
@@ -174,7 +240,7 @@
                     <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
                   </div>
                   <div class="flex justify-end mt-6">
-                    <x-primary-button type="button" x-on:click="$dispatch('close')" class="btn-cancel-delete">
+                    <x-primary-button type="button" x-on:click="$dispatch('close')">
                       {{ __('Cancelar') }}
                     </x-primary-button>
                     <x-danger-button class="ml-3">
@@ -186,7 +252,7 @@
             </x-modal>
           </div>
         @elseif (!$samara->status)
-          <div class="flex items-center justify-between py-5 px-7 ">
+          <div class="flex items-center justify-between py-3 px-7 ">
             <div class="flex flex-col justify-center w-2/3">
               <h4 class="font-bold text-md">Recuperar Samará</h4>
               <p class="font-normal text-gray-600">Recuperar este samará </p>

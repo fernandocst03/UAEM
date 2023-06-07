@@ -68,7 +68,7 @@ class InfraestructuraController extends Controller
         'inmueble_tipo_id' => $request->tipoInmueble,
         'aula_tipo_id' => $request->tipoAula,
         'aulas_existentes' => $request->aulas_existentes,
-        'aulas_en uso' => $request->aulas_en_uso,
+        'aulas_en_uso' => $request->aulas_en_uso,
         'aulas_adaptadas' => $request->aulas_adaptadas,
         'talleres_existentes' => $request->talleres_existentes,
         'talleres_en_uso' => $request->talleres_en_uso,

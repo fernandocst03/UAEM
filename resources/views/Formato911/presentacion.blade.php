@@ -16,22 +16,21 @@
 
     <article class="mt-20">
       <div class="flex flex-col items-center">
-        <h1 class="text-3xl font-light">Órgano Informativo Universitario</h1>
-        <h3 class="mt-3 text-xl font-bold">“Adolfo Menéndez Samará”</h3>
+        <h1 class="text-3xl font-light">Formato 911</h1>
       </div>
 
       <p class="mt-3 text">
-        El Órgano Informativo Universitario “Adolfo Menéndez Samará” fue creado por acuerdo del Consejo
-        Universitario en su sesión de fecha 9 de febrero de 1995. El Secretario General de la UAEM, es el
-        Director
-        de este Órgano Informativo, el cual contiene las actas y acuerdos de las sesiones del Consejo
-        Universitario,
-        las normatividades que regulan la gestión universitaria y los acuerdos del Rector.
-
-        Para cualquier asunto relacionado a este Órgano se pone a disposición de la Comunidad Universitaria el
-        teléfono 01 (777) 329-70-00 extensiones 2125, 3176 y 3124 con la Dirección de Normatividad Institucional
-        y
-        en el correo electrónico normatividad@uaem.mx
+        El Formato-911 consiste en bases de datos conformadas por medio de registros administrativos que contienen la
+        información de todas las escuelas del estado (censo de escuelas).
+        Todos los centros escolares están obligados a proporcionar la información solicitada por la SEP, tanto al inicio
+        como al fin de cada ciclo escolar, siguiendo una logística de captura que involucra tanto a las autoridades
+        escolares como a los directivos de la educación de los estados y la propia SEP. Así es como se generan las
+        estadísticas educativas para dar cuenta de la educación en el país y proveer la información necesaria para
+        diseñar políticas educativas. Las estadísticas generadas son básicas para llevar a cabo los procesos de
+        planeación, programación, asignación, evaluación de recursos y rendición de cuentas del sector educativo, además
+        de que son los insumos para la construcción de indicadores educativos que contribuyen a la evaluación del
+        Sistema Educativo Nacional (SEN), actualmente a cargo del Instituto Nacional para la Evaluación de la Educación
+        (INEE)
       </p>
     </article>
 

@@ -32,4 +32,19 @@ class PersonalDocenteAntiguedad extends Model
   {
     return $this->belongsTo('App\Models\Formato911\AntiguedadGrupo', 'grupo_id', 'id');
   }
+
+  // scope
+  public function scopeUnidad($query, $unidad)
+  {
+    if ($unidad) {
+      return $query->where('unidad_academica_id', $unidad);
+    }
+  }
+
+  public function scopeAnio($query, $anio)
+  {
+    if ($anio) {
+      return $query->where('anio', $anio);
+    }
+  }
 }
