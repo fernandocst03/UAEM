@@ -9,7 +9,7 @@
       </div>
       <p class="text-xl font-bold text-gray-100">911</p>
     </header>
-    <div class="flex gap-5 mt-3">
+    <div class="flex gap-5 mt-9">
       <table class="table w-1/3 table-striped">
         <thead>
           <tr class="text-base text-gray-100 bg-gray-900">
