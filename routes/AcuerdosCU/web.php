@@ -41,6 +41,8 @@ Route::post('/acuerdos-cu/sesiones/import', [SesionController::class, 'import'])
   ->name('sesiones.import');
 Route::post('/acuerdos-cu/acuerdos/import', [AcuerdoController::class, 'import'])->middleware('auth')
   ->name('aceurdos.import');
+Route::post('/acuerdos-cu/rectorados/import', [RectoradoController::class, 'import'])->middleware('auth')
+  ->name('rectorado.import');
 /*
   Reportes
 */
