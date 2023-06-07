@@ -33,7 +33,8 @@
                   Seleccion el archivo con la informacion que desea importar,
                   por favor asegurese que la estructura de
                   los datos esta de manera correcta, en caso de no saber cual es la estructura correspondiente descargue
-                  este <a href="" class="underline">archivo.</a>.
+                  este <a href="{{ route('formato.importacion', ['name' => 'formato-personal-docente']) }}"
+                    class="underline">archivo.</a>.
                 </p>
               </div>
               <form action="{{ route('personal-docente.import') }} " method="post" enctype="multipart/form-data">
@@ -46,7 +47,7 @@
                       name="file" />
                   </label>
                   <div class="flex items-center justify-end gap-2 mt-4">
-                    <x-danger-button>Cancelar</x-danger-button>
+                    <x-danger-button x-on:click="$dispatch('close')" type="button">Cancelar</x-danger-button>
                     <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
                       <span>Importar</span>
                       <span x-show="loading">
@@ -113,7 +114,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 mt-2 text-green-900">
+    <section class="w-full h-10 my-1 text-green-900">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))

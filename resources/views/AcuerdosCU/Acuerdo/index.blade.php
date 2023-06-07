@@ -33,7 +33,7 @@
                   Seleccion el archivo con la informacion que desea importar,
                   por favor asegurese que la estructura de
                   los datos esta de manera correcta, en caso de no saber cual es la estructura correspondiente descargue
-                  este <a href="{{ route('formato.importacion', ['name' => 'acuerdos']) }}"
+                  este <a href="{{ route('formato.importacion', ['name' => 'formato-acuerdos']) }}"
                     class="underline">archivo</a>.
                 </p>
               </div>
@@ -47,10 +47,10 @@
                       name="file" />
                   </label>
                   <div class="flex items-center justify-end gap-2 mt-4">
-                    <button x-on:click="$dispatch('close')" type="button"
-                      class="danger-button">{{ __('Cancelar') }}</button>
+                    <x-danger-button x-on:click="$dispatch('close')" type="button">
+                      {{ __('Cancelar') }}</x-danger-button>
                     <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
-                      <span>Importar</span>
+                      <span>{{ __('Importar') }}</span>
                       <span x-show="loading">
                         <x-loaders.spinner />
                       </span>

@@ -33,7 +33,8 @@
                   Seleccion el archivo con la informacion que desea importar,
                   por favor asegurese que la estructura de
                   los datos esta de manera correcta, en caso de no saber cual es la estructura correspondiente descargue
-                  este <a href="" class="underline">archivo.</a>.
+                  este <a href="{{ route('formato.importacion', ['name' => 'formato-personal-docente_antiguedad']) }}"
+                    class="underline">archivo.</a>.
                 </p>
               </div>
               <form action="{{ route('personal-docente-antiguedad.import') }}" method="post"
@@ -47,7 +48,7 @@
                       name="file" />
                   </label>
                   <div class="flex items-center justify-end gap-2 mt-4">
-                    <x-danger-button>Cancelar</x-danger-button>
+                    <x-danger-button x-on:click="$dispatch('close')" type="button">Cancelar</x-danger-button>
                     <x-primary-button class="gap-2" x-data="{ loading: false }" x-on:click="loading = true">
                       <span>Importar</span>
                       <span x-show="loading">
@@ -91,7 +92,7 @@
                   <x-input-error class="mt-1" :messages="$errors->get('anio')" />
                 </div>
 
-                <div class="flex flex-col gap-1 mt-5">
+                <div class="flex flex-col gap-1 mt-3">
                   <x-input-label for="grupo_antiguedad" :value="__('Grupo de antiguedad')" />
                   <select name="grupo_antiguedad" id="grupo_antiguedad" class="border border-gray-300 rounded w-fit">
                     <option value="">Selecciona un grupo de antiguedad</option>
@@ -180,7 +181,10 @@
   $(document).ready(datatable({
     id: '#personalDocenteAntiguedad',
     props: {
-      orderBy: [4, 'desc'],
+      orderBy: [
+        [4, 'desc'],
+        [5, 'asc']
+      ],
       scroll: 'true',
       fileName: 'Personal docente por grupo de antiguedad',
       columns: [0, 1, 2, 3, 4, 5, 6]

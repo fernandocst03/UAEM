@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\AcuerdosCU;
 
 use App\Http\Controllers\Controller;
+use App\Imports\RectoradoImport;
 use Illuminate\Http\Request;
 use App\Models\AcuerdosCU\Rectorado;
 use Exception;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RectoradoController extends Controller
 {
@@ -158,5 +160,23 @@ class RectoradoController extends Controller
     $rectorado->save();
 
     return redirect()->route('rectorados.index');
+  }
+
+  public function import(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'file' => 'required|mimes:xlsx, xls'
+    ]);
+
+    sleep(1);
+
+    try {
+      $file = $request->file('file');
+      $import = new RectoradoImport;
+      Excel::import($import, $file);
+      return redirect()->route('rectorados.index')->with('success', 'Se realizo la importación correctamente.');
+    } catch (Exception  $e) {
+      return back()->with('warning', 'Error al importar: ' . $e->getMessage());
+    }
   }
 }

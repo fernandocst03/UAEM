@@ -1,6 +1,6 @@
 @props(['text'])
 
-<p class="flex items-center gap-2 px-3 py-2 text-xs text-red-900 bg-red-200 border-l-4 border-red-700 rounded-sm notification"
+<p class="flex items-center gap-2 px-3 py-2 text-red-900 bg-red-200 border-l-4 border-red-700 rounded-sm text-md notification"
   x-data="{ show: true }" x-show="show">
   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-triangle-filled" width="24"
     height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"

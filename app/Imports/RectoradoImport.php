@@ -2,12 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\AcuerdosCU\Sesion;
+use App\Models\AcuerdosCU\Rectorado;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class SesionImport implements ToModel, WithHeadingRow, WithMultipleSheets
+class RectoradoImport implements ToModel, WithHeadingRow, WithMultipleSheets
 {
   private $rows = 0;
 
@@ -15,16 +15,15 @@ class SesionImport implements ToModel, WithHeadingRow, WithMultipleSheets
   {
     ++$this->rows;
 
-    return new Sesion([
-      'tipo_id' => $row['sesion_tipo_id'],
-      'fecha' => $row['fecha']
+    return new Rectorado([
+      'ciclo' => $row['ciclo'],
     ]);
   }
 
   public function sheets(): array
   {
     return [
-      'Importar' => new SesionImport(),
+      'Importar' => new RectoradoImport(),
     ];
   }
 
