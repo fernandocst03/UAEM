@@ -24,12 +24,6 @@ instalar las dependencias de PHP
 composer install
 ```
 
-levantar el entorno de desarrollo
-
-```
-npm run dev
-```
-
 Crear el archivo .env y agregar la configuracion de la `Base de Datos`
 
 ```php
@@ -48,6 +42,20 @@ Generar una clave
 
 ```
 php artisan key:generate
+```
+
+levantar el entorno de desarrollo
+
+```
+npm run dev
+```
+
+O
+
+Ejecutar el proyecto de manera local
+
+```
+npm run dev
 ```
 
 ## :hammer: Funcionalidades del proyecto
