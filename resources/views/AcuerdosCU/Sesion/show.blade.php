@@ -150,7 +150,11 @@
             @foreach ($sesion->acuerdos as $acuerdo)
               <tr>
                 <td>{{ $acuerdo->punto }}</td>
-                <td>{{ $acuerdo->tipoAcuerdo->tipo_acuerdo }}</td>
+                @if ($acuerdo->tipoAcuerdo->id == 19)
+                  <td>Otro ({{ $acuerdo->tipo_otro }})</td>
+                @else
+                  <td>{{ $acuerdo->tipoAcuerdo->tipo_acuerdo }}</td>
+                @endif
                 <td>{{ $acuerdo->acuerdo_corto }}</td>
                 <td>
                   @if ($acuerdo->observaciones)

@@ -40,7 +40,6 @@
           <thead>
             <tr class="text-sm bg-gray-900 text-gray-50">
               <th>Tipo del acuerdo</th>
-              <th>Otro tipo</th>
               <th>Acuerdo</th>
               <th>Acuerdo Corto</th>
               <th>Observaciones</th>
@@ -52,14 +51,11 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{ $acuerdo->tipoAcuerdo->tipo_acuerdo }}</td>
-              <td>
-                @if ($acuerdo->tipo_otro)
-                  <p>{{ $acuerdo-- > tipo_otro }}</p>
-                @else
-                  <p class="italic text-secondary">Ninguno</p>
-                @endif
-              </td>
+              @if ($acuerdo->tipoAcuerdo->id == 19)
+                <td>Otro ({{ $acuerdo->tipo_otro }})</td>
+              @else
+                <td>{{ $acuerdo->tipoAcuerdo->tipo_acuerdo }}</td>
+              @endif
               <td>{{ $acuerdo->acuerdo }}</td>
               <td>{{ $acuerdo->acuerdo_corto }}</td>
               <td>

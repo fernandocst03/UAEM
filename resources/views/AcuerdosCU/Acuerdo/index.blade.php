@@ -183,7 +183,6 @@
             <thead class="bg-gray-900 text-gray-50">
               <tr>
                 <th>Tipo del acuerdo</th>
-                <th>Otro tipo</th>
                 <th>Punto</th>
                 <th>Acuerdo corto</th>
                 <th>Observaciones</th>
@@ -194,14 +193,11 @@
             <tbody class="font-normal">
               @foreach ($lastSesion->acuerdos as $item)
                 <tr class="{{ $item->status ? '' : 'opacity-40' }}">
-                  <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
-                  <td>
-                    @if ($item->tipo_otro)
-                      <p>{{ $item->tipo_otrp }}</p>
-                    @else
-                      <p class="italic text-secondary">Ninguno</p>
-                    @endif
-                  </td>
+                  @if ($item->tipoAcuerdo->id == 19)
+                    <td>Otro ({{ $item->tipo_otro }})</td>
+                  @else
+                    <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
+                  @endif
                   <td>{{ $item->punto }}</td>
                   <td>{{ $item->acuerdo_corto }}</td>
                   <td>
