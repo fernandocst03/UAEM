@@ -15,19 +15,19 @@
 }
 
 .title {
-  @apply text-lg font-bold text-gray-900;
+  @apply text-base font-bold text-gray-900 sm:text-lg;
 }
 
 .text {
-  @apply text-base text-gray-900;
+  @apply text-sm text-gray-900 sm:text-base;
 }
 
 .text-secondary {
-  @apply text-sm font-normal text-gray-600 xl:text-base;
+  @apply text-sm font-normal text-gray-600;
 }
 
 .card-container {
-  @apply flex flex-col p-3 leading-normal bg-white rounded shadow;
+  @apply flex flex-col p-3 mx-3 leading-normal bg-white rounded shadow;
 }
 
 table.dataTable.stripe tbody tr.odd,
