@@ -14,9 +14,9 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-20 pt-10 pb-32">
+  <section class="flex flex-col pt-10 pb-32 sm:px-20">
     @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-      <section class="flex items-center justify-end w-full gap-1">
+      <section class="flex flex-col items-end w-full gap-1 pr-3 sm:flex-row sm:justify-end">
         <article>
           <x-secondary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import')">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -113,7 +113,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 my-1">
+    <section class="w-full h-10 px-3 my-1">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))
@@ -123,15 +123,15 @@
 
     <section class="flex flex-col gap-5">
       <article class="card-container">
-        <h2 class="mb-2 title">Sesiones sin samará asignado</h2>
+        <h2 class="mb-4 title">Sesiones sin samará asignado</h2>
         <table id="sesionesSinSamaras" class="table stripe" style="width: 100%">
-          <thead class="bg-gray-900 text-gray-50 text-md">
+          <thead class="text-base bg-gray-900 text-gray-50">
             <tr>
               <th>Fecha</th>
               <th>Tipo de sesion</th>
               <th>Samara</th>
               <th>Número de a cuerdos</th>
-              <th></th>
+              <th>Opciones</th>
             </tr>
           </thead>
           <tbody class="text">
@@ -161,11 +161,11 @@
 
       <article class="card-container">
         <h2 class="mb-1 title">Sesiones del ultimo samará</h2>
-        <p class="text-secondary">Número del Samará: {{ $samara->numero }}</p>
-        <p class="text-secondary">Rectorado: {{ $samara->rectorado->ciclo }}</p>
-        <p class="mb-2 text-secondary">Fecha: {{ $samara->fecha }}</p>
+        <p class="text">Número del Samará: {{ $samara->numero }}</p>
+        <p class="text">Rectorado: {{ $samara->rectorado->ciclo }}</p>
+        <p class="mb-4 text">Fecha: {{ $samara->fecha }}</p>
         <table id="sesionesUltimosamara" class="table stripe" style="width: 100%">
-          <thead class="bg-gray-900 text-gray-50">
+          <thead class="text-base bg-gray-900 text-gray-50">
             <tr>
               <th>Fecha</th>
               <th>Tipo de sesion</th>
@@ -180,13 +180,15 @@
                   <td>{{ date('d-m-Y', strtotime($sesiones->sesion->fecha)) }}</td>
                   <td>{{ $sesiones->sesion->sesionTipo->tipo }}</td>
                   <td>{{ sizeOf($sesiones->sesion->acuerdos) }}</td>
-                  <td class="flex gap-2">
-                    <a href="{{ route('sesiones.show', ['sesione' => $sesiones->sesion->id]) }}"
-                      class="btn-primary">Ver</a>
-                    @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-                      <a href="{{ route('sesiones.edit', ['sesione' => $sesiones->sesion->id]) }}"
-                        class="btn-secondary">Editar</a>
-                    @endif
+                  <td>
+                    <div class="flex gap-2">
+                      <a href="{{ route('sesiones.show', ['sesione' => $sesiones->sesion->id]) }}"
+                        class="btn-primary">Ver</a>
+                      @if (Auth::check() && Auth::user()->role->role == 'Administrador')
+                        <a href="{{ route('sesiones.edit', ['sesione' => $sesiones->sesion->id]) }}"
+                          class="btn-secondary">Editar</a>
+                      @endif
+                    </div>
                   </td>
                 </tr>
               @endforeach

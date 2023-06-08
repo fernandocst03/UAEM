@@ -17,7 +17,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32 gap-7">
+  <section class="flex flex-col w-full pt-10 pb-32 lg:px-20 gap-7">
     <section class="card-container">
       <div class="flex flex-col gap-3">
         <div class="flex flex-col gap-1">
@@ -32,14 +32,13 @@
               </a>
             @endif
           </div>
-          <p class="mt-4 text-secondary">Tipo de plantel:
+          <p class="mt-4 text">Tipo de plantel:
             {{ $personalDocente->unidadAcademica->tipoUnidadAcademica->tipo }}</p>
-          <p class="text-secondary">{{ $personalDocente->unidadAcademica->municipio->municipio }}</p>
-          <p class="text-secondary">Campus: {{ $personalDocente->unidadAcademica->municipio->campus->campus }}
+          <p class="text">{{ $personalDocente->unidadAcademica->municipio->municipio }}</p>
+          <p class="text">Campus: {{ $personalDocente->unidadAcademica->municipio->campus->campus }}
           </p>
         </div>
         <div class="mt-12">
-          <p class="mb-3 text">Informacion del Personal Docente por Edad</p>
           <table class="table" id="personalDocenteEdad" style="width: 100%">
             <thead class="text-sm bg-gray-900 text-gray-50">
               <tr>

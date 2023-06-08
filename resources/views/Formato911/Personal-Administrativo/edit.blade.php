@@ -19,7 +19,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32 gap-7">
+  <section class="flex flex-col w-full pt-10 pb-32 lg:px-20 gap-7">
 
     <section class="card-container ">
       <article>
@@ -45,13 +45,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="directivo_h" :value="__('Hombres')" class="text-secondary" />
                 <x-text-input id="directivo_h" name="directivo_h" value="{{ $personalAdministrativo->directivo_h }}"
-                  type="text" class="w-fit" />
+                  type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('directivo_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="directivo_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="directivo_m" name="directivo_m" value="{{ $personalAdministrativo->directivo_m }}"
-                  type="text" class="w-fit" />
+                  type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('directivo_m')" />
               </div>
             </div>
@@ -63,13 +63,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="docente_h" :value="__('Hombres')" class="text-secondary" />
                 <x-text-input id="docente_h" name="docente_h" value="{{ $personalAdministrativo->docente_h }}"
-                  type="text" class="w-fit" />
+                  type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('docente_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="docente_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="docente_m" name="docente_m" value="{{ $personalAdministrativo->docente_m }}"
-                  type="text" class="w-fit" />
+                  type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('docente_m')" />
               </div>
             </div>
@@ -81,14 +81,16 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="docente_investigador_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="docente_investigador_h" name="docente_investigador_h"
-                  value="{{ $personalAdministrativo->docente_investigador_h }}" type="text" class="w-fit" />
+                  value="{{ $personalAdministrativo->docente_investigador_h }}" type="text"
+                  class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('docente_investigador_h')" />
 
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="docente_investigador_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="docente_investigador_m" name="docente_investigador_m"
-                  value="{{ $personalAdministrativo->docente_investigador_m }}" type="text" class="w-fit" />
+                  value="{{ $personalAdministrativo->docente_investigador_m }}" type="text"
+                  class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('docente_investigador_m')" />
 
               </div>
@@ -101,13 +103,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="investigador_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="investigador_h" name="investigador_h"
-                  value="{{ $personalAdministrativo->investigador_h }}" type="text" class="w-fit" />
+                  value="{{ $personalAdministrativo->investigador_h }}" type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('investigador_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="investigador_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="investigador_m" name="investigador_m"
-                  value="{{ $personalAdministrativo->investigador_m }}" type="text" class="w-fit" />
+                  value="{{ $personalAdministrativo->investigador_m }}" type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('investigador_m')" />
               </div>
             </div>
@@ -119,13 +121,15 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="auxiliar_investigador_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="auxiliar_investigador_h" name="auxiliar_investigador_h"
-                  value="{{ $personalAdministrativo->auxiliar_investigador_h }}" type="text" class="w-fit" />
+                  value="{{ $personalAdministrativo->auxiliar_investigador_h }}" type="text"
+                  class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('auxiliar_investigador_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="auxiliar_investigador_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="auxiliar_investigador_m" name="auxiliar_investigador_m"
-                  value="{{ $personalAdministrativo->auxiliar_investigador_m }}" type="text" class="w-fit" />
+                  value="{{ $personalAdministrativo->auxiliar_investigador_m }}" type="text"
+                  class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('auxiliar_investigador_m')" />
               </div>
             </div>
@@ -137,13 +141,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="administrativo_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="administrativo_h" name="administrativo_h"
-                  value="{{ $personalAdministrativo->administrativo_h }}" type="text" class="w-fit" />
+                  value="{{ $personalAdministrativo->administrativo_h }}" type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('administrativo_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="administrativo_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="administrativo_m" name="administrativo_m"
-                  value="{{ $personalAdministrativo->administrativo_m }}" type="text" class="w-fit" />
+                  value="{{ $personalAdministrativo->administrativo_m }}" type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('administrativo_m')" />
               </div>
             </div>
@@ -155,13 +159,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="otros_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="otros_h" name="otros_h" value="{{ $personalAdministrativo->otros_h }}"
-                  type="text" class="w-fit" />
+                  type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('otros_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="otros_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="otros_m" name="otros_m" value="{{ $personalAdministrativo->otros_m }}"
-                  type="text" class="w-fit" />
+                  type="text" class="w-3/4 md:w-full" />
                 <x-input-error class="mt-1" :messages="$errors->get('otros_m')" />
               </div>
             </div>
@@ -186,9 +190,9 @@
 
     <section class="card-container">
       <article class="">
-        <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
-          <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
-            <div class="flex flex-col justify-center w-2/3">
+        <div class="flex flex-col lg:w-3/5 border-[1px] border-red-500 rounded">
+          <div class="flex items-center justify-between px-3 py-5 border-b-2 border-gray-300">
+            <div class="flex flex-col justify-center w-1/2 md:w-2/3">
               <h4 class="title">Eliminar Personal Administrativo</h4>
               <p class="text-secondary">Al eliminar este personal administrativo, no se podra recuperar mas adelante de
                 este
@@ -230,8 +234,8 @@
           </div>
 
           @if ($personalAdministrativo->status)
-            <div class="flex items-center justify-between py-5 px-7 ">
-              <div class="flex flex-col justify-center w-2/3">
+            <div class="flex items-center justify-between px-3 py-5 ">
+              <div class="flex flex-col justify-center w-1/2 md:w-2/3">
                 <h4 class="title">Archivar Personal administrativo</h4>
                 <p class="text-secondary">Archiva este Personal administrativo, lo podras recuperar en un futuro si asi
                   lo
@@ -272,8 +276,8 @@
               </x-modal>
             </div>
           @elseif (!$personalAdministrativo->status)
-            <div class="flex items-center justify-between py-5 px-7 ">
-              <div class="flex flex-col justify-center w-2/3">
+            <div class="flex items-center justify-between px-3 py-5 ">
+              <div class="flex flex-col justify-center w-1/2 md:w-2/3">
                 <h4 class="title">Recuperar Personal administrativo</h4>
                 <p class="text-secondary">Puede recuperar el Personal administrativo, de esta forma la información sera
                   visible a los usuarios nuevamente</p>

@@ -10,14 +10,14 @@
 
   <section class="flex flex-col items-center pt-8 pb-32">
 
-    <section class="flex items-center">
+    <section class="flex items-center p-3">
       <img src="https://www.semmexico.mx/wp-content/uploads/2019/10/universidad-autonoma-morelos.jpg"
         alt="Edificio principal de la UAEM" class="rounded-md" width="1000" height="auto">
     </section>
 
     <section class="flex flex-col items-center w-full gap-16 mt-20">
 
-      <article class='flex flex-col items-center w-2/4'>
+      <article class='flex flex-col items-center w-3/4 sm:w-2/4'>
         <h2 class="pb-4 text-xl font-bold text-blue-600">Misión</h2>
         <p class='text-center text-secondary'>La UAEM es una institución educativa que forma profesionales
           en los
@@ -34,7 +34,7 @@
           sociedad democrática en constante movimiento.</p>
       </article>
 
-      <article class='flex flex-col items-center w-2/4'>
+      <article class='flex flex-col items-center w-3/4 sm:w-2/4'>
         <h2 class="pb-4 text-xl font-bold text-blue-600">Visión</h2>
         <p class='text-center text-secondary'>Para 2023, la UAEM se consolida como una institución de
           excelencia

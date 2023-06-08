@@ -1,6 +1,6 @@
 @props(['data'])
 
-<div id="graficaPersonalDocenteAntiguedad" class="w-2/3">
+<div id="graficaPersonalDocenteAntiguedad" class="w-full md:w-2/3">
 </div>
 
 <x-highcharts.scripts />

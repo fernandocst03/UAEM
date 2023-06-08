@@ -19,23 +19,23 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-20 pt-10 pb-32">
+  <section class="flex flex-col pt-10 pb-32 md:px-20">
 
     <article class="card-container">
       <div>
         <h2 class="title">Informacion de la sesión</h2>
         <div class="flex flex-col gap-1">
           @if ($acuerdo->sesion->samarasesion)
-            <p class="text-secondary">Menendez Samara: {{ $acuerdo->sesion->samarasesion->samara->numero }}</p>
-            <p class="text-secondary">Rectorado: {{ $acuerdo->sesion->samarasesion->samara->rectorado->ciclo }}</p>
+            <p class="text">Menendez Samara: {{ $acuerdo->sesion->samarasesion->samara->numero }}</p>
+            <p class="text">Rectorado: {{ $acuerdo->sesion->samarasesion->samara->rectorado->ciclo }}</p>
           @endif
-          <p class="text-secondary">Tipo de la sesión: {{ $acuerdo->sesion->sesionTipo->tipo }}</p>
-          <a class="text-secondary" href="{{ route('sesiones.show', ['sesione' => $acuerdo->sesion->id]) }}">Fecha de la
+          <p class="text">Tipo de la sesión: {{ $acuerdo->sesion->sesionTipo->tipo }}</p>
+          <a class="text" href="{{ route('sesiones.show', ['sesione' => $acuerdo->sesion->id]) }}">Fecha de la
             sesion: {{ $acuerdo->sesion->fecha }}</a>
         </div>
       </div>
 
-      <div class="mt-4">
+      <div class="mt-10 overflow-x-auto">
         <table class="table stripe" id="acuerdo">
           <thead>
             <tr class="text-sm bg-gray-900 text-gray-50">
@@ -49,7 +49,7 @@
               @endif
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text">
             <tr>
               @if ($acuerdo->tipoAcuerdo->id == 19)
                 <td>Otro ({{ $acuerdo->tipo_otro }})</td>

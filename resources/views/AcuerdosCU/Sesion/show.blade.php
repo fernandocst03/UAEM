@@ -18,9 +18,8 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-20 pt-10 pb-32">
+  <section class="flex flex-col pt-10 pb-32 sm:px-20">
     <section class="card-container">
-
       <article>
         <div class="flex items-center gap-2">
           <h2 class="title">
@@ -34,22 +33,25 @@
           @endif
         </div>
         <div class="flex flex-col gap-1 mt-3">
+          @if ($sesion->samarasesion)
+            <p class="text">Menendez Samará: {{ $sesion->samarasesion->samara->numero }}</p>
+          @endif
           <p class="text">Fecha de la sesión: {{ date('d-m-Y', strtotime($sesion->fecha)) }}</p>
           <p class="text">Tipo de la sesión: {{ $sesion->sesionTipo->tipo }}</p>
         </div>
       </article>
-      <article class="flex justify-end">
+      <article class="flex justify-end mt-3">
         @if (Auth::check() && Auth::user()->role->role == 'Administrador')
           <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-acuerdo')">
             Agregar acuerdo
           </x-primary-button>
           <x-modal name="create-acuerdo">
-            <div class="p-5">
+            <div class="p-3 sm:p-5">
               <p class="font-bold text-md">Crear nuevo acuerdo</p>
               <form method="post" action="{{ route('sesion.acuerdo.store', ['sesion' => $sesion->id]) }}">
                 @method('post')
                 @csrf
-                <div class="w-full mt-6">
+                <div class="w-1/2 mt-6">
                   <x-input-label for="tipoAcuerdo" :value="__('Tipo de acuerdo')" />
                   <select name="tipoAcuerdo" id="tipoAcuerdo" class="mt-2 border-gray-300 rounded-md border-1">
                     <option value="">Eliga una opcion</option>
@@ -125,7 +127,7 @@
         @endif
       </article>
 
-      <article class="w-full h-10 my-3">
+      <article class="w-full h-10 my-1">
         @if ($message = Session::get('success'))
           <x-alerts.success :text="$message" />
         @elseif ($message = Session::get('warning'))
@@ -146,7 +148,7 @@
               <th>Opciones</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-sm">
             @foreach ($sesion->acuerdos as $acuerdo)
               <tr>
                 <td>{{ $acuerdo->punto }}</td>

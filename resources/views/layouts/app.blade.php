@@ -24,7 +24,7 @@
 
     <!-- Page Heading -->
     @if (isset($header))
-      <header class="bg-white border-b-2 border-gray-200">
+      <header class="hidden bg-white border-b-2 border-gray-200 sm:block">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           {{ $header }}
         </div>
@@ -38,24 +38,28 @@
   </div>
 </body>
 
-<footer class="flex flex-col items-center justify-center w-full h-auto gap-2 py-5 bg-blue-600">
+<footer class="flex flex-col items-center justify-center w-full h-auto gap-2 px-2 py-5 bg-blue-600">
   <div class="flex flex-col items-center">
-    <h2 class="font-bold text-gray-100 text-md">Direccion</h2>
-    <p class="text-sm font-light text-gray-200">Av. Universidad No. 1001, Col Chamilpa, Cuernavaca, Morelos, México.
+    <h2 class="text-base font-bold text-gray-100 sm:text-lg">Direccion</h2>
+    <p class="text-xs font-light text-center text-gray-200 sm:text-base">Av. Universidad No. 1001, Col Chamilpa,
+      Cuernavaca, Morelos,
+      México.
       C.P. 62209</p>
   </div>
   <div class="flex flex-col items-center">
-    <h2 class="font-bold text-gray-100 text-md">Telefono</h2>
-    <p class="text-sm font-light text-gray-200">(777) 329-79-00</p>
+    <h2 class="mt-2 text-base font-bold text-gray-100 sm:text-lg">Telefono</h2>
+    <p class="text-xs font-light text-center text-gray-200 sm:text-base">(777) 329-79-00</p>
   </div>
-  <div class="flex flex-col items-center">
-    <h2 class="font-bold text-gray-100 text-md"> Contacto UAEM</h2>
-    <a href="https://www.uaem.mx/" class="text-sm font-light text-gray-200">Directorio</a>
+  <div class="flex flex-col items-center mt-2">
+    <h2 class="text-base font-bold text-gray-100 sm:text-lg"> Contacto UAEM</h2>
+    <a href="https://www.uaem.mx/" class="text-xs font-light text-gray-200 sm:text-base">Directorio</a>
   </div>
-  <div class="flex flex-col items-center">
-    <h2 class="font-bold text-gray-100 text-md">Cuenta de correo exclusiva para cuestiones relacionadas con el sitio web
+  <div class="flex flex-col items-center mt-2">
+    <h2 class="text-base font-bold text-center text-gray-100 sm:text-lg">Cuenta de correo exclusiva para cuestiones
+      relacionadas con
+      el sitio web
     </h2>
-    <a href="https://www.uaem.mx/" class="text-sm font-light text-gray-200">web@uaem.mx</a>
+    <a href="https://www.uaem.mx/" class="text-xs font-light text-gray-200 sm:text-base">web@uaem.mx</a>
   </div>
 </footer>
 

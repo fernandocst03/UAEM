@@ -14,7 +14,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-24 mt-12 pb-28">
+  <section class="flex flex-col mt-12 md:px-24 pb-28">
     <article class="card-container">
       <p class="mt-3 title">Actualice la informacion del ciclo.</p>
       <form method="post" action="{{ route('rectorados.update', ['rectorado' => $rectorado->id]) }}"
@@ -46,9 +46,9 @@
     </article>
 
     <article class="card-container mt-9">
-      <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
-        <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
-          <div class="flex flex-col justify-center w-2/3">
+      <div class="flex flex-col sm:w-3/5 border-[1px] border-red-500 rounded">
+        <div class="flex items-center justify-between px-3 py-5 border-b-2 border-gray-300">
+          <div class="flex flex-col justify-center w-1/2 sm:w-2/3">
             <h4 class="title">Eliminar Rectorado</h4>
             <p class="text-secondary">Al eliminar este rectorado, no se podra recuperar mas adelante de este
               registro, por favor,
@@ -89,8 +89,8 @@
         </div>
 
         @if ($rectorado->status)
-          <div class="flex items-center justify-between py-5 px-7 ">
-            <div class="flex flex-col justify-center w-2/3">
+          <div class="flex items-center justify-between px-3 py-5 ">
+            <div class="flex flex-col justify-center w-1/2 sm:w-2/3">
               <h4 class="title">Archivar Rectorado</h4>
               <p class="text-secondary">Archiva este rectorado, lo podras recuperar en un futuro si asi lo
                 deseas.</p>
@@ -129,8 +129,8 @@
             </x-modal>
           </div>
         @elseif (!$rectorado->status)
-          <div class="flex items-center justify-between py-5 px-7 ">
-            <div class="flex flex-col justify-center w-2/3">
+          <div class="flex items-center justify-between px-3 py-5 ">
+            <div class="flex flex-col justify-center w-1/2 sm:w-2/3">
               <h4 class="title">Recuperar Rectorado</h4>
               <p class="text-secondary">Puede recuperar el rectorado, de esta forma la información sera
                 visible a los usuarios nuevamente</p>

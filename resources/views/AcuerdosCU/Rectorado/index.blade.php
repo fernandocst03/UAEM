@@ -10,9 +10,9 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-24 pt-10 pb-20">
+  <section class="flex flex-col w-full pt-10 pb-20 md:px-24">
 
-    <section class="flex items-center justify-end w-full gap-1">
+    <section class="flex flex-col items-end w-full gap-1 px-3 sm:flex-row sm:justify-end">
       <article>
         <x-secondary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import')">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -127,14 +127,15 @@
                 </a>
               @endif
             </div>
-            <div class="flex flex-col w-full gap-2 pl-14">
+            <div class="flex flex-col w-full gap-2 sm:pl-14">
               @foreach ($rectorado->samaras as $samara)
-                <div class="flex justify-between px-0 {{ $samara->status ? '' : 'opacity-40' }} text items-center">
-                  <p>Menendez Samara {{ $samara->numero }}</p>
-                  <p>{{ $samara->anio }}</p>
-                  <p>{{ date('d-m-Y', strtotime($samara->fecha)) }}</p>
+                <div
+                  class="flex justify-between gap-3 px-0 {{ $samara->status ? '' : 'opacity-40' }} text items-center">
+                  <p class="flex-grow">Menendez Samara {{ $samara->numero }}</p>
+                  <p class="flex-grow">{{ $samara->anio }}</p>
+                  <p class="flex-grow">{{ date('d-m-Y', strtotime($samara->fecha)) }}</p>
                   @if ($samara->url_archivo)
-                    <a href="{{ $samara->url_archivo }}" target="blank">
+                    <a href="{{ $samara->url_archivo }}" target="blank" class="flex-grow">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -142,9 +143,9 @@
                       </svg>
                     </a>
                   @else
-                    <p class="italic text-secondary">PDF sin asignar</p>
+                    <p class="italic text-secondary" class="flex-grow">PDF sin asignar</p>
                   @endif
-                  <div class="flex gap-2">
+                  <div class="flex flex-col flex-grow gap-2 sm:flex-row">
                     <a href="{{ route('samaras.show', ['samara' => $samara->id]) }}" class="btn-primary">Ver</a>
                     <a href="{{ route('samaras.edit', ['samara' => $samara->id]) }}" class="btn-secondary">Editar</a>
                   </div>

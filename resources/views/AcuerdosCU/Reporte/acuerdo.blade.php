@@ -18,11 +18,11 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col gap-3 px-20 pt-10 pb-32">
+  <section class="flex flex-col gap-3 pt-10 pb-32 md:px-20">
     <article class="card-container">
       <form action="{{ route('reporte.acuerdos') }}" method="get">
         @csrf
-        <div class="flex justify-center w-full gap-5">
+        <div class="flex flex-col justify-center w-full gap-3 lg:flex-row">
           <div class="flex flex-col items-center justify-center gap-1">
             <label for="fechaInicio">Fecha inicio</label>
             <input type="date" name="fechaInicio" id="fechaInicio" class="border-[1px] border-gray-300 rounded"
@@ -35,7 +35,7 @@
           </div>
           <div class="flex flex-col items-center justify-center gap-1">
             <label for="tipoAcuerdo">Tipo acuerdo</label>
-            <select name="tipoAcuerdo" id="tipoAcuerdo" class="border-[1px] border-gray-300 rounded">
+            <select name="tipoAcuerdo" id="tipoAcuerdo" class="border-[1px] border-gray-300 rounded w-3/4 sm:w-fit">
               <option value="">Todos</option>
               @foreach ($tipoAcuerdos as $tipo)
                 <option value="{{ $tipo->id }}">{{ $tipo->tipo_acuerdo }}</option>
@@ -57,7 +57,7 @@
     </article>
 
     <article class="relative card-container">
-      {{-- <x-loaders.skeleton /> --}}
+      <x-loaders.skeleton />
       <h4 class="text-lg font-bold">Resultados</h4>
       <table class="table stripe" id="acuerdos" style="width: 100%">
         <thead class="bg-gray-900 text-gray-50">

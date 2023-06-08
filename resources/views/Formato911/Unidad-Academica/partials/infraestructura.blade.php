@@ -8,8 +8,8 @@
       <p class="text-base font-light text-gray-300">Infraestructuras</p>
       <p class="text-xl font-bold text-gray-100">911</p>
     </header>
-    <div class="flex items-center gap-6 mt-10">
-      <div class="w-1/3">
+    <div class="flex flex-col gap-6 mt-10 md:items-center md:flex-row">
+      <div class="md:w-1/3">
         <table class="table table-striped">
           <thead>
             <tr class="text-sm bg-gray-900 text-gray-50">
@@ -44,8 +44,8 @@
       <x-highcharts.grafica-infraestructuras :data="$infraestructura" />
     </div>
 
-    <div class="flex gap-10 mt-20">
-      <div class="w-1/3 ">
+    <div class="flex flex-col gap-10 mt-20 md:flex-row">
+      <div class="md:w-1/3 ">
         <table class="table table-striped">
           <thead>
             <tr class="text-sm bg-gray-900 text-gray-50">
@@ -66,7 +66,7 @@
         </table>
       </div>
 
-      <div class="w-1/3 ">
+      <div class="md:w-1/3 ">
         <table class="table table-striped">
           <thead>
             <tr class="text-sm bg-gray-900 text-gray-50">
@@ -83,7 +83,7 @@
         </table>
       </div>
 
-      <div class="w-1/3 ">
+      <div class="md:w-1/3 ">
         <table class="table table-striped">
           <thead>
             <tr class="text-sm bg-gray-900 text-gray-50">

@@ -17,7 +17,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32 gap-7">
+  <section class="flex flex-col w-full pt-10 pb-32 lg:px-20 gap-7">
     <section class="card-container">
       <div class="flex flex-col gap-3">
         <div class="flex flex-col gap-1">
@@ -27,23 +27,23 @@
             </h3>
             @if (Auth::check() && Auth::user()->role->role == 'Administrador')
               <a href="{{ route('personal-docente-antiguedad.edit', ['personal_docente_antiguedad' => $personalDocente->id]) }}"
-                class="px-2 py-1 text-xs transition bg-gray-300 rounded hover:bg-gray-200 hover:text-gray-800">
+                class="px-2 py-1 text-xs transition bg-gray-300 rounded md:text-xs hover:bg-gray-200 hover:text-gray-800">
                 Editar Personal
               </a>
             @endif
           </div>
-          <p class="mt-4 text-secondary">Tipo de plantel:
+          <p class="mt-4 text">Tipo de plantel:
             {{ $personalDocente->unidadAcademica->tipoUnidadAcademica->tipo }}</p>
-          <p class="text-secondary">{{ $personalDocente->unidadAcademica->municipio->municipio }}</p>
-          <p class="text-secondary">Campus: {{ $personalDocente->unidadAcademica->municipio->campus->campus }}
+          <p class="text">{{ $personalDocente->unidadAcademica->municipio->municipio }}</p>
+          <p class="text">Campus: {{ $personalDocente->unidadAcademica->municipio->campus->campus }}
           </p>
         </div>
         <div class="mt-12">
-          <p class="mb-3 text">Informacion del Personal Docente por Antiguedad</p>
           <table class="table" id="personalDocenteAntiguedad" style="width: 100%">
             <thead class="text-sm bg-gray-900 text-gray-50">
               <tr>
                 <th>Año</th>
+                <th>Grupo de antiguedad</th>
                 <th>Mujeres</th>
                 <th>Hombres</th>
                 <th>Total</th>
@@ -52,6 +52,7 @@
             <tbody class="text">
               <tr>
                 <td>{{ $personalDocente->anio }}</td>
+                <td>{{ $personalDocente->antiguedadGrupo->grupo }}</td>
                 <td>{{ $personalDocente->mujeres }}</td>
                 <td>{{ $personalDocente->hombres }}</td>
                 <td>{{ $personalDocente->total }}</td>

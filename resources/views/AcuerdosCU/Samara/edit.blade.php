@@ -21,7 +21,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-20 mt-10 mb-20">
+  <section class="flex flex-col mt-10 mb-20 sm:px-20">
     <article class="card-container">
       <div>
         <h3 class="title">Menendez Samara {{ $samara->numero }}</h3>
@@ -93,7 +93,7 @@
           @endif
         </div>
 
-        <div class="mt-3">
+        <div class="mt-1">
           <p class="text-secondary">Actializado ultima vez: {{ $samara->updated_at }} </p>
         </div>
       </form>
@@ -101,12 +101,12 @@
     </article>
 
     <article class="mt-6 card-container">
-      <div class="w-1/2 p-3 border-[1px] border-gray-800 rounded">
+      <div class="sm:w-1/2 p-3 border-[1px] border-gray-600 rounded">
         <h3 class="title">Sesiones del Samará</h3>
         <p class="mt-3 mb-1 text">Elimina sesiones al samará</p>
         <p class="mb-2 text-secondary">Seleccione las sesiones que desea eliminar</p>
         @foreach ($samara->samarasesion as $item)
-          <div class="w-1/2 mt-2">
+          <div class="mt-2 sm:w-1/2">
             <form action="{{ route('samarasesion.delete', ['samara' => $samara->id, 'sesion' => $item->sesion->id]) }}"
               method="POST">
               @method('delete')
@@ -134,7 +134,7 @@
         </div>
       </div>
 
-      <div class="w-1/2 p-3 border-[1px] border-gray-800 rounded mt-3">
+      <div class="sm:w-1/2 p-3 border-[1px] border-gray-800 rounded mt-3">
         <p class="mb-1 text">Agrega sesiones al samará</p>
         <p class="mb-2 text-secondary">Seleccione las sesiones que desea agregar</p>
         <form action="{{ route('samarasesion.add', ['samara' => $samara->id]) }}" method="post">
@@ -142,7 +142,7 @@
           @method('post')
           @foreach ($sesiones as $sesion)
             @if ($sesion->samarasesion == null)
-              <div class="flex gap-3 border-[1px] w-fit border-gray-300 rounded p-2 items-center mb-2">
+              <div class="w-full flex gap-3 border-[1px] sm:w-fit border-gray-300 rounded p-2 items-center mb-2">
                 <input type="checkbox" value="{{ $sesion->id }}" class="ml-3 " name="sesion[]"
                   id="{{ $sesion->id }}">
                 <div class="flex items-center gap-1">
@@ -164,10 +164,10 @@
     </article>
 
     <article class="mt-6 card-container">
-      <section class="flex flex-col w-1/2 border-[1px] rounded border-red-500">
+      <section class="flex flex-col sm:w-1/2 border-[1px] rounded border-red-500">
 
-        <div class="flex items-center justify-between py-3 border-b-[1px] border-gray-300 px-7">
-          <div class="flex flex-col justify-center w-2/3">
+        <div class="flex items-center justify-between py-3 border-b-[1px] border-gray-300  px-3">
+          <div class="flex flex-col justify-center w-1/2 sm:w-2/3">
             <h4 class="title">Eliminar Samará</h4>
             <p class="text-secondary">Elimina este samará, no se podra recuperar este registro, por favor,
               este
@@ -211,8 +211,8 @@
         </div>
 
         @if ($samara->status)
-          <div class="flex items-center justify-between py-3 px-7 ">
-            <div class="flex flex-col justify-center w-2/3">
+          <div class="flex items-center justify-between px-3 py-3">
+            <div class="flex flex-col justify-center w-1/2 sm:w-2/3">
               <h4 class="title">Archivar Samará</h4>
               <p class="text-secondary">Archiva este samará, lo podras recuperar en un futuro si asi lo
                 deseas.
@@ -252,8 +252,8 @@
             </x-modal>
           </div>
         @elseif (!$samara->status)
-          <div class="flex items-center justify-between py-3 px-7 ">
-            <div class="flex flex-col justify-center w-2/3">
+          <div class="flex items-center justify-between px-3 py-3 ">
+            <div class="flex flex-col justify-center w-1/2 sm:w-2/3">
               <h4 class="font-bold text-md">Recuperar Samará</h4>
               <p class="font-normal text-gray-600">Recuperar este samará </p>
             </div>

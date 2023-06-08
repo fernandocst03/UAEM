@@ -12,9 +12,9 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col gap-10 px-24 pb-32">
+  <section class="flex flex-col gap-10 pb-32 md:px-24">
 
-    <article class="mt-20">
+    <article class="px-3 mt-20">
       <div class="flex flex-col items-center">
         <h1 class="text-3xl font-light">Formato 911</h1>
       </div>

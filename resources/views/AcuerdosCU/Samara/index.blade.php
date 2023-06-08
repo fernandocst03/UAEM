@@ -13,9 +13,9 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-20 pt-10 pb-32">
+  <section class="flex flex-col pt-10 pb-24 sm:px-20">
     @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-      <section class="flex justify-end">
+      <section class="flex justify-end px-3">
         <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'create')">
           Crear Samará
         </x-primary-button>
@@ -114,7 +114,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 mt-2 text-green-900">
+    <section class="w-full h-10 px-3 mt-2 text-green-900">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))
@@ -176,7 +176,7 @@
           </tbody>
         </table>
       </article>
-      <a href="{{ route('samaras.showAll') }}" class="text-sm text-blue-500 underline mt-7">Ver mas</a>
+      <a href="{{ route('samaras.showAll') }}" class="pl-3 mt-4 text-sm text-blue-500 underline sm:mt-7">Ver mas</a>
     </section>
 
   </section>
