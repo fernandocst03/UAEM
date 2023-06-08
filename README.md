@@ -6,25 +6,25 @@
 
 ## Sobre esta aplicacion
 
-Este sitio web fue creada para el departamento de gestion y evaluacion de la Universidad Autónma del Estado de Morelos con el objetivo de poder gestionar y generar archivos historicos de los modulos de Acuerdos del Consejo Universitario y Formato 911
+Este sitio web fue creada para el departamento de gestión y evaluación de la Universidad Autónoma del Estado de Morelos con el objetivo de poder gestionar y generar archivos históricos de los módulos de Acuerdos del Consejo Universitario y Formato 911.
 
 ## ¿Cómo lo ejecuto en local?
 
-Necesitarás tener instalado `Node.js` a partir de la versión 14, tener un servidor web local, como por ejemplo: `XAMP`, `WAMP`,`Laragon`, etc. y tener acceso a una terminal para seguir los siguientes pasos:
+Necesitarás tener instalado `Node.js` a partir de la versión 14, tener un servidor web local, como por ejemplo: `XAMP`, `WAMP`, `Laragon`, etc. y tener acceso a una terminal para seguir los siguientes pasos:
 
-instalar las dependencias de JavaScript
+Instalar las dependencias de JavaScript
 
 ```
 npm install
 ```
 
-instalar las dependencias de PHP
+Instalar las dependencias de PHP
 
 ```
 composer install
 ```
 
-Crear el archivo .env y agregar la configuracion de la `Base de Datos`
+Crear el archivo .env y agregar la configuración de la `Base de Datos`
 
 ```php
 DB_CONNECTION=mysql
@@ -44,13 +44,11 @@ Generar una clave
 php artisan key:generate
 ```
 
-levantar el entorno de desarrollo
+Levantar el entorno de desarrollo
 
 ```
 npm run dev
 ```
-
-O
 
 Ejecutar el proyecto de manera local
 
@@ -68,7 +66,7 @@ npm run dev
 - `Exportar`: Permite al usuario exportar registros en formato Excel o PDF.
 - `Generar reportes`: Permite al usuario generar reportes de registros de un periodo determinado.
 
-## :computer: Tecnologias utilizadas
+## :computer: Tecnologías utilizadas
 
 - `PHP 8`
 - `Laravel 10`
