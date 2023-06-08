@@ -89,7 +89,11 @@
               <td>
                 {{-- <a href="{{ route('acuerdos.show', ['acuerdo' => $item->id]) }}"> --}}{{ $item->punto }}{{-- </a> --}}
               </td>
-              <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
+              @if ($item->tipoAcuerdo->id == 19)
+                <td>Otro ({{ $item->tipo_otro }})</td>
+              @else
+                <td>{{ $item->tipoAcuerdo->tipo_acuerdo }}</td>
+              @endif
               <td>{{ $item->acuerdo_corto }}</td>
               <td>
                 @if ($item->observaciones)

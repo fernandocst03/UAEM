@@ -61,26 +61,36 @@
                 </tr>
               </thead>
               <tbody class="text">
-                @foreach ($last_sesion->acuerdos as $acuerdos)
+                @foreach ($last_sesion->acuerdos as $acuerdo)
                   <tr>
-                    <td>{{ $acuerdos->punto }}</td>
-                    <td>{{ $acuerdos->tipoAcuerdo->tipo_acuerdo }}</td>
-                    <td>{{ $acuerdos->acuerdo_corto }}</td>
+                    <td>{{ $acuerdo->punto }}</td>
+                    @if ($acuerdo->tipoAcuerdo->id == 19)
+                      <td>Otro ({{ $acuerdo->tipo_otro }})</td>
+                    @else
+                      <td>{{ $acuerdo->tipoAcuerdo->tipo_acuerdo }}</td>
+                    @endif
+                    <td>{{ $acuerdo->acuerdo_corto }}</td>
                     <td>
-                      @if ($acuerdos->observaciones == null)
+                      @if ($acuerdo->observaciones == null)
                         Sin observaciones
                       @else
-                        {{ $acuerdos->observaciones }}
+                        {{ $acuerdo->observaciones }}
                       @endif
                     </td>
-                    <th>{{ $acuerdos->pagina_samara }}</th>
-                    @if (Auth::check() && Auth::user()->role->id == 1)
-                      <td>
-                        <a class="btn-primary w-fit" href="{{ route('acuerdos.edit', ['acuerdo' => $acuerdos->id]) }}">
-                          Editar
+                    <th>{{ $acuerdo->pagina_samara }}</th>
+                    <td>
+                      <div class="flex gap-2">
+                        <a class="btn-primary w-fit" href="{{ route('acuerdos.show', ['acuerdo' => $acuerdo->id]) }}">
+                          Ver
                         </a>
-                      </td>
-                    @endif
+                        @if (Auth::check() && Auth::user()->role->id == 1)
+                          <a class="btn-secondary w-fit"
+                            href="{{ route('acuerdos.edit', ['acuerdo' => $acuerdo->id]) }}">
+                            Editar
+                          </a>
+                        @endif
+                      </div>
+                    </td>
                   </tr>
                 @endforeach
             </table>
