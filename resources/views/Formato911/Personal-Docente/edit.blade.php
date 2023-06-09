@@ -19,12 +19,12 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32 gap-7">
+  <section class="flex flex-col w-full pt-10 pb-32 lg:px-20 gap-7">
 
     <section class="card-container ">
       <article>
         <h2 class="text-lg font-semibold text-gray-900">Personal Docente</h2>
-        <p class="text-sm font-normal text-gray-500">Actualice la informacion del personal docente de la unidad
+        <p class="max-w-md text-sm font-normal text-gray-500">Actualice la informacion del personal docente de la unidad
           academica de {{ $personalDocente->unidadAcademica->unidadDependencia->unidad_dependencia }} </p>
         <form action="{{ route('personal-docente.update', ['personal_docente' => $personalDocente->id]) }}" method="post"
           class="flex flex-col gap-8 mt-6">
@@ -44,13 +44,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pitc_h" :value="__('Hombres')" class="text-secondary" />
                 <x-text-input id="pitc_h" name="pitc_h" value="{{ $personalDocente->pitc_h }}" type="text"
-                  class="w-fit" />
+                  class="w-2/3 md:w-fit" />
                 <x-input-error class="mt-1" :messages="$errors->get('pitc_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pitc_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pitc_m" name="pitc_m" value="{{ $personalDocente->pitc_m }}" type="text"
-                  class="w-fit" />
+                  class="w-2/3 md:w-fit" />
                 <x-input-error class="mt-1" :messages="$errors->get('pitc_m')" />
               </div>
             </div>
@@ -62,13 +62,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="p34t_h" :value="__('Hombres')" class="text-secondary" />
                 <x-text-input id="p34t_h" name="p34t_h" value="{{ $personalDocente->p34t_h }}" type="text"
-                  class="w-fit" />
+                  class="w-2/3 md:w-fit" />
                 <x-input-error class="mt-1" :messages="$errors->get('p34t_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="p34t_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="p34t_m" name="p34t_m" value="{{ $personalDocente->p34t_m }}" type="text"
-                  class="w-fit" />
+                  class="w-2/3 md:w-fit" />
                 <x-input-error class="mt-1" :messages="$errors->get('p34t_m')" />
               </div>
             </div>
@@ -80,13 +80,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pmt_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pmt_h" name="pmt_h" value="{{ $personalDocente->pmt_h }}" type="text"
-                  class="w-fit" />
+                  class="w-2/3 md:w-fit" />
                 <x-input-error class="mt-1" :messages="$errors->get('pmt_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pmt_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pmt_m" name="pmt_m" value="{{ $personalDocente->pmt_m }}" type="text"
-                  class="w-fit" />
+                  class="w-2/3 md:w-fit" />
                 <x-input-error class="mt-1" :messages="$errors->get('pmt_m')" />
               </div>
             </div>
@@ -98,13 +98,13 @@
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pph_h" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pph_h" name="pph_h" value="{{ $personalDocente->pph_h }}" type="text"
-                  class="w-fit" />
+                  class="w-2/3 md:w-fit" />
                 <x-input-error class="mt-1" :messages="$errors->get('pph_h')" />
               </div>
               <div class="flex flex-col justify-center gap-1">
                 <x-input-label for="pph_m" :value="__('Mujeres')" class="text-secondary" />
                 <x-text-input id="pph_m" name="pph_m" value="{{ $personalDocente->pph_m }}" type="text"
-                  class="w-fit" />
+                  class="w-2/3 md:w-fit" />
                 <x-input-error class="mt-1" :messages="$errors->get('pph_m')" />
               </div>
             </div>
@@ -129,9 +129,9 @@
 
     <section class="card-container">
       <article class="">
-        <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
-          <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
-            <div class="flex flex-col justify-center w-2/3">
+        <div class="flex flex-col md:w-3/5 border-[1px] border-red-500 rounded">
+          <div class="flex items-center justify-between px-3 py-5 border-b-2 border-gray-300">
+            <div class="flex flex-col justify-center w-1/2 md:w-2/3">
               <h4 class="title">Eliminar Personal Docente</h4>
               <p class="text-secondary">Al eliminar este personal docente, no se podra recuperar mas adelante de
                 este
@@ -173,8 +173,8 @@
           </div>
 
           @if ($personalDocente->status)
-            <div class="flex items-center justify-between py-5 px-7 ">
-              <div class="flex flex-col justify-center w-2/3">
+            <div class="flex items-center justify-between px-3 py-5 ">
+              <div class="flex flex-col justify-center w-1/2 md:w-2/3">
                 <h4 class="title">Archivar Personal Docente</h4>
                 <p class="text-secondary">Archiva este Personal docente, lo podras recuperar en un futuro si asi
                   lo
@@ -214,8 +214,8 @@
               </x-modal>
             </div>
           @elseif (!$personalDocente->status)
-            <div class="flex items-center justify-between py-5 px-7 ">
-              <div class="flex flex-col justify-center w-2/3">
+            <div class="flex items-center justify-between px-3 py-5 ">
+              <div class="flex flex-col justify-center w-1/2 md:w-2/3">
                 <h4 class="title">Recuperar Personal Docente</h4>
                 <p class="text-secondary">Puede recuperar el Personal docente, de esta forma la información sera
                   visible a los usuarios nuevamente</p>

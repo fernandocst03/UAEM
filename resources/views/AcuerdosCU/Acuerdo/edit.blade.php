@@ -17,7 +17,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col gap-5 px-20 pt-10 pb-32">
+  <section class="flex flex-col gap-5 pt-10 pb-20 md:px-20">
     <article class="card-container">
       <p class="title">Actualice la informacion del acuerdo.</p>
       <form method="post" action="{{ route('acuerdos.update', ['acuerdo' => $acuerdo->id]) }}"" class="mt-6 space-y-6">
@@ -25,7 +25,7 @@
         @method('patch')
         <div class="w-1/3 mt-6">
           <x-input-label for="tipoAcuerdo" :value="__('Tipo de acuerdo')" />
-          <select name="tipoAcuerdo" id="tipoAcuerdo" class="mt-2 border-gray-300 rounded-md border-1">
+          <select name="tipoAcuerdo" id="tipoAcuerdo" class="w-full mt-2 border-gray-300 rounded-md border-1">
             <option value="">Seleccione un tipo de acuerdo</option>
             @foreach ($tipoAcuerdos as $item)
               <option value="{{ $item->id }}" @if (old('state', $acuerdo->acuerdo_tipo_id) == $item->id) {{ 'selected' }} @endif>
@@ -40,19 +40,19 @@
             required autofocus autocomplete="name" />
           <x-input-error :messages="$errors->get('punto')" class="mt-1" />
         </div>
-        <div class="w-1/3 mt-6">
+        <div class="mt-6 md:w-1/3">
           <x-input-label for="acuerdo" :value="__('Acuerdo')" />
           <textarea class='w-full pt-4 mt-2 border-gray-300 rounded-md resize-none border-1' name="acuerdo" id="acuerdo"
             cols="30" rows="15">{{ $acuerdo->acuerdo }}</textarea>
           <x-input-error :messages="$errors->get('acuerdo')" class="mt-1" />
         </div>
-        <div class="w-1/3 mt-6">
+        <div class="mt-6 md:w-1/3">
           <x-input-label for="acuerdoCorto" :value="__('Acuerdo Corto')" />
           <textarea class='w-full pt-4 mt-2 border-gray-300 rounded-md resize-none border-1' name="acuerdoCorto" id="acuerdo"
             cols="30" rows="15">{{ $acuerdo->acuerdo_corto }}</textarea>
           <x-input-error :messages="$errors->get('acuerdoCorto')" class="mt-1" />
         </div>
-        <div class="w-1/3 mt-6">
+        <div class="mt-6 md:w-1/3">
           <x-input-label for="observaciones" :value="__('Observaciones')" />
           <textarea class='w-full pt-4 mt-2 border-gray-300 rounded-md resize-none border-1' name="observaciones"
             id="observaciones" cols="30" rows="10">{{ $acuerdo->observaciones }}</textarea>
@@ -76,16 +76,16 @@
             <x-alerts.warning :text="$message" />
           @endif
         </div>
-        <div class="pb-10">
+        <div class="">
           <p class="text-secondary">Editado por ultima vez: {{ $acuerdo->updated_at }} </p>
         </div>
       </form>
     </article>
 
     <article class="card-container">
-      <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
-        <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
-          <div class="flex flex-col justify-center w-2/3">
+      <div class="flex flex-col md:w-3/5 border-[1px] border-red-500 rounded">
+        <div class="flex items-center justify-between px-3 py-5 border-b-2 border-gray-300">
+          <div class="flex flex-col justify-center w-1/2 md:w-2/3">
             <h4 class="title">Eliminar Acuerdo</h4>
             <p class="text-secondary">Al eliminar este acuerdo, no se podra recuperar mas adelante de este
               registro, por favor, este seguro.</p>
@@ -125,8 +125,8 @@
         </div>
 
         @if ($acuerdo->status)
-          <div class="flex items-center justify-between py-5 px-7 ">
-            <div class="flex flex-col justify-center w-2/3">
+          <div class="flex items-center justify-between px-3 py-5 ">
+            <div class="flex flex-col justify-center w-1/2 md:w-2/3">
               <h4 class="title">Archivar Acuerdo</h4>
               <p class="text-secondary">Archiva este acuerdo, lo podras recuperar en un futuro si asi lo
                 deseas.</p>
@@ -165,8 +165,8 @@
             </x-modal>
           </div>
         @elseif (!$acuerdo->status)
-          <div class="flex items-center justify-between py-5 px-7 ">
-            <div class="flex flex-col justify-center w-2/3">
+          <div class="flex items-center justify-between px-3 py-5 ">
+            <div class="flex flex-col justify-center w-1/2 md:w-2/3">
               <h4 class="title">Recuperar Acuerdo</h4>
               <p class="text-secondary">Puede recuperar el acuerdo, de esta forma la información sera
                 visible a los usuarios nuevamente</p>

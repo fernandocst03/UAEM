@@ -1,15 +1,15 @@
 @if (!empty($personalAdministrativo))
   <div class="border-[2px] border-gray-200 rounded p-2">
-    <header class="flex items-center justify-between w-full px-5 py-4 bg-gray-900">
-      <div class="flex flex-col">
-        <h2 class="text-lg font-bold text-gray-100">
+    <header class="flex items-center justify-between w-full px-3 py-4 bg-gray-900 md:px-5">
+      <div class="flex flex-col w-3/4">
+        <h2 class="text-sm font-bold text-gray-100 md:text-lg">
           {{ $personalAdministrativo->unidadAcademica->unidadDependencia->unidad_dependencia }}</h2>
-        <p class="text-base italic font-light text-gray-300">Personal Administrativo - Informacion del año
+        <p class="text-sm italic font-light text-gray-300 md:text-base">Personal Administrativo - Informacion del año
           {{ $personalAdministrativo->anio }}</p>
       </div>
-      <p class="text-xl font-bold text-gray-100">911</p>
+      <p class="text-base font-bold text-gray-100 md:text-xl">911</p>
     </header>
-    <div class="flex gap-5 mt-9">
+    <div class="flex flex-col gap-5 mt-4 md:flex-row md:mt-9">
       <table class="table w-1/3 table-striped">
         <thead>
           <tr class="text-base text-gray-100 bg-gray-900">
@@ -69,6 +69,6 @@
   </div>
 @else
   <div class="flex items-center justify-center w-full h-36">
-    <p class="w-1/3 italic text-secondary">Información del personal administrativo no esta disponible.</p>
+    <p class="w-1/3 italic text-center text-secondary">Información del personal administrativo no esta disponible.</p>
   </div>
 @endif

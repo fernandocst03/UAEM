@@ -13,11 +13,11 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32">
+  <section class="flex flex-col w-full pt-10 pb-32 lg:px-20">
 
     <article class="items-center card-container">
       <form action="">
-        <div class="flex gap-4">
+        <div class="flex flex-col items-center gap-4 md:flex-row">
           <livewire:select />
           <div>
             <select name="anio" id="anio"
@@ -42,18 +42,18 @@
       </form>
     </article>
 
-    <article class="mt-10 overflow-hidden card-container">
-      <header class="grid grid-col-3 tabs">
+    <article class="mt-10 card-container">
+      <header class="w-full tabs">
         <h3
-          class="px-3 py-2 font-bold text-center transition bg-gray-900 rounded-tl-lg text-gray-50 active hover:cursor-pointer hover:bg-gray-800">
+          class="px-3 py-2 text-sm font-bold text-center transition bg-gray-900 rounded-tl-lg md:text-base text-gray-50 active hover:cursor-pointer hover:bg-gray-800">
           Personal Administrativo
         </h3>
         <h3
-          class="px-3 py-2 font-bold text-center transition bg-gray-900 text-gray-50 hover:cursor-pointer hover:bg-gray-800">
+          class="px-3 py-2 text-sm font-bold text-center transition bg-gray-900 md:text-base text-gray-50 hover:cursor-pointer hover:bg-gray-800">
           Personal Docente
         </h3>
         <h3
-          class="px-3 py-2 font-bold text-center transition bg-gray-900 rounded-tr-lg text-gray-50 hover:cursor-pointer hover:bg-gray-800">
+          class="px-3 py-2 text-sm font-bold text-center transition bg-gray-900 rounded-tr-lg md:text-base text-gray-50 hover:cursor-pointer hover:bg-gray-800">
           Infraestructura
         </h3>
       </header>
@@ -70,12 +70,12 @@
             <article>
               @include('Formato911.Unidad-Academica.partials.infraestructura')
             </article>
-      </div>
-    @else
-      <div class="flex items-center justify-center h-40">
-        <span class="italic text-secondary">Realiza una busqueda</span>
-      </div>
-      @endif
+          </section>
+        @else
+          <div class="flex items-center justify-center h-40">
+            <span class="italic text-secondary">Realiza una busqueda</span>
+          </div>
+        @endif
       </div>
     </article>
 

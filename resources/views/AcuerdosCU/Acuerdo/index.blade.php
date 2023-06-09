@@ -13,9 +13,9 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-20 pt-10 pb-32">
+  <section class="flex flex-col pt-10 pb-32 md:px-20">
     @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-      <section class="flex items-center justify-end w-full gap-1">
+      <section class="flex flex-col items-end w-full gap-1 px-3 md:flex-row md:justify-end">
         <article>
           <x-secondary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import')">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -161,7 +161,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 my-1">
+    <section class="w-full h-10 px-3 my-1">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))
@@ -174,7 +174,7 @@
         @if (!empty($lastSesion->acuerdos))
           <div class="flex flex-col gap-1 mb-4">
             <h2 class="title">Acuerdos de la ultima sesion</h2>
-            <a class="text-secondary w-fit" href="{{ route('sesiones.show', ['sesione' => $lastSesion->id]) }}">Fecha
+            <a class="text w-fit" href="{{ route('sesiones.show', ['sesione' => $lastSesion->id]) }}">Fecha
               de
               la sesion:
               {{ $lastSesion->fecha }}</a>
@@ -190,7 +190,7 @@
                 <th>Opciones</th>
               </tr>
             </thead>
-            <tbody class="font-normal">
+            <tbody class="text">
               @foreach ($lastSesion->acuerdos as $item)
                 <tr class="{{ $item->status ? '' : 'opacity-40' }}">
                   @if ($item->tipoAcuerdo->id == 19)
@@ -237,15 +237,17 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/dataTableConfig.js') }}"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', datatable({
-    id: '#ultima_sesion',
-    props: {
-      orderBy: [0, 'desc'],
-      scroll: 'false',
-      fileName: 'Acuerdos de la ultima sesión: {{ $lastSesion->fecha }}',
-      columns: [0, 1, 2, 3, 4, 5]
-    }
-  }))
-</script>
+@if (!empty($lastSesion))
+  <script src="{{ asset('js/dataTableConfig.js') }}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', datatable({
+      id: '#ultima_sesion',
+      props: {
+        orderBy: [0, 'desc'],
+        scroll: 'false',
+        fileName: 'Acuerdos de la ultima sesión: {{ $lastSesion->fecha }}',
+        columns: [0, 1, 2, 3, 4, 5]
+      }
+    }))
+  </script>
+@endif

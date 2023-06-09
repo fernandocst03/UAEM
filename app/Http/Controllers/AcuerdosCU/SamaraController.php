@@ -231,6 +231,6 @@ class SamaraController extends Controller
       }
     }
 
-    return redirect()->route('samaras.edit', ['samara' => $samaraId])->with('add', 'Sesiones agregadas correctamente');
+    return redirect()->route('samaras.edit', ['samara' => $samaraId])->with('added', 'Sesiones agregadas correctamente');
   }
 }

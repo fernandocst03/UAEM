@@ -13,9 +13,9 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32">
+  <section class="flex flex-col w-full pt-10 pb-32 lg:px-20">
     @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-      <section class="flex items-center justify-end w-full gap-1">
+      <section class="flex flex-col items-end w-full gap-1 px-3 md:flex-row md:justify-end">
         <article>
           <x-secondary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import')">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -133,7 +133,7 @@
 
     <section class="mt-1 card-container">
       <table class="table stripe" id="personalDocenteEdad" style="width: 100%">
-        <thead class="text-sm bg-gray-900 text-gray-50">
+        <thead class="text-base bg-gray-900 text-gray-50">
           <tr>
             <th>Unidad academica</th>
             <th>Tipo unidad academica</th>

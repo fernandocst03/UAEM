@@ -22,7 +22,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32">
+  <section class="flex flex-col w-full pt-10 pb-20 md:px-20">
 
     <section class="card-container">
       <div>
@@ -70,7 +70,7 @@
 
           <div class="flex flex-col gap-1">
             <x-input-label for="" :value="__('Aula')" />
-            <div class="flex items-center gap-3">
+            <div class="flex flex-wrap items-center gap-3">
               <div class="flex flex-col gap-1">
                 <x-input-label for="aulas_existentes" value="{{ __('Existentes') }}" />
                 <x-text-input id="aulas_existentes" name="aulas_existentes" type="text" class="1"
@@ -92,9 +92,9 @@
             </div>
           </div>
 
-          <div class="flex flex-col gap-1">
+          <div class="flex flex-col gap-1 mt-7 md:mt-0">
             <x-input-label for="" :value="__('Talleres')" />
-            <div class="flex items-center gap-3">
+            <div class="flex flex-wrap items-center gap-3">
               <div class="flex flex-col gap-1">
                 <x-input-label for="talleres_existentes" value="{{ __('Existentes') }}" />
                 <x-text-input id="talleres_existentes" name="talleres_existentes" type="text" class="1"
@@ -116,9 +116,9 @@
             </div>
           </div>
 
-          <div class="flex flex-col gap-1">
+          <div class="flex flex-col gap-1 mt-7 md:mt-0">
             <x-input-label for="" :value="__('Laboratorios')" />
-            <div class="flex items-center gap-3">
+            <div class="flex flex-wrap items-center gap-3">
               <div class="flex flex-col gap-1">
                 <x-input-label for="laboratorios_existentes" value="{{ __('Existentes') }}" />
                 <x-text-input id="laboratorios_existentes" name="laboratorios_existentes" type="text"
@@ -140,7 +140,7 @@
             </div>
           </div>
 
-          <div class="flex flex-col gap-1 w-fit">
+          <div class="flex flex-col gap-1 w-fit mt-7 md:mt-0">
             <x-input-label for="laboratorio_computo" value="{{ __('Laboratorio de computo') }}" class="w-fit" />
             <x-text-input id="laboratorio_computo" name="laboratorio_computo" type="text" class="1"
               value="{{ $infraestructura->laboratorios_computo }}" />
@@ -183,9 +183,9 @@
 
     <section class="mt-9 card-container">
       <article class="">
-        <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
-          <div class="flex items-center justify-between py-3 border-b-2 border-gray-300 px-7">
-            <div class="flex flex-col justify-center w-2/3">
+        <div class="flex flex-col md:w-3/5 border-[1px] border-red-500 rounded">
+          <div class="flex items-center justify-between px-3 py-3 border-b-2 border-gray-300">
+            <div class="flex flex-col justify-center w-1/2 md:w-2/3">
               <h4 class="title">Eliminar Infraesstructura</h4>
               <p class="text-secondary">Al eliminar esta infraestructura, no se podra recuperar mas adelante de
                 este
@@ -227,8 +227,8 @@
           </div>
 
           @if ($infraestructura->status)
-            <div class="flex items-center justify-between py-3 px-7 ">
-              <div class="flex flex-col justify-center w-2/3">
+            <div class="flex items-center justify-between px-3 py-3 ">
+              <div class="flex flex-col justify-center w-1/2 md:w-2/3">
                 <h4 class="title">Archivar Infraestructura</h4>
                 <p class="text-secondary">Archiva esta infraestructura, lo podras recuperar en un futuro si asi
                   lo
@@ -268,8 +268,8 @@
               </x-modal>
             </div>
           @elseif (!$infraestructura->status)
-            <div class="flex items-center justify-between py-3 px-7 ">
-              <div class="flex flex-col justify-center w-2/3">
+            <div class="flex items-center justify-between px-3 py-3 ">
+              <div class="flex flex-col justify-center w-1/2 md:w-2/3">
                 <h4 class="title">Recuperar Infraestructura</h4>
                 <p class="text-secondary">Puede recuperar la Infraestructura, de esta forma la información sera
                   visible a los usuarios nuevamente</p>

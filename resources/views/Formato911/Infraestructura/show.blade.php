@@ -18,7 +18,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32">
+  <section class="flex flex-col w-full pt-10 pb-32 md:px-20">
 
     <section class="card-container">
       <div class="flex flex-col gap-3">
@@ -34,14 +34,13 @@
               </a>
             @endif
           </div>
-          <p class="text-secondary">{{ $infraestructura->unidadAcademica->tipoUnidadAcademica->tipo }}</p>
-          <p class="text-secondary">{{ $infraestructura->unidadAcademica->municipio->municipio }}</p>
-          <p class="text-secondary">Campus: {{ $infraestructura->unidadAcademica->municipio->campus->campus }}</p>
+          <p class="text">{{ $infraestructura->unidadAcademica->tipoUnidadAcademica->tipo }}</p>
+          <p class="text">{{ $infraestructura->unidadAcademica->municipio->municipio }}</p>
+          <p class="text">Campus: {{ $infraestructura->unidadAcademica->municipio->campus->campus }}</p>
         </div>
-        <p class="mt-5 text">Infraestructura</p>
       </div>
 
-      <div>
+      <div class="mt-7">
         <table class="table stripe" id="infraestructuras">
           <thead class="text-sm bg-gray-900 text-gray-50">
             <tr>

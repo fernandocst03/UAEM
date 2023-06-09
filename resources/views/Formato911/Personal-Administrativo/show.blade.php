@@ -17,7 +17,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32">
+  <section class="flex flex-col w-full pt-10 pb-32 lg:px-20">
 
     <section class="card-container ">
       <div class="flex flex-col gap-3">
@@ -33,18 +33,17 @@
               </a>
             @endif
           </div>
-          <p class="mt-4 text-secondary">Tipo de plantel:
+          <p class="mt-4 text">Tipo de plantel:
             {{ $personalAdministrativo->unidadAcademica->tipoUnidadAcademica->tipo }}</p>
-          <p class="text-secondary">{{ $personalAdministrativo->unidadAcademica->municipio->municipio }}</p>
-          <p class="text-secondary">Campus: {{ $personalAdministrativo->unidadAcademica->municipio->campus->campus }}
+          <p class="text">{{ $personalAdministrativo->unidadAcademica->municipio->municipio }}</p>
+          <p class="text">Campus: {{ $personalAdministrativo->unidadAcademica->municipio->campus->campus }}
           </p>
         </div>
       </div>
 
       <div class="mt-12">
-        <p class="mb-3 text">Informacion del Personal administrativo</p>
         <table class="table" id="personalAdministrativo">
-          <thead class="text-sm bg-gray-900 text-gray-50">
+          <thead class="text-base bg-gray-900 text-gray-50">
             <tr>
               <th>Año</th>
               <th>Directivos Hombres</th>

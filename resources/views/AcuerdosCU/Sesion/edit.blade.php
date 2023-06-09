@@ -20,10 +20,10 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-20 pt-10 pb-32">
+  <section class="flex flex-col pt-10 pb-20 sm:px-20">
     <article class="card-container">
       <p class="title">Actualice la informacion de la sesion.</p>
-      <form method="post" action="{{ route('sesiones.update', ['sesione' => $sesion->id]) }}" class="mt-6 space-y-6"
+      <form method="post" action="{{ route('sesiones.update', ['sesione' => $sesion->id]) }}" class="space-y-6 sm:mt-6"
         id="form" onKeyPress="return disableEnterKey(event)">
         @csrf
         @method('patch')
@@ -61,10 +61,9 @@
     </article>
 
     <article class="mt-9 card-container">
-      <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
-
-        <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
-          <div class="flex flex-col justify-center w-2/3">
+      <div class="flex flex-col sm:w-2/3 border-[1px] border-red-500 rounded">
+        <div class="flex items-center justify-between px-3 py-5 border-b-2 border-gray-300">
+          <div class="flex flex-col justify-center w-1/2">
             <h4 class="title">Eliminar Sesión</h4>
             <p class="text-secondary">Al eliminar esta sesión, no se podra recuperar mas adelante de este
               registro, por favor,este seguro.</p>
@@ -103,8 +102,8 @@
         </div>
 
         @if ($sesion->status)
-          <div class="flex items-center justify-between py-5 px-7 ">
-            <div class="flex flex-col justify-center w-2/3">
+          <div class="flex items-center justify-between px-3 py-5 ">
+            <div class="flex flex-col justify-center sm:w-2/3">
               <h4 class="title">Archivar Sesión</h4>
               <p class="text-secondary">Archiva esta sesión, la inrofmación ya no sera visible a los usuarios la podras
                 recuperar en un futuro si asi lo
@@ -143,8 +142,8 @@
             </x-modal>
           </div>
         @elseif (!$sesion->status)
-          <div class="flex items-center justify-between py-5 px-7 ">
-            <div class="flex flex-col justify-center w-2/3">
+          <div class="flex items-center justify-between px-3 py-5 ">
+            <div class="flex flex-col justify-center w-1/2">
               <h4 class="title">Recuperar Sesión</h4>
               <p class="text-secondary">Puede recuperar la sesión, de esta forma la información sera
                 visible a los usuarios nuevamente</p>

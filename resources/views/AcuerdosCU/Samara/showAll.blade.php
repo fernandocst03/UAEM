@@ -17,11 +17,11 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-20 pt-10 pb-32">
+  <section class="flex flex-col pt-10 pb-32 sm:px-20">
     <div class="flex flex-col gap-14 " id="tablas">
 
       @foreach ($rectorados as $rectorado)
-        <div class="p-4 bg-white rounded-md shadow">
+        <div class="overflow-x-scroll card-container">
           <p class="mb-2 title">Ciclo: {{ $rectorado->ciclo }}</p>
           <table id="tabla_samaras" class="table stripe" style="width: 100%">
             <thead class="bg-gray-900 text-gray-50">

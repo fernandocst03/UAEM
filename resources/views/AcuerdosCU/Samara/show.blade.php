@@ -17,7 +17,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col px-24 mt-10">
+  <section class="flex flex-col mt-10 sm:px-24">
     <article class="card-container">
       <div class="flex items-center gap-2">
         <h2 class="title">
@@ -32,7 +32,6 @@
       </div>
 
       <div class="pt-3">
-
         <div>
           <p class="text">Rectorado: {{ $samara->rectorado->ciclo }}</p>
           <p class="text">Fecha: {{ date('d-m-Y', strtotime($samara->fecha)) }}</p>
@@ -72,8 +71,9 @@
       </div>
     </article>
 
-    <article class="pb-20 mt-3">
-      <a href="{{ $samara->url_archivo }}" target="_blank" class="flex gap-2 btn-primary w-fit">Descargar
+    <article class="px-3 pb-20 mt-3">
+      <a href="{{ $samara->url_archivo }}" target="_blank"
+        class="flex items-center gap-2 text-sm btn-primary w-fit">Descargar
         PDF
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
           stroke="currentColor" class="w-5 h-5">

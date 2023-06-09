@@ -13,9 +13,9 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32">
+  <section class="flex flex-col w-full pt-10 pb-32 lg:px-20">
     @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-      <section class="flex items-center justify-end w-full gap-1">
+      <section class="flex flex-col items-end w-full gap-1 px-3 md:flex-row md:justify-end">
         <article>
           <x-secondary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'import')">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -124,7 +124,7 @@
       </section>
     @endif
 
-    <section class="w-full h-10 mt-1 text-green-900">
+    <section class="w-full h-10 px-3 mt-1 text-green-900">
       @if ($message = Session::get('success'))
         <x-alerts.success :text="$message" />
       @elseif ($message = Session::get('warning'))

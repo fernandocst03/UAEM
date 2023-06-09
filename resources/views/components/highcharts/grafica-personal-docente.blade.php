@@ -1,6 +1,6 @@
 @props(['data'])
 
-<div id="graficaPersonalDocente" class="w-2/3 h-80"></div>
+<div id="graficaPersonalDocente" class="md:w-2/3 h-80"></div>
 <script src="{{ asset('js/charts/generateCakeGraphic.js') }}"></script>
 @if ($data)
   <script>

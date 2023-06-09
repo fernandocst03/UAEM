@@ -19,7 +19,7 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col w-full px-20 pt-10 pb-32 gap-7">
+  <section class="flex flex-col w-full pt-10 pb-20 lg:px-20 gap-7">
 
     <section class="card-container ">
       <article>
@@ -84,11 +84,11 @@
 
     <section class="card-container">
       <article class="">
-        <div class="flex flex-col w-3/5 border-[1px] border-red-500 rounded">
-          <div class="flex items-center justify-between py-5 border-b-2 border-gray-300 px-7">
-            <div class="flex flex-col justify-center w-2/3">
+        <div class="flex flex-col md:w-3/5 border-[1px] border-red-500 rounded">
+          <div class="flex items-center justify-between px-3 py-5 border-b-2 border-gray-300">
+            <div class="flex flex-col justify-center w-1/2 md:w-2/3">
               <h4 class="title">Eliminar Personal Docente por Antiguedad</h4>
-              <p class="text-secondary">Al eliminar este personal docente, no se podra recuperar mas adelante de
+              <p class="mt-2 text-secondary">Al eliminar este personal docente, no se podra recuperar mas adelante de
                 este
                 registro, por favor, este seguro.</p>
             </div>
@@ -128,10 +128,10 @@
           </div>
 
           @if ($personalDocente->status)
-            <div class="flex items-center justify-between py-5 px-7 ">
-              <div class="flex flex-col justify-center w-2/3">
+            <div class="flex items-center justify-between px-3 py-5 ">
+              <div class="flex flex-col justify-center w-1/2 md:w-2/3">
                 <h4 class="title">Archivar Personal Docente por Antiguedad</h4>
-                <p class="text-secondary">Archiva este Personal docente, lo podras recuperar en un futuro si asi
+                <p class="mt-2 text-secondary">Archiva este Personal docente, lo podras recuperar en un futuro si asi
                   lo
                   deseas.</p>
               </div>
@@ -170,10 +170,10 @@
               </x-modal>
             </div>
           @elseif (!$personalDocente->status)
-            <div class="flex items-center justify-between py-5 px-7 ">
-              <div class="flex flex-col justify-center w-2/3">
+            <div class="flex items-center justify-between px-3 py-5 ">
+              <div class="flex flex-col justify-center w-1/2 md:w-2/3">
                 <h4 class="title">Recuperar Personal Docente por Antiguedad</h4>
-                <p class="text-secondary">Puede recuperar el Personal docente, de esta forma la información sera
+                <p class="mt-2 text-secondary">Puede recuperar el Personal docente, de esta forma la información sera
                   visible a los usuarios nuevamente</p>
               </div>
               <x-primary-button x-data=""

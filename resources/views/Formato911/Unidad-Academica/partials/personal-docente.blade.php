@@ -1,18 +1,18 @@
 @if (!empty($personalDocente))
   <div class="border-[2px] border-gray-200 rounded p-2">
-    <header class="flex items-center justify-between w-full px-5 py-4 bg-gray-900">
-      <div class="flex flex-col">
-        <h2 class="text-lg font-bold text-gray-100">
+    <header class="flex items-center justify-between w-full px-3 py-4 bg-gray-900 md:px-5">
+      <div class="flex flex-col w-3/4">
+        <h2 class="text-sm font-bold text-gray-100 md:text-lg">
           {{ $personalDocente->unidadAcademica->unidadDependencia->unidad_dependencia }}</h2>
-        <p class="text-base italic font-light text-gray-300">Personal Docente - Informacion del año
+        <p class="text-sm italic font-light text-gray-300 md:text-base">Personal Docente - Informacion del año
           {{ $personalDocente->anio }}</p>
       </div>
       <p class="text-xl font-bold text-gray-100">911</p>
     </header>
-    <div class="mt-10">
+    <div class="mt-3 md:mt-10">
       {{-- Personal docente --}}
-      <div class="flex items-center gap-5 mb-10">
-        <div class="w-1/3 ">
+      <div class="flex flex-col gap-2 md:gap-5 md:mb-10 md:flex-row md:justify-center">
+        <div class="flex flex-col md:w-1/3">
           <h2 class="mb-2 title">Personal docente</h2>
           <table class="table stripe">
             <thead>
@@ -54,9 +54,9 @@
         <x-highcharts.grafica-personal-docente :data="$personalDocente" />
       </div>
 
-      <div class="flex items-center gap-10 mb-10">
+      <div class="flex flex-col items-center gap-2 mt-10 mb-10 md:gap-10 md:flex-row md:mt-0">
         {{-- Personal docente edad --}}
-        <div class="w-1/3 ">
+        <div class="flex flex-col md:w-1/3 ">
           <h2 class="mb-2 title">Personal docente por grupos de edad</h2>
           <table class="table stripe">
             <thead>
@@ -82,9 +82,9 @@
         <x-highcharts.grafica-personal-docente-edad :data="$personalDocenteEdad" />
       </div>
 
-      <div class="flex items-center gap-10">
+      <div class="flex flex-col items-center gap-2 mt-10 mb-10 md:gap-10 md:flex-row md:mt-0">
         {{-- Personal docente por antiguedad --}}
-        <div class="w-1/3 ">
+        <div class="flex flex-col md:w-1/3 ">
           <h2 class="mb-2 title">Personal docente por grupos de antiguedad</h2>
           <table class="table striped">
             <thead>
@@ -114,6 +114,6 @@
   </div>
 @else
   <div class="flex items-center justify-center w-full h-36">
-    <p class="w-1/3 italic text-secondary">Información del personal docente no esta disponible.</p>
+    <p class="w-1/3 italic text-center text-secondary">Información del personal docente no esta disponible.</p>
   </div>
 @endif

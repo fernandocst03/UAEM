@@ -12,12 +12,12 @@
     </div>
   </x-slot>
 
-  <section class="flex flex-col gap-10 px-24 pb-32">
+  <section class="flex flex-col gap-10 pb-32 sm:px-32">
 
-    <article class="mt-20">
+    <article class="px-3 mt-10 sm:mt-20">
       <div class="flex flex-col items-center">
-        <h1 class="text-3xl font-light">Órgano Informativo Universitario</h1>
-        <h3 class="mt-3 text-xl font-bold">“Adolfo Menéndez Samará”</h3>
+        <h1 class="text-lg font-light text-center sm:text-3xl">Órgano Informativo Universitario</h1>
+        <h3 class="mt-3 text-base font-bold sm:text-xl">“Adolfo Menéndez Samará”</h3>
       </div>
 
       <p class="mt-3 text">
@@ -39,28 +39,26 @@
       @if (empty($last_sesion))
         <p class="italic text-center text-secondary">Información no disponible</p>
       @else
-        <a href="{{ route('sesiones.show', ['sesione' => $last_sesion->id]) }}" class="text-lg font-bold">Ultima
+        <a href="{{ route('sesiones.show', ['sesione' => $last_sesion->id]) }}" class="title">Ultima
           sesión</a>
 
         <div>
-          <p class="title">Fecha de la sesión: {{ date('d-m-y', strtotime($last_sesion->fecha)) }} </p>
+          <p class="text">Fecha de la sesión: {{ date('d-m-y', strtotime($last_sesion->fecha)) }} </p>
           <p class="text">Tipo de la sesion: {{ $last_sesion->sesionTipo->tipo }} </p>
           <p class="text">Acuerdos</p>
-          <div class="mt-2">
+          <div class="mt-4">
             <table id="ultima_sesion" class="table stripe" style="width: 100%">
-              <thead class="bg-gray-900 text-gray-50 text-md">
+              <thead class="text-sm bg-gray-900 text-gray-50 sm:text-base">
                 <tr>
                   <th>Punto</th>
                   <th>Tipo acuerdo</th>
                   <th>Acuerdo corto</th>
                   <th>Observaciones</th>
                   <th>Pagina Samara</th>
-                  @if (Auth::check() && Auth::user()->role->id == 1)
-                    <th>Opciones</th>
-                  @endif
+                  <th>Opciones</th>
                 </tr>
               </thead>
-              <tbody class="text">
+              <tbody class="text-xs sm:text-sm">
                 @foreach ($last_sesion->acuerdos as $acuerdo)
                   <tr>
                     <td>{{ $acuerdo->punto }}</td>
@@ -101,9 +99,9 @@
 
     <article class="card-container">
       <h4 class="title">Ultimos 5 Samaras</h4>
-      <div class="flex flex-col gap-4 mt-2">
+      <div class="flex flex-col gap-4 mt-4">
         <table id="ultimos_5_samaras" class="table stripe" style="width: 100%">
-          <thead class="bg-gray-900 text-gray-50 text-md">
+          <thead class="text-sm bg-gray-900 text-gray-50 sm:text-base">
             <tr>
               <th>Menendez Samará</th>
               <th>Ciclo</th>
@@ -112,7 +110,7 @@
               <th>PDF</th>
             </tr>
           </thead>
-          <tbody class="text">
+          <tbody class="text-xs sm:text-sm">
             @foreach ($last_five_samaras as $samara)
               <tr>
                 <td>{{ $samara->numero }}</td>

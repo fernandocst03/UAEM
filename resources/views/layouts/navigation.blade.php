@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="py-4 bg-white border-b border-gray-100 sm:py-0">
   <!-- Primary Navigation Menu -->
   <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
@@ -36,26 +36,26 @@
               </button>
             </x-slot>
             <x-slot name="content">
-              <x-dropdown-link :href="route('acuerdos-cu')">
+              <x-dropdown-link :href="route('acuerdos-cu')" :active="request()->routeIs('acuerdos-cu')">
                 {{ __('Presentación') }}
               </x-dropdown-link>
-              <x-dropdown-link :href="route('samaras.index')">
+              <x-dropdown-link :href="route('samaras.index')" :active="request()->routeIs('samaras.index')">
                 {{ __('Samaras') }}
               </x-dropdown-link>
-              <x-dropdown-link :href="route('sesiones.index')">
+              <x-dropdown-link :href="route('sesiones.index')" :active="request()->routeIs('sesiones.index')">
                 {{ __('Sesiones') }}
               </x-dropdown-link>
               @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-                <x-dropdown-link :href="route('acuerdos.index')">
+                <x-dropdown-link :href="route('acuerdos.index')" :active="request()->routeIs('acuerdos.index')">
                   {{ __('Acuerdos') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('rectorados.index')">
+                <x-dropdown-link :href="route('rectorados.index')" :active="request()->routeIs('rectorados.index')">
                   {{ __('Rectorados') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('reporte.acuerdos')">
+                <x-dropdown-link :href="route('reporte.acuerdos')" :active="request()->routeIs('reporte.acuerdos')">
                   {{ __('Reporte de acuerdos') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('reporte.bitacoras')">
+                <x-dropdown-link :href="route('reporte.bitacoras')" :active="request()->routeIs('reporte.bitacoras')">
                   {{ __('Reporte de bitacoras') }}
                 </x-dropdown-link>
               @endif
@@ -65,7 +65,7 @@
 
         <!-- Formato 911 -->
         <div class="hidden sm:ml-4 sm:flex">
-          <x-dropdown align="right" widith="48">
+          <x-dropdown align="right" widith="52">
             <x-slot name="trigger">
               <button
                 class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white hover:text-gray-700 focus:outline-none">
@@ -80,27 +80,27 @@
               </button>
             </x-slot>
             <x-slot name="content">
-              <x-dropdown-link :href="route('formato-911')">
+              <x-dropdown-link :href="route('formato-911')" :active="request()->routeIs('formato-911')">
                 {{ __('Presentación') }}
               </x-dropdown-link>
               @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-                <x-dropdown-link :href="route('personal-administrativo.index')">
+                <x-dropdown-link :href="route('personal-administrativo.index')" :active="request()->routeIs('personal-administrativo.index')">
                   {{ __('Personal Administrativo') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente.index')">
+                <x-dropdown-link :href="route('personal-docente.index')" :active="request()->routeIs('personal-docente.index')">
                   {{ __('Personal Docente') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente-antiguedad.index')">
+                <x-dropdown-link :href="route('personal-docente-antiguedad.index')" :active="request()->routeIs('personal-docente-antiguedad.index')">
                   {{ __('Grupos de antiguedad del personal docente') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente-edad.index')">
+                <x-dropdown-link :href="route('personal-docente-edad.index')" :active="request()->routeIs('personal-docente-edad.index')">
                   {{ __('Grupos de edad del personal docente') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('infraestructuras.index')">
+                <x-dropdown-link :href="route('infraestructuras.index')" :active="request()->routeIs('infraestructuras.index')">
                   {{ __('Infraestructuras') }}
                 </x-dropdown-link>
               @endif
-              <x-dropdown-link :href="route('unidades-academicas.index')">
+              <x-dropdown-link :href="route('unidades-academicas.index')" :active="request()->routeIs('unidades-academicas.index')">
                 {{ __('Unidades academicas') }}
               </x-dropdown-link>
             </x-slot>
@@ -171,9 +171,67 @@
   <!-- Responsive Navigation Menu -->
   <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('welcome')">
+      <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
         {{ __('Inicio') }}
       </x-responsive-nav-link>
+      <div>
+        <p class="py-1 pl-4 pr-4 text-base font-medium text-gray-600 text-lef">
+          Acuerdos CU</p>
+        <div class="ml-3">
+          <x-responsive-nav-link :href="route('acuerdos-cu')" class="text-sm" :active="request()->routeIs('acuerdos-cu')">
+            {{ __('Presentación') }}
+          </x-responsive-nav-link>
+          <x-responsive-nav-link :href="route('samaras.index')" class="text-sm" :active="request()->routeIs('samaras.index')">
+            {{ __('Samaras') }}
+          </x-responsive-nav-link>
+          <x-responsive-nav-link :href="route('sesiones.index')" class="text-sm" :active="request()->routeIs('sesiones.index')">
+            {{ __('Sesiones') }}
+          </x-responsive-nav-link>
+          @if (Auth::check() && Auth::user()->role->role == 'Administrador')
+            <x-responsive-nav-link :href="route('acuerdos.index')" class="text-sm" :active="request()->routeIs('acuerdos.index')">
+              {{ __('Acuerdos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('rectorados.index')" class="text-sm" :active="request()->routeIs('rectorados.index')">
+              {{ __('Rectorados') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reporte.acuerdos')" class="text-sm" :active="request()->routeIs('reporte.acuerdos')">
+              {{ __('Reporte de acuerdos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reporte.bitacoras')" class="text-sm" :active="request()->routeIs('reporte.bitacoras')">
+              {{ __('Reporte de bitacoras') }}
+            </x-responsive-nav-link>
+          @endif
+        </div>
+      </div>
+      <div>
+        <p class="py-1 pl-4 pr-4 text-base font-medium text-gray-600 text-lef">
+          Formato 911</p>
+        <div class="ml-3">
+          <x-responsive-nav-link :href="route('formato-911')" class="text-sm" :active="request()->routeIs('formato-911')">
+            {{ __('Presentación') }}
+          </x-responsive-nav-link>
+          @if (Auth::check() && Auth::user()->role->role == 'Administrador')
+            <x-responsive-nav-link :href="route('personal-administrativo.index')" class="text-sm" :active="request()->routeIs('personal-administrativo.index')">
+              {{ __('Personal Administrativo') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('personal-docente.index')" class="text-sm" :active="request()->routeIs('personal-docente.index')">
+              {{ __('Personal Docente') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('personal-docente-antiguedad.index')" class="text-sm" :active="request()->routeIs('personal-docente-antiguedad.index')">
+              {{ __('Grupos de antiguedad del personal docente') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('personal-docente-edad.index')" class="text-sm" :active="request()->routeIs('personal-docente-edad.index')">
+              {{ __('Grupos de edad del personal docente') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('infraestructuras.index')" class="text-sm" :active="request()->routeIs('infraestructuras.index')">
+              {{ __('Infraestructuras') }}
+            </x-responsive-nav-link>
+          @endif
+          <x-responsive-nav-link :href="route('unidades-academicas.index')" class="text-sm" :active="request()->routeIs('unidades-academicas.index')">
+            {{ __('Unidades academicas') }}
+          </x-responsive-nav-link>
+        </div>
+      </div>
     </div>
 
     <!-- Responsive Settings Options -->
@@ -199,6 +257,11 @@
               {{ __('Log Out') }}
             </x-responsive-nav-link>
           </form>
+        </div>
+      @else
+        <div class='flex flex-col items-center gap-3'>
+          <x-responsive-nav-link :href="route('login')">Iniciar sesión</x-responsive-nav-link>
+          <x-responsive-nav-link :href="route('register')">Registrarse</x-responsive-nav-link>
         </div>
       @endif
     </div>
