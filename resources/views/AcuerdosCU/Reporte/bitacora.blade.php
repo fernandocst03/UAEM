@@ -60,7 +60,7 @@
     </article>
 
     <article class="relative overflow-x-auto card-container">
-      {{-- <x-loaders.skeleton /> --}}
+      <x-loaders.skeleton />
       <h4 class="mb-2 text-lg font-bold">Resultados</h4>
       <table class="table stripe" id="bitacoras" style="width: 100%">
         <thead class="bg-gray-900 text-gray-50">
