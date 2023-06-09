@@ -18,7 +18,7 @@
 
 <body class="font-sans antialiased text-gray-900">
   @include('layouts.navigation')
-  <div class="flex flex-col items-center bg-gray-50 py-36 sm:justify-center">
+  <div class="flex flex-col items-center py-24 bg-gray-50 sm:justify-center">
     <div>
       <a href="/">
         <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
