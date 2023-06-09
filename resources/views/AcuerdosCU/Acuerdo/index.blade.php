@@ -237,15 +237,17 @@
 </x-app-layout>
 
 <x-datatables.scripts />
-<script src="{{ asset('js/dataTableConfig.js') }}"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', datatable({
-    id: '#ultima_sesion',
-    props: {
-      orderBy: [0, 'desc'],
-      scroll: 'false',
-      fileName: 'Acuerdos de la ultima sesión: {{ $lastSesion->fecha }}',
-      columns: [0, 1, 2, 3, 4, 5]
-    }
-  }))
-</script>
+@if (!empty($lastSesion))
+  <script src="{{ asset('js/dataTableConfig.js') }}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', datatable({
+      id: '#ultima_sesion',
+      props: {
+        orderBy: [0, 'desc'],
+        scroll: 'false',
+        fileName: 'Acuerdos de la ultima sesión: {{ $lastSesion->fecha }}',
+        columns: [0, 1, 2, 3, 4, 5]
+      }
+    }))
+  </script>
+@endif
