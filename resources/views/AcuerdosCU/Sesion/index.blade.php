@@ -138,7 +138,7 @@
             @foreach ($sesiones as $sesion)
               @if ($sesion->samarasesion == null)
                 <tr class="{{ $sesion->status ? '' : 'opacity-40' }}">
-                  <td>{{ date('d-m-y', strtotime($sesion->fecha)) }}</td>
+                  <td>{{ date('d-m-Y', strtotime($sesion->fecha)) }}</td>
                   <td>{{ $sesion->sesionTipo->tipo }}</td>
                   <td class="italic text-secondary">{{ __('Sin samara asiganado') }}</td>
                   <td>{{ sizeof($sesion->acuerdos) }}</td>
