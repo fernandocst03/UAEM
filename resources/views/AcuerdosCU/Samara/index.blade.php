@@ -198,7 +198,7 @@
       datatable({
         id: '#ultimo_rectorado',
         props: {
-          orderBy: [3, 'desc'],
+          orderBy: [0, 'desc'],
           scroll: 'false',
           fileName: 'Ultimo rectorado {{ $last_rectorado->ciclo }}',
           columns: [0, 1, 2, 3, 4]
