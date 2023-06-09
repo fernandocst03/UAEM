@@ -1,4 +1,4 @@
-<div class="" x-init="setTimeout(() => show = false, 3000)" x-data="{ show: true }" x-show="show" x-transition>
+<div class="" x-init="setTimeout(() => show = false, 1500)" x-data="{ show: true }" x-show="show" x-transition>
   <div class="skeleton skeleton-content "></div>
 </div>
 
