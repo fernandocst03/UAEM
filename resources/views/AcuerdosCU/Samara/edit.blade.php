@@ -235,7 +235,7 @@
                   </p>
                   <div class="mt-6">
                     <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-                    <x-text-input id="password" name="password" type="password" class="block w-3/4 mt-1"
+                    <x-text-input id="passwordArchivar" name="password" type="password" class="block w-3/4 mt-1"
                       placeholder="{{ __('Password') }}" />
                     <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
                   </div>
@@ -275,7 +275,7 @@
                   </p>
                   <div class="mt-6">
                     <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-                    <x-text-input id="password" name="password" type="password" class="block w-3/4 mt-1"
+                    <x-text-input id="passwordRecuperar" name="password" type="password" class="block w-3/4 mt-1"
                       placeholder="{{ __('Password') }}" />
                     <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
                   </div>
