@@ -103,58 +103,53 @@
     </section>
 
     <section class="flex flex-col gap-3">
-      @if (empty($rectorados))
-        <p class="text-center text-gray-600">No hay rectorados registrados</p>
-      @else
-        @foreach ($rectorados as $rectorado)
-          <div class="card-container">
-            <div class="flex items-center gap-3">
-              <span class="p-2 {{ $rectorado->status ? 'bg-green-400' : 'bg-red-400 opacity-40' }} rounded-lg">
+      @foreach ($rectorados as $rectorado)
+        <div class="card-container">
+          <div class="flex items-center gap-3">
+            <span class="p-2 {{ $rectorado->status ? 'bg-green-400' : 'bg-red-400 opacity-40' }} rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+              </svg>
+            </span>
+            <h2 class="title {{ $rectorado->status ? '' : 'opacity-40' }}">Rectorado {{ $rectorado->ciclo }}</h2>
+            @if (Auth::check() && Auth::user()->role->role == 'Administrador')
+              <a href="{{ route('rectorados.edit', ['rectorado' => $rectorado->id]) }}" class="text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                  stroke="currentColor" class="w-6 h-6">
+                  stroke="currentColor" class="w-4 h-4">
                   <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
-              </span>
-              <h2 class="title {{ $rectorado->status ? '' : 'opacity-40' }}">Rectorado {{ $rectorado->ciclo }}</h2>
-              @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-                <a href="{{ route('rectorados.edit', ['rectorado' => $rectorado->id]) }}" class="text-gray-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                  </svg>
-                </a>
-              @endif
-            </div>
-            <div class="flex flex-col w-full gap-2 sm:pl-14">
-              @foreach ($rectorado->samaras as $samara)
-                <div
-                  class="flex justify-between gap-3 px-0 {{ $samara->status ? '' : 'opacity-40' }} text items-center">
-                  <p class="flex-grow">Menendez Samara {{ $samara->numero }}</p>
-                  <p class="flex-grow">{{ $samara->anio }}</p>
-                  <p class="flex-grow">{{ date('d-m-Y', strtotime($samara->fecha)) }}</p>
-                  @if ($samara->url_archivo)
-                    <a href="{{ $samara->url_archivo }}" target="blank" class="flex-grow">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                      </svg>
-                    </a>
-                  @else
-                    <p class="italic text-secondary" class="flex-grow">PDF sin asignar</p>
-                  @endif
-                  <div class="flex flex-col flex-grow gap-2 sm:flex-row">
-                    <a href="{{ route('samaras.show', ['samara' => $samara->id]) }}" class="btn-primary">Ver</a>
-                    <a href="{{ route('samaras.edit', ['samara' => $samara->id]) }}" class="btn-secondary">Editar</a>
-                  </div>
-                </div>
-              @endforeach
-            </div>
+              </a>
+            @endif
           </div>
-        @endforeach
-      @endif
+          <div class="flex flex-col w-full gap-2 sm:pl-14">
+            @foreach ($rectorado->samaras as $samara)
+              <div class="flex justify-between gap-3 px-0 {{ $samara->status ? '' : 'opacity-40' }} text items-center">
+                <p class="flex-grow">Menendez Samara {{ $samara->numero }}</p>
+                <p class="flex-grow">{{ $samara->anio }}</p>
+                <p class="flex-grow">{{ date('d-m-Y', strtotime($samara->fecha)) }}</p>
+                @if ($samara->url_archivo)
+                  <a href="{{ $samara->url_archivo }}" target="blank" class="flex-grow">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" class="w-5 h-5">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                    </svg>
+                  </a>
+                @else
+                  <p class="italic text-secondary" class="flex-grow">PDF sin asignar</p>
+                @endif
+                <div class="flex flex-col flex-grow gap-2 sm:flex-row">
+                  <a href="{{ route('samaras.show', ['samara' => $samara->id]) }}" class="btn-primary">Ver</a>
+                  <a href="{{ route('samaras.edit', ['samara' => $samara->id]) }}" class="btn-secondary">Editar</a>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        </div>
+      @endforeach
     </section>
 
   </section>

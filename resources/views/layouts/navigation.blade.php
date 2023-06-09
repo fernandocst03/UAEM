@@ -65,7 +65,7 @@
 
         <!-- Formato 911 -->
         <div class="hidden sm:ml-4 sm:flex">
-          <x-dropdown align="right" widith="48">
+          <x-dropdown align="right" widith="52">
             <x-slot name="trigger">
               <button
                 class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white hover:text-gray-700 focus:outline-none">

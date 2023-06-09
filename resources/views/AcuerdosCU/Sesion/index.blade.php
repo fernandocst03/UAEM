@@ -159,22 +159,22 @@
         </table>
       </article>
 
-      <article class="card-container">
-        <h2 class="mb-1 title">Sesiones del ultimo samará</h2>
-        <p class="text">Número del Samará: {{ $samara->numero }}</p>
-        <p class="text">Rectorado: {{ $samara->rectorado->ciclo }}</p>
-        <p class="mb-4 text">Fecha: {{ $samara->fecha }}</p>
-        <table id="sesionesUltimosamara" class="table stripe" style="width: 100%">
-          <thead class="text-base bg-gray-900 text-gray-50">
-            <tr>
-              <th>Fecha</th>
-              <th>Tipo de sesion</th>
-              <th>Número de acuerdos</th>
-              <th>Opciones</th>
-            </tr>
-          </thead>
-          <tbody class="text">
-            @if (!empty($samara))
+      @if (!empty($samara))
+        <article class="card-container">
+          <h2 class="mb-1 title">Sesiones del ultimo samará</h2>
+          <p class="text">Número del Samará: {{ $samara->numero }}</p>
+          <p class="text">Rectorado: {{ $samara->rectorado->ciclo }}</p>
+          <p class="mb-4 text">Fecha: {{ $samara->fecha }}</p>
+          <table id="sesionesUltimosamara" class="table stripe" style="width: 100%">
+            <thead class="text-base bg-gray-900 text-gray-50">
+              <tr>
+                <th>Fecha</th>
+                <th>Tipo de sesion</th>
+                <th>Número de acuerdos</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody class="text">
               @foreach ($samara->samarasesion as $sesiones)
                 <tr class="{{ $sesiones->sesion->status ? '' : 'opacity-40' }}">
                   <td>{{ date('d-m-Y', strtotime($sesiones->sesion->fecha)) }}</td>
@@ -192,11 +192,14 @@
                   </td>
                 </tr>
               @endforeach
-            @endif
-          </tbody>
-        </table>
-      </article>
-
+            </tbody>
+          </table>
+        </article>
+      @else
+        <div class="w-full card-container">
+          <p class="italic text-center text-secondary">Sin información disponible</p>
+        </div>
+      @endif
     </section>
   </section>
 
@@ -204,26 +207,28 @@
 
 <x-datatables.scripts />
 
-<script src="{{ asset('js/dataTableConfig.js') }}"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', [
-    datatable({
-      id: '#sesionesSinSamaras',
-      props: {
-        orderBy: [0, 'desc'],
-        scroll: 'false',
-        fileName: 'Sesiones sin Samará asignado',
-        columns: [0, 1, 2, 3, 4]
-      }
-    }),
-    datatable({
-      id: '#sesionesUltimosamara',
-      props: {
-        orderBy: [0, 'desc'],
-        scroll: 'false',
-        fileName: 'Sesiones del ultimo Samará - {{ $samara->numero }}',
-        columns: [0, 1, 2]
-      }
-    })
-  ])
-</script>
+@if (!empty($samara))
+  <script src="{{ asset('js/dataTableConfig.js') }}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', [
+      datatable({
+        id: '#sesionesSinSamaras',
+        props: {
+          orderBy: [0, 'desc'],
+          scroll: 'false',
+          fileName: 'Sesiones sin Samará asignado',
+          columns: [0, 1, 2, 3, 4]
+        }
+      }),
+      datatable({
+        id: '#sesionesUltimosamara',
+        props: {
+          orderBy: [0, 'desc'],
+          scroll: 'false',
+          fileName: 'Sesiones del ultimo Samará - {{ $samara->numero }}',
+          columns: [0, 1, 2]
+        }
+      })
+    ])
+  </script>
+@endif

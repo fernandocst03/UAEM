@@ -69,6 +69,6 @@
   </div>
 @else
   <div class="flex items-center justify-center w-full h-36">
-    <p class="w-1/3 italic text-secondary">Información del personal administrativo no esta disponible.</p>
+    <p class="w-1/3 italic text-center text-secondary">Información del personal administrativo no esta disponible.</p>
   </div>
 @endif
