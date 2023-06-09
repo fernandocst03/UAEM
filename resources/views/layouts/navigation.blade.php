@@ -36,26 +36,26 @@
               </button>
             </x-slot>
             <x-slot name="content">
-              <x-dropdown-link :href="route('acuerdos-cu')">
+              <x-dropdown-link :href="route('acuerdos-cu')" :active="request()->routeIs('acuerdos-cu')">
                 {{ __('Presentación') }}
               </x-dropdown-link>
-              <x-dropdown-link :href="route('samaras.index')">
+              <x-dropdown-link :href="route('samaras.index')" :active="request()->routeIs('samaras.index')">
                 {{ __('Samaras') }}
               </x-dropdown-link>
-              <x-dropdown-link :href="route('sesiones.index')">
+              <x-dropdown-link :href="route('sesiones.index')" :active="request()->routeIs('sesiones.index')">
                 {{ __('Sesiones') }}
               </x-dropdown-link>
               @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-                <x-dropdown-link :href="route('acuerdos.index')">
+                <x-dropdown-link :href="route('acuerdos.index')" :active="request()->routeIs('acuerdos.index')">
                   {{ __('Acuerdos') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('rectorados.index')">
+                <x-dropdown-link :href="route('rectorados.index')" :active="request()->routeIs('rectorados.index')">
                   {{ __('Rectorados') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('reporte.acuerdos')">
+                <x-dropdown-link :href="route('reporte.acuerdos')" :active="request()->routeIs('reporte.acuerdos')">
                   {{ __('Reporte de acuerdos') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('reporte.bitacoras')">
+                <x-dropdown-link :href="route('reporte.bitacoras')" :active="request()->routeIs('reporte.bitacoras')">
                   {{ __('Reporte de bitacoras') }}
                 </x-dropdown-link>
               @endif
@@ -80,27 +80,27 @@
               </button>
             </x-slot>
             <x-slot name="content">
-              <x-dropdown-link :href="route('formato-911')">
+              <x-dropdown-link :href="route('formato-911')" :active="request()->routeIs('formato-911')">
                 {{ __('Presentación') }}
               </x-dropdown-link>
               @if (Auth::check() && Auth::user()->role->role == 'Administrador')
-                <x-dropdown-link :href="route('personal-administrativo.index')">
+                <x-dropdown-link :href="route('personal-administrativo.index')" :active="request()->routeIs('personal-administrativo.index')">
                   {{ __('Personal Administrativo') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente.index')">
+                <x-dropdown-link :href="route('personal-docente.index')" :active="request()->routeIs('personal-docente.index')">
                   {{ __('Personal Docente') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente-antiguedad.index')">
+                <x-dropdown-link :href="route('personal-docente-antiguedad.index')" :active="request()->routeIs('personal-docente-antiguedad.index')">
                   {{ __('Grupos de antiguedad del personal docente') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('personal-docente-edad.index')">
+                <x-dropdown-link :href="route('personal-docente-edad.index')" :active="request()->routeIs('personal-docente-edad.index')">
                   {{ __('Grupos de edad del personal docente') }}
                 </x-dropdown-link>
-                <x-dropdown-link :href="route('infraestructuras.index')">
+                <x-dropdown-link :href="route('infraestructuras.index')" :active="request()->routeIs('infraestructuras.index')">
                   {{ __('Infraestructuras') }}
                 </x-dropdown-link>
               @endif
-              <x-dropdown-link :href="route('unidades-academicas.index')">
+              <x-dropdown-link :href="route('unidades-academicas.index')" :active="request()->routeIs('unidades-academicas.index')">
                 {{ __('Unidades academicas') }}
               </x-dropdown-link>
             </x-slot>
