@@ -60,7 +60,7 @@
       <div class="mt-2">
         @if ($unidadAcademica)
           <section class="relative tab-content">
-            {{-- <x-loaders.skeleton /> --}}
+            <x-loaders.skeleton />
             <article class="active">
               @include('Formato911.Unidad-Academica.partials.personal-administrativo')
             </article>
