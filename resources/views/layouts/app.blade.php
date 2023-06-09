@@ -13,7 +13,8 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+  <link rel="icon"
+    href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Logo_de_la_UAEMex.svg/800px-Logo_de_la_UAEMex.svg.png">
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -64,3 +65,15 @@
 </footer>
 
 </html>
+
+<script src="{{ asset('js/getRouteName.js') }}"></script>
+<script type="text/javascript">
+  // Cuando el usuario pierde el foco o sale de tu pestaña (sitio web)
+  window.addEventListener("blur", () => {
+    document.title = "UAEM";
+  });
+  // Cuando el enfoque del usuario vuelve a tu pestaña (sitio web) nuevamente
+  window.addEventListener("focus", getRouteName);
+  // Cuando carga la pagina
+  window.addEventListener('load', getRouteName);
+</script>
